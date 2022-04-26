@@ -78,5 +78,3 @@ def main():
 
 main()
 
-
-print(parent_to_child)

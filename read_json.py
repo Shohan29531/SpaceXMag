@@ -3,11 +3,11 @@ from multiprocessing.dummy import current_process
 
 current_index = 0
 
-index_to_coordinates = {}
-coordinates_to_index = {}
-
 parent_to_child = {}
 child_to_parent = {}
+
+index_to_coordinates = {}
+coordinates_to_index = {}
 
 def assign_id(node):
     
@@ -58,13 +58,8 @@ def assign_parent_to_children():
 
 
 
-
-# print(root['bounds'])
-
-
-
-def main():
-    with open('0.json') as d:
+def main(filename):
+    with open(filename) as d:
         dictData = json.load(d)
 
     root = dictData['activity']['root']
@@ -76,6 +71,8 @@ def main():
 
 
 
-main()
+def get_maps(filename):
 
-print(parent_to_child)
+    main(filename)
+
+    return [ parent_to_child, child_to_parent, index_to_coordinates, coordinates_to_index ]

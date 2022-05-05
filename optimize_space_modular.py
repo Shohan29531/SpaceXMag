@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from gekko import GEKKO
 
+
 ################################################################################
 
 class Node:
@@ -40,28 +41,10 @@ for line in lines:
 
 ################################################################################
 
-## draw the initial figure
-
-# draw the root
-tempX, tempY = get_rectangle_coordinates( root.x1, root.x2, root.y1, root.y2 )
-plt.plot( tempX, tempY )
+def optimize_space(root_id):
 
 
-# draw the children
-for child in children:
-  tempX, tempY = get_rectangle_coordinates( child.x1, child.x2, child.y1, child.y2 )
-  plt.plot( tempX, tempY )
 
-
-plt.rcParams["figure.figsize"] = (8,8)
-plt.axis('scaled')
-
-plt.gca().set_xlim([root.x1 - 100, root.x2 + 100])
-plt.gca().set_ylim([root.y1 - 100, root.y2 + 100])
-plt.gca().invert_yaxis()
-plt.show()
-
-################################################################################
 
 # initialize the GEKKO model (non-linear optimizer)
 m = GEKKO(remote=False)
@@ -237,9 +220,6 @@ for i in range(1, len(children) + 1):
       m.Equation( X[j+1] == X[l+1] )
 
 
-
-# print("RELATIVE POSITION MATRIX")
-
 for row in relative_row_col_matrix:
   print(row)
 
@@ -250,28 +230,4 @@ m.Minimize( root_area - children_area )
 m.solve(disp=False)
 
 
-################################################################################
-# draw the final figure
 
-for i in range( 1 + len(children ) ):
-  j = 2 * i
-  tempX, tempY = get_rectangle_coordinates( X[j].value[0], X[j+1].value[0],
-                                           Y[j].value[0], Y[j+1].value[0] )
-  plt.plot( tempX, tempY )
-
-
-plt.rcParams["figure.figsize"] = (8,8)
-plt.axis('scaled')
-
-plt.gca().set_xlim([root.x1 - 100, root.x2 + 100])
-plt.gca().set_ylim([root.y1 - 100, root.y2 + 100])
-plt.gca().invert_yaxis()
-plt.show()
-
-################################################################################
-# show the values of the final output
-
-for i in range( 1 + len(children ) ):
-  j = i * 2
-  print( round(X[j].value[0]), round(X[j+1].value[0]),
-   round(Y[j].value[0]), round(Y[j+1].value[0]) )

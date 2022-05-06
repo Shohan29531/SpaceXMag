@@ -10,4 +10,4 @@ index_to_coordinates = maps[2]
 coordinates_to_index = maps[3]
 
 
-print(parent_to_child)
+print( index_to_coordinates.keys() )

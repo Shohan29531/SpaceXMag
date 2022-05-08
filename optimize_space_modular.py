@@ -46,8 +46,10 @@ for i in range( max_id + 1 ):
   is_optimized_flag_map[i] = False
 
 
-for xx in range( max_id ):
-  print(xx, "--> ", index_to_coordinates[xx][0], ",", index_to_coordinates[xx][2], ",", index_to_coordinates[xx][1], ",", index_to_coordinates[xx][3] )
+# for xx in range( max_id ):
+#   print(xx, "--> ", index_to_coordinates[xx][0], ",", index_to_coordinates[xx][2], ",", index_to_coordinates[xx][1], ",", index_to_coordinates[xx][3] )
+
+
 ################################################################################
 
 ## Find the order in which the nodes will be optimized (post order traversal)
@@ -69,24 +71,24 @@ def postorder_traversal( id ):
 
 postorder_traversal(0)
 
+
 ################################################################################
 
 ## optimize function
 
 def optimize_space( root_id ):
 
-
   root_coordinates = index_to_coordinates[root_id]
 
-  root = Node(root_coordinates[0], root_coordinates[2], root_coordinates[1], root_coordinates[3])
+  root = Node( root_coordinates[0], root_coordinates[2], root_coordinates[1], root_coordinates[3] )
 
   children = []
   children_ids = parent_to_child[root_id]
 
   for children_id in children_ids:
     child_coordinates = index_to_coordinates[children_id]
-    child = Node(child_coordinates[0], child_coordinates[2], child_coordinates[1], child_coordinates[3])
-    children.append(child)
+    child = Node( child_coordinates[0], child_coordinates[2], child_coordinates[1], child_coordinates[3] )
+    children.append( child )
 
   # initialize the GEKKO model (non-linear optimizer)
   m = GEKKO(remote=False)
@@ -271,5 +273,24 @@ def optimize_space( root_id ):
 
   m.solve(disp=False)
 
+  ################################################################################
+  # optimization finished, update the index_to_coordinates and coordinates_to_index maps
+  
+  # update root coordinates
+  root_coordinates = [ round( X[0].value[0] ), round( X[1].value[0] ), round( Y[0].value[0] ), round( Y[1].value[0] ) ]
+  index_to_coordinates[ root_id ] = root_coordinates
+  coordinates_to_index[ str( root_coordinates ) ] = root_id
+
+  # update children coordinates
+
+  for i in range( 1, 1 + len(children ) ):
+    j = i * 2
+
+    child_coordinates = [ round( X[j].value[0] ), round( X[j+1].value[0] ), round( Y[j].value[0] ), round( Y[j+1].value[0] ) ] 
+    relevant_child_id = children_ids[i-1]
+
+    index_to_coordinates[relevant_child_id] = child_coordinates
+
+    coordinates_to_index[ str( child_coordinates ) ] = relevant_child_id
 
 

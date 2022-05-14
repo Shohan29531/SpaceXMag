@@ -108,15 +108,15 @@ def get_maps(filename, imagename):
 
 
 
-maps = get_maps( '1.json', '1.jpg' )
+maps = get_maps( '100.json', '100.jpg' )
 
 print(maps)
 
-img = Image.open( '1.jpg' )
+img = Image.open( '100.jpg' )
 for key in index_to_coordinates.keys():
     if( node_valididty_map[ key ] == False):
         continue
     coordinate = index_to_coordinates[key]
 
     img2 = img.crop( ( coordinate[0], coordinate[1], coordinate[2], coordinate[3] ) )
-    img2.save( str(key) + ".png" )   
+    img2.save( "image_segments/" + str(key) + ".png" )   

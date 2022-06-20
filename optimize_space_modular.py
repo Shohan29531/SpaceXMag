@@ -23,9 +23,10 @@ def get_rectangle_coordinates(x1, x2, y1, y2):
 
 ## Read the input json file and build the maps
 
-filename = '0.json'
+filename = '100.json'
+imagename = '100.jpg'
 
-maps = read_json.get_maps(filename)
+maps = read_json.get_maps(filename, imagename)
 
 parent_to_child = maps[0]
 child_to_parent = maps[1]
@@ -33,6 +34,8 @@ child_to_parent = maps[1]
 index_to_coordinates = maps[2]
 coordinates_to_index = maps[3]
 
+
+print(index_to_coordinates)
 
 ################################################################################
 
@@ -270,8 +273,9 @@ def optimize_space( root_id ):
   ################################################################################
   # objective function
   m.Minimize( root_area - children_area )
-
-  m.solve(disp=False)
+  m.options.MAX_ITER=1000
+  m.open_folder()
+  m.solve(disp=True)
 
   ################################################################################
   # optimization finished, update the index_to_coordinates and coordinates_to_index maps
@@ -294,3 +298,7 @@ def optimize_space( root_id ):
     coordinates_to_index[ str( child_coordinates ) ] = relevant_child_id
 
 
+
+optimize_space(0)
+
+print(index_to_coordinates)

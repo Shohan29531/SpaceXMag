@@ -34,11 +34,11 @@ def build_maps(node, x_ratio, y_ratio):
 
     temp_coordinates = node['bounds']
 
-    temp_coordinates[0] = round( temp_coordinates[0] * x_ratio )
-    temp_coordinates[2] = round( temp_coordinates[2] * x_ratio )
+    temp_coordinates[0] = round( abs( temp_coordinates[0] ) * x_ratio )
+    temp_coordinates[2] = round( abs( temp_coordinates[2] ) * x_ratio )
 
-    temp_coordinates[1] = round( temp_coordinates[1] * y_ratio )
-    temp_coordinates[3] = round( temp_coordinates[3] * y_ratio )
+    temp_coordinates[1] = round( abs( temp_coordinates[1] ) * y_ratio )
+    temp_coordinates[3] = round( abs( temp_coordinates[3] ) * y_ratio )
     
     index_to_coordinates[ node['id'] ] = temp_coordinates  
     coordinates_to_index[ str( temp_coordinates ) ] = node['id']

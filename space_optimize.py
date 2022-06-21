@@ -1,15 +1,19 @@
 from operator import index
+from matplotlib import image
 import numpy as np
 import matplotlib.pyplot as plt
 from gekko import GEKKO
 from urllib3 import Retry
-import read_json
-
-import json
-from operator import index, inv
 from PIL import Image
 
 
+import os
+import glob
+
+import json
+from operator import index, inv
+
+object_separation = 0
 current_index = 0
 
 parent_to_child = {}
@@ -22,6 +26,10 @@ node_valididty_map = {}
 
 given_dim_x = 1440
 given_dim_y = 2560
+
+input_img_dim_x = 0
+input_img_dim_y = 0
+
 traversal_order = []
 
 def assign_id(node):
@@ -163,6 +171,12 @@ def main(filename, imagename):
     img = Image.open(imagename)
     dim_x, dim_y = img.size
 
+    global input_img_dim_x 
+    input_img_dim_x = dim_x
+
+    global input_img_dim_y 
+    input_img_dim_y = dim_y
+
     x_ratio = dim_x * 1.0 / given_dim_x
     y_ratio = dim_y * 1.0 / given_dim_y
 
@@ -188,16 +202,12 @@ class Node:
     self.y1 = y1
     self.y2 = y2
 
-object_separation = 0
+
 
 def get_rectangle_coordinates(x1, x2, y1, y2):
   return [ x1, x2, x2, x1, x1 ], [ y1, y1, y2, y2, y1 ]
 
-################################################################################
 
-## Read the input json file and build the maps
-
-main('10000.json', '10000.jpg')
 
 ################################################################################
 
@@ -442,7 +452,7 @@ def optimize_space( root_id ):
 
   m.Minimize( root_area - children_area )
 #   m.options.IMODE=4
-  m.solve(disp=True)
+  m.solve(disp=False)
 
   ################################################################################
   # optimization finished, update the index_to_coordinates and coordinates_to_index maps
@@ -490,6 +500,33 @@ def update_subtree_coordinates(local_root_id, difference):
         update_subtree_coordinates(child, difference)
 
 
+def save_image_segments(image_file):
+
+    img = Image.open( image_file )
+    for key in index_to_coordinates.keys():
+        if( node_valididty_map[ key ] == False):
+            continue
+        coordinate = index_to_coordinates[key]
+
+        img2 = img.crop( ( coordinate[0], coordinate[1], coordinate[2], coordinate[3] ) )
+        img2.save( "image_segments/" + str(key) + ".jpg" )   
+
+
+
+
+################################################################################
+
+## Read the input json file and build the maps
+
+image_id = 9700
+
+jsonfile = str(image_id) + '.json'
+image_file = str(image_id) + '.jpg'
+
+
+main(jsonfile, image_file)
+save_image_segments(image_file)
+
 old_index_to_coordinates = index_to_coordinates.copy()
 print(old_index_to_coordinates)
 print(parent_to_child)
@@ -502,4 +539,39 @@ for current_id in traversal_order:
     optimize_space(current_id)
 
 # print(old_index_to_coordinates)
+print(parent_to_child)
 print(index_to_coordinates)
+
+
+all_valid_nodes = []
+
+for node in node_valididty_map.keys():
+    if( node_valididty_map[node] == True):
+        all_valid_nodes.append(node)
+
+print(all_valid_nodes)        
+
+parents = [key for key in parent_to_child.keys()]
+
+for parent in parents:
+    if parent in all_valid_nodes:
+        all_valid_nodes.remove(parent)
+all_valid_leaves = all_valid_nodes  
+
+
+### render the final image
+
+final_output = Image.new('RGB', (input_img_dim_x, input_img_dim_y))
+
+for im_id in all_valid_leaves:
+  im =  Image.open( "image_segments/" + str(im_id) + '.jpg' ) 
+  leaf_coordinates = index_to_coordinates[im_id]
+  final_output.paste(im, (leaf_coordinates[0], leaf_coordinates[1]))
+
+final_output.save('Output.jpg')
+
+files = glob.glob('image_segments/*')
+for f in files:
+    os.remove(f)
+
+

@@ -184,11 +184,11 @@ def get_maps(filename, imagename):
 
 
 
-maps = get_maps( '1.json', '1.jpg' )
+maps = get_maps( '10000.json', '10000.jpg' )
 
-# # print(maps)
+print(maps)
 
-img = Image.open( '1.jpg' )
+img = Image.open( '10000.jpg' )
 for key in index_to_coordinates.keys():
     if( node_valididty_map[ key ] == False):
         continue

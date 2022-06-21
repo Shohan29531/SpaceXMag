@@ -11,7 +11,7 @@ class Node:
     self.y1 = y1
     self.y2 = y2
 
-object_separation = 10
+object_separation = 0
 
 def get_rectangle_coordinates(x1, x2, y1, y2):
   return [ x1, x2, x2, x1, x1 ], [ y1, y1, y2, y2, y1 ]

@@ -29,10 +29,10 @@ imagename = '100.jpg'
 maps = read_json.get_maps(filename, imagename)
 
 parent_to_child = maps[0]
-child_to_parent = maps[1]
+# child_to_parent = maps[1]
 
 index_to_coordinates = maps[2]
-coordinates_to_index = maps[3]
+# coordinates_to_index = maps[3]
 
 
 print(index_to_coordinates)
@@ -273,8 +273,8 @@ def optimize_space( root_id ):
   ################################################################################
   # objective function
   m.Minimize( root_area - children_area )
-  m.options.MAX_ITER=1000
-  m.open_folder()
+  # m.options.MAX_ITER=1000
+  # m.open_folder()
   m.solve(disp=True)
 
   ################################################################################
@@ -283,7 +283,7 @@ def optimize_space( root_id ):
   # update root coordinates
   root_coordinates = [ round( X[0].value[0] ), round( X[1].value[0] ), round( Y[0].value[0] ), round( Y[1].value[0] ) ]
   index_to_coordinates[ root_id ] = root_coordinates
-  coordinates_to_index[ str( root_coordinates ) ] = root_id
+  # coordinates_to_index[ str( root_coordinates ) ] = root_id
 
   # update children coordinates
 
@@ -295,7 +295,7 @@ def optimize_space( root_id ):
 
     index_to_coordinates[relevant_child_id] = child_coordinates
 
-    coordinates_to_index[ str( child_coordinates ) ] = relevant_child_id
+    # coordinates_to_index[ str( child_coordinates ) ] = relevant_child_id
 
 
 

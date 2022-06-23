@@ -1,17 +1,23 @@
 from operator import index
+from textwrap import indent
 from matplotlib import image
 import numpy as np
 import matplotlib.pyplot as plt
 from gekko import GEKKO
 from urllib3 import Retry
 from PIL import Image
-
+import pickle
 
 import os
 import glob
 
 import json
 from operator import index, inv
+
+
+files = glob.glob('image_segments/*')
+for f in files:
+    os.remove(f)
 
 object_separation = 0
 current_index = 0
@@ -21,6 +27,8 @@ child_to_parent = {}
 
 index_to_coordinates = {}
 coordinates_to_index = {}
+
+index_to_node_type = {}
 
 node_valididty_map = {}
 
@@ -59,6 +67,10 @@ def build_maps(node, x_ratio, y_ratio):
     
     index_to_coordinates[ node['id'] ] = temp_coordinates  
     coordinates_to_index[ str( temp_coordinates ) ] = node['id']
+
+    class_parts = node['class'].split('.')
+
+    index_to_node_type[ node['id'] ] = class_parts[ len(class_parts) -1 ]
 
     area = abs ( temp_coordinates[0] - temp_coordinates[2] ) * abs ( temp_coordinates[1] - temp_coordinates[3] ) 
 
@@ -125,7 +137,8 @@ def remove_invalid_nodes():
                         parent_to_child[parent] = children_of_current_parent
 
     for invalid_node in invalid_nodes:
-        index_to_coordinates.pop(invalid_node, None) 
+        index_to_coordinates.pop(invalid_node, None)
+        index_to_node_type.pop(invalid_node, None)
 
     parents = sorted(parent_to_child.keys())
 
@@ -527,7 +540,7 @@ def save_image_segments(image_file):
 
 ## Read the input json file and build the maps
 
-image_id = 58293
+image_id = 10000
 
 jsonfile = str(image_id) + '.json'
 image_file = str(image_id) + '.jpg'
@@ -558,14 +571,16 @@ for node in node_valididty_map.keys():
     if( node_valididty_map[node] == True):
         all_valid_nodes.append(node)
 
-print(all_valid_nodes)        
+# print(all_valid_nodes)  
+
+all_valid_nodes_copy = all_valid_nodes.copy()      
 
 parents = [key for key in parent_to_child.keys()]
 
 for parent in parents:
-    if parent in all_valid_nodes:
-        all_valid_nodes.remove(parent)
-all_valid_leaves = all_valid_nodes  
+    if parent in all_valid_nodes_copy:
+        all_valid_nodes_copy.remove(parent)
+all_valid_leaves = all_valid_nodes_copy  
 
 
 ### render the final image
@@ -579,8 +594,22 @@ for im_id in all_valid_leaves:
 
 final_output.save('Output.jpg')
 
-files = glob.glob('image_segments/*')
-for f in files:
-    os.remove(f)
+
+with open('old_index_to_coordinates.json', 'wb') as fp:
+    pickle.dump(old_index_to_coordinates, fp)
 
 
+with open('index_to_coordinates.json', 'wb') as fp:
+    pickle.dump(index_to_coordinates, fp)
+
+
+with open('parent_to_child.json', 'wb') as fp:
+    pickle.dump(parent_to_child, fp)    
+
+
+with open('valid_nodes.json', 'wb') as fp:
+    pickle.dump({'root' :all_valid_nodes}, fp) 
+
+
+with open('index_to_node_type.json', 'wb') as fp:
+    pickle.dump(index_to_node_type, fp) 

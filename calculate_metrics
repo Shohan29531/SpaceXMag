@@ -1,0 +1,101 @@
+from operator import index
+from matplotlib import image
+import numpy as np
+import matplotlib.pyplot as plt
+from gekko import GEKKO
+from urllib3 import Retry
+from PIL import Image
+import pickle
+import statistics
+from textwrap import wrap
+
+
+import os
+import glob
+
+import json
+from operator import index, inv
+
+with open('index_to_node_type.json', 'rb') as fp:
+    index_to_node_type = pickle.load(fp)
+
+with open('old_index_to_coordinates.json', 'rb') as fp:
+    old_index_to_coordinates = pickle.load(fp)
+
+with open('index_to_coordinates.json', 'rb') as fp:
+    index_to_coordinates = pickle.load(fp)
+
+with open('parent_to_child.json', 'rb') as fp:
+    parent_to_child = pickle.load(fp)
+
+with open('valid_nodes.json', 'rb') as fp:
+    all_valid_nodes = pickle.load(fp)
+    all_valid_nodes = all_valid_nodes['root']
+
+# print(index_to_coordinates)
+# print(parent_to_child)
+# print(all_valid_nodes)
+for key in index_to_node_type.keys():
+    print(key, index_to_node_type[ key ])
+
+
+saved_space = {}
+
+for valid_node in all_valid_nodes:
+
+    old_coordinates = old_index_to_coordinates[valid_node]
+    new_coordinates = index_to_coordinates[valid_node]
+
+    old_area = abs(old_coordinates[0] - old_coordinates[2]) * abs(old_coordinates[1] - old_coordinates[3])
+
+    new_area = abs(new_coordinates[0] - new_coordinates[2]) * abs(new_coordinates[1] - new_coordinates[3])
+
+    area_reduced = old_area - new_area
+
+    area_reduction_percentage = 100 * ( area_reduced * 1.0 / old_area )  
+
+    saved_space[valid_node] = area_reduction_percentage 
+
+
+saved_space_by_types = {}
+
+for key in saved_space.keys():
+
+    object_type = index_to_node_type[key]
+
+    saved_space_for_object = saved_space[key]
+
+    if object_type in saved_space_by_types.keys():
+        current_list = saved_space_by_types[object_type]
+        current_list.append(saved_space_for_object)
+        saved_space_by_types[object_type] = current_list
+
+    else:
+        new_list = [saved_space_for_object]
+        saved_space_by_types[object_type] = new_list 
+
+
+
+
+
+
+for key in saved_space_by_types.keys():
+    current_list = saved_space_by_types[key]
+    saved_space_by_types[key] = statistics.mean(current_list)
+
+X = [key for key in saved_space_by_types.keys()]
+Y = [saved_space_by_types[key] for key in saved_space_by_types.keys()]
+
+
+# print(saved_space)
+print(saved_space_by_types)
+
+X = ['\n'.join(wrap(x, 10)) for x in X ]
+
+
+plt.bar( X, Y , align='center') # A bar chart
+plt.xlabel('Object Types')
+plt.ylabel('Avg % Space Saved For Object Type')
+# plt.xticks(rotation='vertical')
+# plt.show()
+plt.savefig('barchart.pdf')

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from gekko import GEKKO
 from urllib3 import Retry
 from PIL import Image
-
+from PIL import Image, ImageChops
 
 import os
 import glob
@@ -520,7 +520,13 @@ def save_image_segments(image_file):
         img2 = img.crop( ( coordinate[0], coordinate[1], coordinate[2], coordinate[3] ) )
         img2.save( "image_segments/" + str(key) + ".jpg" )   
 
-
+def trim_whitespace(original):
+    bg = Image.new(original.mode, original.size, original.getpixel((0,0)))
+    diff = ImageChops.difference(original, bg)
+    diff = ImageChops.add(diff, diff, 2.0, 0)
+    bbox = diff.getbbox()
+    if bbox:
+        return original.crop(bbox)
 
 
 ################################################################################
@@ -534,6 +540,46 @@ image_file = str(image_id) + '.jpg'
 
 
 main(jsonfile, image_file)
+
+old_index_to_coordinates = index_to_coordinates.copy()
+print(old_index_to_coordinates)
+
+all_valid_nodes = []
+
+for node in node_valididty_map.keys():
+    if( node_valididty_map[node] == True):
+        all_valid_nodes.append(node)
+
+print(all_valid_nodes)        
+
+parents = [key for key in parent_to_child.keys()]
+
+for parent in parents:
+    if parent in all_valid_nodes:
+        all_valid_nodes.remove(parent)
+all_valid_leaves = all_valid_nodes  
+
+## do the leaf level optimization here; before saving the segments
+## just update the coordinates
+
+parent_image = Image.open( image_file )
+for leaf in all_valid_leaves:
+  
+  current_leaf_coordinate = index_to_coordinates[leaf]
+
+  old_image = parent_image.crop( ( current_leaf_coordinate[0], current_leaf_coordinate[1], current_leaf_coordinate[2], current_leaf_coordinate[3] ) )
+ 
+  new_image = trim_whitespace(old_image)
+  new_image.save( "image_segments/" + str(leaf) + ".jpg" )
+
+  new_dim_x, new_dim_y = new_image.size
+
+  new_coordinates = [current_leaf_coordinate[0] ,current_leaf_coordinate[1], current_leaf_coordinate[0] + new_dim_x, current_leaf_coordinate[1] + new_dim_y]
+
+  index_to_coordinates[leaf] = new_coordinates
+
+
+
 save_image_segments(image_file)
 
 old_index_to_coordinates = index_to_coordinates.copy()
@@ -552,20 +598,7 @@ print(parent_to_child)
 print(index_to_coordinates)
 
 
-all_valid_nodes = []
 
-for node in node_valididty_map.keys():
-    if( node_valididty_map[node] == True):
-        all_valid_nodes.append(node)
-
-print(all_valid_nodes)        
-
-parents = [key for key in parent_to_child.keys()]
-
-for parent in parents:
-    if parent in all_valid_nodes:
-        all_valid_nodes.remove(parent)
-all_valid_leaves = all_valid_nodes  
 
 
 ### render the final image
@@ -578,6 +611,7 @@ for im_id in all_valid_leaves:
   final_output.paste(im, (leaf_coordinates[0], leaf_coordinates[1]))
 
 final_output.save('Output.jpg')
+# final_output.show()
 
 files = glob.glob('image_segments/*')
 for f in files:

@@ -8,9 +8,9 @@ def trim(im):
     if bbox:
         return im.crop(bbox)
 
-im = Image.open("11.jpg")
+im = Image.open("image_segments/8.jpg")
 im = trim(im)
 im.show()
-im.save('11_cropped.jpg')
+im.save('image_segments/8_cropped.jpg')
 
 

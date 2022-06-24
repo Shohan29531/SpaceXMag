@@ -149,7 +149,6 @@ def remove_invalid_nodes():
             parent_to_child.pop(parent, None)
 
 
-
 def remove_duplications():
 
     parents = sorted(parent_to_child.keys())
@@ -472,7 +471,14 @@ def optimize_space( root_id ):
   ################################################################################
   # objective function
 
+  sumX = 0
+  for i in range( len(children) + 1 ):
+    sumX += X[i]
+
+  # objective function
+
   m.Minimize( root_area - children_area )
+  m.Minimize( sumX )
 #   m.options.IMODE=4
   m.solve(disp=False)
 
@@ -531,7 +537,7 @@ def save_image_segments(image_file):
         coordinate = index_to_coordinates[key]
 
         img2 = img.crop( ( coordinate[0], coordinate[1], coordinate[2], coordinate[3] ) )
-        img2.save( "image_segments/" + str(key) + ".jpg" )   
+        img2.save( "image_segments/" + str(key) + ".png" )   
 
 
 
@@ -550,8 +556,8 @@ main(jsonfile, image_file)
 save_image_segments(image_file)
 
 old_index_to_coordinates = index_to_coordinates.copy()
-print(old_index_to_coordinates)
-print(parent_to_child)
+# print(old_index_to_coordinates)
+# print(parent_to_child)
 
 postorder_traversal(0)
 
@@ -588,9 +594,13 @@ all_valid_leaves = all_valid_nodes_copy
 final_output = Image.new('RGB', (input_img_dim_x, input_img_dim_y))
 
 for im_id in all_valid_leaves:
-  im =  Image.open( "image_segments/" + str(im_id) + '.jpg' ) 
+  im =  Image.open( "image_segments/" + str(im_id) + '.png' ) 
   leaf_coordinates = index_to_coordinates[im_id]
   final_output.paste(im, (leaf_coordinates[0], leaf_coordinates[1]))
+
+final_output = final_output.crop( ( index_to_coordinates[0][0] , index_to_coordinates[0][1], index_to_coordinates[0][2] , index_to_coordinates[0][3] ) )
+
+final_output = final_output.resize( (input_img_dim_x, input_img_dim_y) )
 
 final_output.save('Output.jpg')
 

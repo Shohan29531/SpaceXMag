@@ -1,17 +1,21 @@
 from operator import index
+from textwrap import indent
 from matplotlib import image
 import numpy as np
 import matplotlib.pyplot as plt
 from gekko import GEKKO
 from urllib3 import Retry
 from PIL import Image
+import pickle
 from PIL import Image, ImageChops
+import math
 
 import os
 import glob
 
 import json
 from operator import index, inv
+
 
 files = glob.glob('image_segments/*')
 for f in files:
@@ -25,6 +29,8 @@ child_to_parent = {}
 
 index_to_coordinates = {}
 coordinates_to_index = {}
+
+index_to_node_type = {}
 
 node_valididty_map = {}
 
@@ -63,6 +69,10 @@ def build_maps(node, x_ratio, y_ratio):
     
     index_to_coordinates[ node['id'] ] = temp_coordinates  
     coordinates_to_index[ str( temp_coordinates ) ] = node['id']
+
+    class_parts = node['class'].split('.')
+
+    index_to_node_type[ node['id'] ] = class_parts[ len(class_parts) -1 ]
 
     area = abs ( temp_coordinates[0] - temp_coordinates[2] ) * abs ( temp_coordinates[1] - temp_coordinates[3] ) 
 
@@ -129,7 +139,8 @@ def remove_invalid_nodes():
                         parent_to_child[parent] = children_of_current_parent
 
     for invalid_node in invalid_nodes:
-        index_to_coordinates.pop(invalid_node, None) 
+        index_to_coordinates.pop(invalid_node, None)
+        index_to_node_type.pop(invalid_node, None)
 
     parents = sorted(parent_to_child.keys())
 
@@ -138,7 +149,6 @@ def remove_invalid_nodes():
 
         if( len(children_list) == 0 ):
             parent_to_child.pop(parent, None)
-
 
 
 def remove_duplications():
@@ -415,55 +425,21 @@ def optimize_space( root_id ):
       elif( code == 'B' ):
         m.Equation ( Y[j] >= Y[l+1] + object_separation) 
 
-    # print("Pos: ")
-    # for row in relative_position_matrix:
-    #     print(row)         
-
-  #######################################
-
-  # Relative positions within rows and columns
-
-#   relative_row_col_matrix = [['N' for x in range(len(children) +1)] 
-#                               for y in range(len(children) +1)] 
+    print("Pos: ")
+    for row in relative_position_matrix:
+        print(row)         
 
 
+  # objective function
 
-#   for i in range(1, len(children) + 1):
-#     first_child = children[i-1]
-#     for k in range(i+1, len(children) + 1):
-#       second_child = children[k-1]
+  sumX = 0
+  for i in range(len(children) + 1):
+    sumX += X[i]
 
-#       ## same row check
-#       if ( first_child.y2 == second_child.y2 and first_child.y1 == second_child.y1 ):
-#         relative_row_col_matrix[i][k] = 'SR'
-#         relative_row_col_matrix[k][i] = 'SR'
-
-#     ## same col check
-#       if ( first_child.x2 == second_child.x2 and first_child.x1 == second_child.x1 ):
-#         relative_row_col_matrix[i][k] = 'SC'
-#         relative_row_col_matrix[k][i] = 'SC'  
-
-
-#   for i in range(1, len(children) + 1):
-#     j = i * 2
-#     for k in range(i+1, len(children) + 1):
-#       l = k * 2
-
-#       code = relative_row_col_matrix[i][k]
-
-#       if ( code == 'SR' ):
-#         m.Equation( Y[j] == Y[l] )
-#         m.Equation( Y[j+1] == Y[l+1] )
-
-#       elif ( code == 'SC' ):
-#         m.Equation( X[j] == X[l] )
-#         m.Equation( X[j+1] == X[l+1] )
-
-
-  ################################################################################
   # objective function
 
   m.Minimize( root_area - children_area )
+  m.Minimize( sumX )
 #   m.options.IMODE=4
   m.solve(disp=False)
 
@@ -512,7 +488,6 @@ def update_subtree_coordinates(local_root_id, difference):
 
         update_subtree_coordinates(child, difference)
 
-
 def save_image_segments(image_file):
 
     img = Image.open( image_file )
@@ -522,12 +497,13 @@ def save_image_segments(image_file):
         coordinate = index_to_coordinates[key]
 
         img2 = img.crop( ( coordinate[0], coordinate[1], coordinate[2], coordinate[3] ) )
-        img2.save( "image_segments/" + str(key) + ".jpg" )   
+        img2.save( "image_segments/" + str(key) + ".png" )   
+
 
 def trim_whitespace(original):
     bg = Image.new(original.mode, original.size, original.getpixel((0,0)))
     diff = ImageChops.difference(original, bg)
-    diff = ImageChops.add(diff, diff, 2.0, -30)
+    diff = ImageChops.add(diff, diff, 2.0, 0)
     bbox = diff.getbbox()
     if bbox:
         return original.crop(bbox)
@@ -546,7 +522,7 @@ image_file = str(image_id) + '.jpg'
 main(jsonfile, image_file)
 
 old_index_to_coordinates = index_to_coordinates.copy()
-print(old_index_to_coordinates)
+# print(old_index_to_coordinates)
 
 all_valid_nodes = []
 
@@ -554,14 +530,16 @@ for node in node_valididty_map.keys():
     if( node_valididty_map[node] == True):
         all_valid_nodes.append(node)
 
-print(all_valid_nodes)        
+# print(all_valid_nodes)  
+
+all_valid_nodes_copy = all_valid_nodes.copy()      
 
 parents = [key for key in parent_to_child.keys()]
 
 for parent in parents:
-    if parent in all_valid_nodes:
-        all_valid_nodes.remove(parent)
-all_valid_leaves = all_valid_nodes  
+    if parent in all_valid_nodes_copy:
+        all_valid_nodes_copy.remove(parent)
+all_valid_leaves = all_valid_nodes_copy  
 
 ## do the leaf level optimization here; before saving the segments
 ## just update the coordinates
@@ -572,23 +550,31 @@ for leaf in all_valid_leaves:
   current_leaf_coordinate = index_to_coordinates[leaf]
 
   old_image = parent_image.crop( ( current_leaf_coordinate[0], current_leaf_coordinate[1], current_leaf_coordinate[2], current_leaf_coordinate[3] ) )
+
+  old_dim_x, old_dim_y = old_image.size
  
   new_image = trim_whitespace(old_image)
-  new_image.save( "image_segments/" + str(leaf) + ".jpg" )
-
+#   new_image.show()
+  new_image.save( "image_segments/" + str(leaf) + ".png" )
+  
   new_dim_x, new_dim_y = new_image.size
 
-  new_coordinates = [current_leaf_coordinate[0] ,current_leaf_coordinate[1], current_leaf_coordinate[0] + new_dim_x, current_leaf_coordinate[1] + new_dim_y]
+  new_coordinates = [ 
+    current_leaf_coordinate[0] + ( old_dim_x - new_dim_x ) / 2, current_leaf_coordinate[1] + ( old_dim_y - new_dim_y ) / 2, current_leaf_coordinate[2] - ( old_dim_x - new_dim_x ) / 2, current_leaf_coordinate[3] - ( old_dim_y - new_dim_y ) / 2  
+    ]
+
+  new_coordinates = [ math.ceil(new_coordinates[0]), 
+  math.ceil(new_coordinates[1]),
+  math.ceil(new_coordinates[2]),
+  math.ceil(new_coordinates[3]), ]
 
   index_to_coordinates[leaf] = new_coordinates
 
+  print(current_leaf_coordinate, new_coordinates)
 
-
-save_image_segments(image_file)
-
-old_index_to_coordinates = index_to_coordinates.copy()
-print(old_index_to_coordinates)
-print(parent_to_child)
+# save_image_segments(image_file)
+# print(old_index_to_coordinates)
+# print(parent_to_child)
 
 postorder_traversal(0)
 
@@ -601,22 +587,37 @@ for current_id in traversal_order:
 print(parent_to_child)
 print(index_to_coordinates)
 
-
-
-
-
 ### render the final image
 
 final_output = Image.new('RGB', (input_img_dim_x, input_img_dim_y))
 
 for im_id in all_valid_leaves:
-  im =  Image.open( "image_segments/" + str(im_id) + '.jpg' ) 
+  im =  Image.open( "image_segments/" + str(im_id) + '.png' ) 
   leaf_coordinates = index_to_coordinates[im_id]
   final_output.paste(im, (leaf_coordinates[0], leaf_coordinates[1]))
 
+final_output = final_output.crop( ( index_to_coordinates[0][0] , index_to_coordinates[0][1], index_to_coordinates[0][2] , index_to_coordinates[0][3] ) )
+
+final_output = final_output.resize( (input_img_dim_x, input_img_dim_y) )
+
 final_output.save('Output.jpg')
-# final_output.show()
 
 
+with open('old_index_to_coordinates.json', 'wb') as fp:
+    pickle.dump(old_index_to_coordinates, fp)
 
 
+with open('index_to_coordinates.json', 'wb') as fp:
+    pickle.dump(index_to_coordinates, fp)
+
+
+with open('parent_to_child.json', 'wb') as fp:
+    pickle.dump(parent_to_child, fp)    
+
+
+with open('valid_nodes.json', 'wb') as fp:
+    pickle.dump({'root' :all_valid_nodes}, fp) 
+
+
+with open('index_to_node_type.json', 'wb') as fp:
+    pickle.dump(index_to_node_type, fp) 

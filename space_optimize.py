@@ -289,6 +289,7 @@ def optimize_space( root_id ):
   # initialize the GEKKO model (non-linear optimizer)
   m = GEKKO(remote=False)
 
+
   ################################################################################
 
   # initialize the variables
@@ -312,7 +313,7 @@ def optimize_space( root_id ):
       child = children[i-1]
       j = i * 2
 
-      X[j].value = child.x1
+      X[j].value = 0
       X[j+1].value = child.x2
 
       Y[j].value = child.y1
@@ -324,7 +325,7 @@ def optimize_space( root_id ):
 
   # sum of children area must be lower than the parent's area
 
-  root_area = abs( X[0] - X[1] ) * abs( Y[0] - Y[1] )
+  root_area = abs( X[1] - X[0] ) * abs( Y[1] - Y[0] )
 
   children_area = 0
 
@@ -335,7 +336,7 @@ def optimize_space( root_id ):
     child_area = abs( X[j+1] - X[j] ) * abs( Y[j+1] - Y[j] )
     children_area += child_area
 
-  m.Equation( root_area >= children_area)
+  # m.Equation( root_area >= children_area)
 
   #######################################
 
@@ -427,60 +428,21 @@ def optimize_space( root_id ):
     # for row in relative_position_matrix:
     #     print(row)         
 
-  #######################################
-
-  # Relative positions within rows and columns
-
-#   relative_row_col_matrix = [['N' for x in range(len(children) +1)] 
-#                               for y in range(len(children) +1)] 
-
-
-
-#   for i in range(1, len(children) + 1):
-#     first_child = children[i-1]
-#     for k in range(i+1, len(children) + 1):
-#       second_child = children[k-1]
-
-#       ## same row check
-#       if ( first_child.y2 == second_child.y2 and first_child.y1 == second_child.y1 ):
-#         relative_row_col_matrix[i][k] = 'SR'
-#         relative_row_col_matrix[k][i] = 'SR'
-
-#     ## same col check
-#       if ( first_child.x2 == second_child.x2 and first_child.x1 == second_child.x1 ):
-#         relative_row_col_matrix[i][k] = 'SC'
-#         relative_row_col_matrix[k][i] = 'SC'  
-
-
-#   for i in range(1, len(children) + 1):
-#     j = i * 2
-#     for k in range(i+1, len(children) + 1):
-#       l = k * 2
-
-#       code = relative_row_col_matrix[i][k]
-
-#       if ( code == 'SR' ):
-#         m.Equation( Y[j] == Y[l] )
-#         m.Equation( Y[j+1] == Y[l+1] )
-
-#       elif ( code == 'SC' ):
-#         m.Equation( X[j] == X[l] )
-#         m.Equation( X[j+1] == X[l+1] )
-
-
-  ################################################################################
+  
+   ################################################################################ 
   # objective function
 
   sumX = 0
-  for i in range( len(children) + 1 ):
+  for i in range( 0, len(children) + 1, 2 ):
     sumX += X[i]
 
   # objective function
 
+  
   m.Minimize( root_area - children_area )
-  m.Minimize( sumX )
+  # m.Minimize( sumX )
 #   m.options.IMODE=4
-  m.solve(disp=False)
+  m.solve(disp=True)
 
   ################################################################################
   # optimization finished, update the index_to_coordinates and coordinates_to_index maps
@@ -546,7 +508,7 @@ def save_image_segments(image_file):
 
 ## Read the input json file and build the maps
 
-image_id = 10000
+image_id = 9700
 
 jsonfile = str(image_id) + '.json'
 image_file = str(image_id) + '.jpg'

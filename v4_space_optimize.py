@@ -524,7 +524,7 @@ def trim_whitespace(original):
 
 ## Read the input json file and build the maps
 
-image_id = 9700
+image_id = 10000
 
 jsonfile = str(image_id) + '.json'
 image_file = str(image_id) + '.jpg'

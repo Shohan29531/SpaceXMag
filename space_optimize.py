@@ -404,7 +404,20 @@ def optimize_space( root_id ):
     ## Bottom check   
       if ( first_child.y1 >= second_child.y2 ):
         relative_position_matrix[i][k] = 'B'
-        relative_position_matrix[k][i] = 'T'       
+        relative_position_matrix[k][i] = 'T'
+
+
+
+    ## If no positional constraints are found, place the relatively higher object on top
+      if (relative_position_matrix[i][k] == 'N' ):
+        if ( first_child.y1 >= second_child.y1 ):
+          relative_position_matrix[i][k] = 'B'
+          relative_position_matrix[k][i] = 'T'
+        else:
+          relative_position_matrix[i][k] = 'T'
+          relative_position_matrix[k][i] = 'B' 
+
+               
 
 
   for i in range(1, len(children) + 1):
@@ -424,9 +437,9 @@ def optimize_space( root_id ):
       elif( code == 'B' ):
         m.Equation ( Y[j] >= Y[l+1] + object_separation) 
 
-    # print("Pos: ")
-    # for row in relative_position_matrix:
-    #     print(row)         
+    print("Pos: ")
+    for row in relative_position_matrix:
+        print(row)         
 
   
    ################################################################################ 
@@ -553,7 +566,11 @@ all_valid_leaves = all_valid_nodes_copy
 
 ### render the final image
 
-final_output = Image.new('RGB', (input_img_dim_x, input_img_dim_y))
+input_again = Image.open(image_file)
+
+background = max(input_again.getcolors(input_again.size[0]*input_again.size[1]))
+
+final_output = Image.new('RGB', (input_img_dim_x, input_img_dim_y), background[1] )
 
 for im_id in all_valid_leaves:
   im =  Image.open( "image_segments/" + str(im_id) + '.png' ) 

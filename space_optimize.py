@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from gekko import GEKKO
 from urllib3 import Retry
-from PIL import Image
+from PIL import Image, ImageOps
 import pickle
 
 import os
@@ -37,6 +37,14 @@ given_dim_y = 2560
 
 input_img_dim_x = 0
 input_img_dim_y = 0
+
+
+user_congurable_object_border_width = 2  ## max 20
+user_congurable_object_border_color = (255, 0, 0)  ## set to red by default
+
+border_proportion = 0.1   ## set to 20% by default 
+max_border_width = 10
+min_border_width = 2
 
 traversal_order = []
 
@@ -515,6 +523,35 @@ def save_image_segments(image_file):
         img2.save( "image_segments/" + str(key) + ".png" )   
 
 
+def get_subimage_with_borders(current_image):
+
+  dim_x, dim_y = current_image.size
+
+  smaller_dim = min(dim_x, dim_y)
+ 
+  selected_border_width = user_congurable_object_border_width
+   
+  if round(smaller_dim * border_proportion) > user_congurable_object_border_width:
+    selected_border_width = round(smaller_dim * border_proportion)
+
+  if selected_border_width > max_border_width:
+     selected_border_width = max_border_width
+
+  if selected_border_width < min_border_width:
+    selected_border_width = min_border_width
+
+
+  new_dim_x, new_dim_y = (dim_x - selected_border_width), (dim_y - selected_border_width)
+
+  modified_image = current_image.resize( (new_dim_x, new_dim_y) )
+
+
+  img_with_border = ImageOps.expand(modified_image, 
+  border = selected_border_width,
+  fill = user_congurable_object_border_color )
+
+  return img_with_border
+
 
 
 ################################################################################
@@ -573,15 +610,22 @@ background = max(input_again.getcolors(input_again.size[0]*input_again.size[1]))
 final_output = Image.new('RGB', (input_img_dim_x, input_img_dim_y), background[1] )
 
 for im_id in all_valid_leaves:
-  im =  Image.open( "image_segments/" + str(im_id) + '.png' ) 
+  im =  Image.open( "image_segments/" + str(im_id) + '.png' )
+
+  bordered_im = get_subimage_with_borders(im)
+
   leaf_coordinates = index_to_coordinates[im_id]
-  final_output.paste(im, (leaf_coordinates[0], leaf_coordinates[1]))
+  final_output.paste(bordered_im, (leaf_coordinates[0], leaf_coordinates[1]))
+
+
 
 final_output = final_output.crop( ( index_to_coordinates[0][0] , index_to_coordinates[0][1], index_to_coordinates[0][2] , index_to_coordinates[0][3] ) )
 
 final_output = final_output.resize( (input_img_dim_x, input_img_dim_y) )
 
-final_output.save('Output.jpg')
+final_output.save('output.jpg')
+
+
 
 
 with open('old_index_to_coordinates.json', 'wb') as fp:
@@ -602,3 +646,6 @@ with open('valid_nodes.json', 'wb') as fp:
 
 with open('index_to_node_type.json', 'wb') as fp:
     pickle.dump(index_to_node_type, fp) 
+
+# print(all_valid_nodes)
+# print(index_to_node_type)    

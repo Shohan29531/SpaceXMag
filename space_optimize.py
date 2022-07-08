@@ -42,7 +42,7 @@ input_img_dim_y = 0
 user_congurable_object_border_width = 2  ## max 20
 user_congurable_object_border_color = (255, 0, 0)  ## set to red by default
 
-border_proportion = 0.1   ## set to 20% by default 
+border_proportion = 0.1   ## set to 10% by default 
 max_border_width = 10
 min_border_width = 2
 

@@ -1,5 +1,6 @@
 import concurrent.futures
 import enum
+from hashlib import new
 import itertools
 import json
 import logging
@@ -10,6 +11,7 @@ import cv2
 import hydra
 import numpy as np
 import scipy.interpolate
+from sklearn import neighbors
 import tifffile
 from omegaconf import OmegaConf, DictConfig
 from tqdm import tqdm
@@ -29,6 +31,7 @@ import glob
 
 import json
 from operator import index, inv
+import collections
 
 
 
@@ -52,10 +55,14 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
     ## ii) pixels outside the focus, i.e., in the context do not change
     ## iii) pixels in the transition gets noisy and distorted
 
+    new_to_old_map = {}
+
+
     for x in range(dim_x):
         for y in range(dim_y):
 
             current_pixel = img_pixels[ x, y ]
+            # print(current_pixel)
 
             distance_from_center = get_euclidean_distance( x_c, y_c, x, y )
 
@@ -64,7 +71,14 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
                 new_position = [ x_c + ( x - x_c ) / MM, 
                                  y_c + ( y - y_c ) / MM  ]
 
-                print( [x, y] ,"   ", new_position)                 
+                transformed = [ round( new_position[0] ), round( new_position[1] ) ]       
+
+                # print( [x, y] ,"   ", transformed)     
+
+                if ( str( transformed ) in new_to_old_map.keys() ):
+                            new_to_old_map[ str( transformed ) ].append([ x, y ])
+                else:
+                     new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]           
 
 
 
@@ -73,12 +87,53 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
                 continue
 
             elif( distance_from_center >= outer_fisheye_radius ):
-                # print( "no change region (context region)" )   
+                # print( "no change region (context region)" )      
                 continue
 
+    # print(new_to_old_map)
+
+    new_img = img.copy()
+
+    for i in range(dim_x):
+        for j in range(dim_y):
+            new_img.putpixel( (i, j), (0, 0, 0))
+
+    ## if MM > 1:
+
+    for key in new_to_old_map.keys():
+        new_coordinate = json.loads(key)
+
+        old_coordinate_list = new_to_old_map[key]
+
+        old_coordinate_bitmaps = []
+
+        for item in old_coordinate_list:
+            old_coordinate_bitmaps.append( img_pixels[ item[0], item[1] ] )
+
+
+        r = 0
+        g = 0
+        b = 0
+
+        for item in old_coordinate_bitmaps:
+            r += item[0]
+            g += item[1]
+            b += item[2]
+
+        r = round ( r / len( old_coordinate_bitmaps ) )
+        g = round ( g / len( old_coordinate_bitmaps ) )  
+        b = round ( b / len( old_coordinate_bitmaps ) )    
+
+        new_img.putpixel( (new_coordinate[0], new_coordinate[1] ), (r, g, b) )
+
+
+    new_img.save('fisheye_output.jpg')
 
 
 
-apply_fisheye("Output.jpg", (540, 960), 80, 100, 3)
 
 
+apply_fisheye("output.jpg", (540, 960), 300, 120, 1.25)
+
+
+# print(json.loads('[2, 3]'))

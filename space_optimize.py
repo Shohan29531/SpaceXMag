@@ -623,7 +623,7 @@ final_output = final_output.crop( ( index_to_coordinates[0][0] , index_to_coordi
 
 final_output = final_output.resize( (input_img_dim_x, input_img_dim_y) )
 
-final_output.save('output.jpg')
+final_output.save('Output.jpg')
 
 
 

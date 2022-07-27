@@ -1,4 +1,3 @@
-from cmath import sin
 import concurrent.futures
 import enum
 from hashlib import new
@@ -9,7 +8,6 @@ import math
 from pathlib import Path
 
 import cv2 
-import hydra
 import numpy as np
 import scipy.interpolate
 from sklearn import neighbors
@@ -40,14 +38,26 @@ def get_euclidean_distance( x0, y0, x1, y1 ):
     return math.sqrt( (x1-x0)**2 + (y1-y0)**2 )
 
 
-def gaussian_drop_off(dist, MM, fisheye_rad):
+
+
+def gaussian_lift_up(dist, MM, fisheye_rad):
     
-    drop_off = 1 - 0.6 * pow( math.sin( (dist/fisheye_rad) * (3.1416/2) ), 1 )
+    lift_up = 0.1 * pow( math.sin( (dist/fisheye_rad) * (3.1416/2) ), 1 )
 
     # print(drop_off)
 
-    drop_off = drop_off * MM
+    lift_up = lift_up * ( MM - 1) + 1
 
+    return lift_up
+
+
+def gaussian_drop_off(dist, MM, fisheye_rad):
+    
+    drop_off = 1 - 0.3 * pow( math.sin( (dist/fisheye_rad) * (3.1416/2) ), 1 )
+
+    # print(drop_off)
+
+    drop_off = drop_off * ( MM - 1) + 1
 
     return drop_off
 
@@ -80,8 +90,38 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
             if( distance_from_center <= inner_fisheye_radius):
                 # print( distance_from_center, " -> inside the focus" )
-                new_position = [ x_c + ( x - x_c ) / MM, 
-                                 y_c + ( y - y_c ) / MM  ]
+                
+                # new_position = [ x_c + (( x - x_c ) / 1), 
+                #                  y_c + (( y - y_c ) / 1)  ]
+
+                # transformed = [ round( new_position[0] ), round( new_position[1] ) ]       
+
+                # # print( [x, y] ,"   ", transformed)     
+
+                # if ( str( transformed ) in new_to_old_map.keys() ):
+                #             new_to_old_map[ str( transformed ) ].append([ x, y ])
+                # else:
+                #      new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]  
+                
+                         
+                # new_to_old_map[ str( [ x, y ] ) ] = [ [ x, y ] ] 
+                
+                # lift_up = gaussian_lift_up(distance_from_center, MM, inner_fisheye_radius )    
+                # new_position = [ x_c + ( x - x_c ) / lift_up, 
+                #                  y_c + ( y - y_c ) / lift_up  ]
+
+                # transformed = [ round( new_position[0] ), round( new_position[1] ) ]       
+
+                # # print( [x, y] ,"   ", transformed)     
+
+                # if ( str( transformed ) in new_to_old_map.keys() ):
+                #             new_to_old_map[ str( transformed ) ].append([ x, y ])
+                # else:
+                #      new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]    
+                
+                drop_off = gaussian_drop_off(distance_from_center, MM, inner_fisheye_radius )    
+                new_position = [ x_c + ( x - x_c ) / drop_off, 
+                                 y_c + ( y - y_c ) / drop_off  ]
 
                 transformed = [ round( new_position[0] ), round( new_position[1] ) ]       
 
@@ -90,21 +130,21 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
                 if ( str( transformed ) in new_to_old_map.keys() ):
                             new_to_old_map[ str( transformed ) ].append([ x, y ])
                 else:
-                     new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]           
-
+                     new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]     
+                
 
 
             elif( distance_from_center > inner_fisheye_radius and distance_from_center < outer_fisheye_radius ):
                 # print( distance_from_center, " -> distortion region" )
                 # continue
  
-                drop_off = gaussian_drop_off(distance_from_center, MM, inner_fisheye_radius)    
+                drop_off = gaussian_drop_off(distance_from_center, MM, inner_fisheye_radius )    
                 new_position = [ x_c + ( x - x_c ) / drop_off, 
                                  y_c + ( y - y_c ) / drop_off  ]
 
                 transformed = [ round( new_position[0] ), round( new_position[1] ) ]       
 
-                print( [x, y] ,"   ", transformed)     
+                # print( [x, y] ,"   ", transformed)     
 
                 if ( str( transformed ) in new_to_old_map.keys() ):
                             new_to_old_map[ str( transformed ) ].append([ x, y ])
@@ -115,7 +155,8 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
             elif( distance_from_center >= outer_fisheye_radius ):
                 # print( "no change region (context region)" )      
-                continue
+                # continue
+                new_to_old_map[ str( [ x, y ] ) ] = [ [ x, y ] ] 
 
     # print(new_to_old_map)
 
@@ -160,7 +201,7 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
 
 
-apply_fisheye("output.jpg", (540, 960), 200, 300, 1.25)
+apply_fisheye("Output.jpg", (540, 960), 100, 250, 1.1)
 
 
 # print(json.loads('[2, 3]'))

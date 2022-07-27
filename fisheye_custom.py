@@ -1,3 +1,4 @@
+from cmath import sin
 import concurrent.futures
 import enum
 from hashlib import new
@@ -38,6 +39,17 @@ import collections
 def get_euclidean_distance( x0, y0, x1, y1 ):
     return math.sqrt( (x1-x0)**2 + (y1-y0)**2 )
 
+
+def gaussian_drop_off(dist, MM, fisheye_rad):
+    
+    drop_off = 1 - 0.6 * pow( math.sin( (dist/fisheye_rad) * (3.1416/2) ), 1 )
+
+    # print(drop_off)
+
+    drop_off = drop_off * MM
+
+
+    return drop_off
 
 
 def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_radius, MM):
@@ -84,7 +96,22 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
             elif( distance_from_center > inner_fisheye_radius and distance_from_center < outer_fisheye_radius ):
                 # print( distance_from_center, " -> distortion region" )
-                continue
+                # continue
+ 
+                drop_off = gaussian_drop_off(distance_from_center, MM, inner_fisheye_radius)    
+                new_position = [ x_c + ( x - x_c ) / drop_off, 
+                                 y_c + ( y - y_c ) / drop_off  ]
+
+                transformed = [ round( new_position[0] ), round( new_position[1] ) ]       
+
+                print( [x, y] ,"   ", transformed)     
+
+                if ( str( transformed ) in new_to_old_map.keys() ):
+                            new_to_old_map[ str( transformed ) ].append([ x, y ])
+                else:
+                     new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]      
+
+
 
             elif( distance_from_center >= outer_fisheye_radius ):
                 # print( "no change region (context region)" )      
@@ -133,7 +160,7 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
 
 
-apply_fisheye("output.jpg", (540, 960), 300, 120, 1.25)
+apply_fisheye("output.jpg", (540, 960), 200, 300, 1.25)
 
 
 # print(json.loads('[2, 3]'))

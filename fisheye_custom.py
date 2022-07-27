@@ -37,14 +37,14 @@ def get_euclidean_distance( x0, y0, x1, y1 ):
 
 
 
-def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_radius):
+def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_radius, MM):
 
     img = Image.open(imgfile)
     dim_x, dim_y = img.size
 
     img_pixels = img.load()
 
-    center_x, center_y = fisheye_center[0], fisheye_center[1]
+    x_c, y_c = fisheye_center[0], fisheye_center[1]
 
     ## loop through all the pixels
     ## each pixel gets one of the three possible transformations
@@ -52,25 +52,33 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
     ## ii) pixels outside the focus, i.e., in the context do not change
     ## iii) pixels in the transition gets noisy and distorted
 
-    for i in range(dim_x):
-        for j in range(dim_y):
+    for x in range(dim_x):
+        for y in range(dim_y):
 
-            current_pixel = img_pixels[ i, j]
+            current_pixel = img_pixels[ x, y ]
 
-            distance_from_center = get_euclidean_distance( center_x, center_y, i, j )
+            distance_from_center = get_euclidean_distance( x_c, y_c, x, y )
 
             if( distance_from_center <= inner_fisheye_radius):
-                print( distance_from_center, " -> inside the focus" )
-                
+                # print( distance_from_center, " -> inside the focus" )
+                new_position = [ x_c + ( x - x_c ) / MM, 
+                                 y_c + ( y - y_c ) / MM  ]
+
+                print( [x, y] ,"   ", new_position)                 
+
+
+
             elif( distance_from_center > inner_fisheye_radius and distance_from_center < outer_fisheye_radius ):
-                print( distance_from_center, " -> distortion region" )
+                # print( distance_from_center, " -> distortion region" )
+                continue
 
             elif( distance_from_center >= outer_fisheye_radius ):
-                print( "no change region (context region)" )   
+                # print( "no change region (context region)" )   
+                continue
 
 
 
 
-apply_fisheye("Output.jpg", (540, 960), 80, 100)
+apply_fisheye("Output.jpg", (540, 960), 80, 100, 3)
 
 

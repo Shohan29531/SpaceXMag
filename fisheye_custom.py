@@ -22,7 +22,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from gekko import GEKKO
 from urllib3 import Retry
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageDraw
 import pickle
 
 import os
@@ -32,6 +32,31 @@ import json
 from operator import index, inv
 import collections
 
+
+
+def crop_circular_section(img_file, fisheye_radius, fisheye_center):
+    img=Image.open(img_file)
+    # img.show()
+    h, w = img.size
+
+    lum_img = Image.new('L', [h, w], 0)
+
+    draw = ImageDraw.Draw(lum_img)
+    draw.pieslice([(fisheye_center[0] - fisheye_radius, fisheye_center[1] -fisheye_radius), (fisheye_center[0]+ fisheye_radius, fisheye_center[1] + fisheye_radius)], 0, 360, 
+                fill = 255, outline = "white")
+    
+    img_arr =np.array(img)
+    lum_img_arr =np.array(lum_img)
+    
+    # Image.fromarray(lum_img_arr).show()
+    
+    final_img_arr = np.dstack((img_arr,lum_img_arr))  
+    Image.fromarray(final_img_arr).show()
+
+
+
+
+crop_circular_section("Output.jpg", 250, (540, 960))
 
 
 def get_euclidean_distance( x0, y0, x1, y1 ):
@@ -79,6 +104,12 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
     new_to_old_map = {}
 
+    min_x = 9999
+    max_x = 0
+    
+    min_y = 9999
+    max_y = 0
+    
 
     for x in range(dim_x):
         for y in range(dim_y):
@@ -114,10 +145,10 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
                 # # print( [x, y] ,"   ", transformed)     
 
-                # if ( str( transformed ) in new_to_old_map.keys() ):
-                #             new_to_old_map[ str( transformed ) ].append([ x, y ])
-                # else:
-                #      new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]    
+                if ( str( transformed ) in new_to_old_map.keys() ):
+                            new_to_old_map[ str( transformed ) ].append([ x, y ])
+                else:
+                     new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]    
                 
                 drop_off = gaussian_drop_off(distance_from_center, MM, inner_fisheye_radius )    
                 new_position = [ x_c + ( x - x_c ) / drop_off, 
@@ -130,7 +161,17 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
                 if ( str( transformed ) in new_to_old_map.keys() ):
                             new_to_old_map[ str( transformed ) ].append([ x, y ])
                 else:
-                     new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]     
+                     new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]  
+                
+                if transformed[0] > max_x:
+                    max_x = transformed[0]
+                if transformed[0] < min_x:
+                    min_x = transformed[0]  
+                
+                if transformed[1] > max_y:
+                    max_y = transformed[1]
+                if transformed[1] < min_y:
+                    min_y = transformed[1]               
                 
 
 
@@ -151,13 +192,24 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
                 else:
                      new_to_old_map[ str( transformed ) ] = [ [ x, y ] ]      
 
+                if transformed[0] > max_x:
+                    max_x = transformed[0]
+                if transformed[0] < min_x:
+                    min_x = transformed[0]  
+                
+                if transformed[1] > max_y:
+                    max_y = transformed[1]
+                if transformed[1] < min_y:
+                    min_y = transformed[1]  
 
 
             elif( distance_from_center >= outer_fisheye_radius ):
                 # print( "no change region (context region)" )      
                 # continue
                 new_to_old_map[ str( [ x, y ] ) ] = [ [ x, y ] ] 
-
+ 
+    print(min_x, max_x)
+    print(min_y, max_y)
     # print(new_to_old_map)
 
     new_img = img.copy()
@@ -201,7 +253,7 @@ def apply_fisheye(imgfile, fisheye_center, inner_fisheye_radius, outer_fisheye_r
 
 
 
-apply_fisheye("Output.jpg", (540, 960), 100, 250, 1.1)
+apply_fisheye("Output.jpg", (540, 960), 100, 250, 1.5)
 
 
 # print(json.loads('[2, 3]'))

@@ -39,13 +39,13 @@ import json
 from operator import index, inv
 import collections
 
-
-
 from fisheye import fisheye
 
 start_time = time.time()
 
 
+boundary_circle_width = 20
+boundary_circle_color = (0, 255, 0)
 
 
 img = Image.open("Output.jpg")
@@ -56,10 +56,11 @@ print(dim_x, dim_y)
 
 img_pixels = img.load()
 
+new_img = img.copy()
 
-original = []
-fisheye_focus = [540, 960]
-fisheye_radius = 150
+fisheye_coordinates = []
+fisheye_focus = [960, 960]
+fisheye_radius = 200
 
 
 def get_euclidean_distance( x0, y0, x1, y1 ):
@@ -67,43 +68,33 @@ def get_euclidean_distance( x0, y0, x1, y1 ):
 
 for i in range(0, dim_x):
     for j in range(0, dim_y):
-        if get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j) >= fisheye_radius:
+        
+        dist = get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j)
+        
+        if dist > ( fisheye_radius + boundary_circle_width ):
             continue
-        original.append([i, j]) 
+        elif dist >= fisheye_radius  and dist <= (fisheye_radius + boundary_circle_width):
+            new_img.putpixel( ( i, j ), boundary_circle_color )
+            continue
+        
+        fisheye_coordinates.append([i, j]) 
+   
 
-
-
-
-      
-
-F = fisheye( R = fisheye_radius, d = 3 )
+F = fisheye( R = fisheye_radius, d = 1.5, xw = 0.4 )
 F.set_focus( fisheye_focus )
 
 F.set_mode('Sarkar')
-transformed = F.radial_2D(original) 
-
-
-
-    
-img_pixels = img.load()
-new_img = img.copy()
-
-for i in range(0, dim_x):
-    for j in range(0, dim_y):
-        new_img.putpixel( ( i, j ), (0, 0, 0) )
-
-   
+original_coordinates = F.inverse_radial_2D(fisheye_coordinates) 
         
-for i in range(len(original)):
+      
+for i in range(len(fisheye_coordinates)):
     
-    old = [ original[i][0], original[i][1] ] 
-    new = [ transformed[i][0], transformed[i][1] ] 
+    new = [ fisheye_coordinates[i][0], fisheye_coordinates[i][1] ] 
+    old = [ original_coordinates[i][0], original_coordinates[i][1] ] 
     
-    current_pixel  = img_pixels[ old[0], old[1]]
+    current_pixel  = img_pixels[ old[0], old[1] ]
       
     new_img.putpixel( ( new[0], new[1] ), current_pixel )
-              
-# new_img.show()
 
 new_img.save("fisheye_applied.jpg")
 

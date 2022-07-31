@@ -28,8 +28,12 @@ def apply_fisheye_effect(
 
     fisheye_coordinates = []
 
-    for i in range(0, dim_x):
-        for j in range(0, dim_y):
+    effective_fisheye_radius = ( fisheye_radius + boundary_circle_width )
+
+    for i in range( fisheye_focus[0] - effective_fisheye_radius ,
+                    fisheye_focus[0] + effective_fisheye_radius):
+        for j in range( fisheye_focus[1] - effective_fisheye_radius,
+                    fisheye_focus[1] + effective_fisheye_radius):
         
             dist = get_euclidean_distance( fisheye_focus[0], 
             fisheye_focus[1], i, j )
@@ -62,7 +66,7 @@ def apply_fisheye_effect(
 
 start_time = time.time()
 
-apply_fisheye_effect(img_file = 'Output.jpg', fisheye_focus = (540, 960), fisheye_radius = 300 )
+apply_fisheye_effect(img_file = 'Output.jpg', fisheye_focus = (540, 960), fisheye_radius = 200 )
 
 print("--- %s seconds ---" % (time.time() - start_time))
         

@@ -9,7 +9,16 @@ def get_euclidean_distance( x0, y0, x1, y1 ):
     return math.sqrt( (x1-x0)**2 + (y1-y0)**2 )
 
 
-def apply_fisheye_effect( img_file, fisheye_focus, fisheye_radius, d = 1.5, xw = 0.4, model = 'Sarkar', boundary_circle_width = 20, boundary_circle_color = ( 0, 255, 0 ), output_file_name = 'fisheye_applied.jpg' ):
+def apply_fisheye_effect( 
+    img_file, fisheye_focus, 
+    fisheye_radius, 
+    d = 1.5, 
+    xw = 0.4,
+    model = 'Sarkar', 
+    boundary_circle_width = 20, 
+    boundary_circle_color = ( 0, 255, 0 ), 
+    output_file_name = 'fisheye_applied.jpg' 
+    ):
 
     img = Image.open(img_file)
     dim_x, dim_y = img.size
@@ -22,7 +31,8 @@ def apply_fisheye_effect( img_file, fisheye_focus, fisheye_radius, d = 1.5, xw =
     for i in range(0, dim_x):
         for j in range(0, dim_y):
         
-            dist = get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j )
+            dist = get_euclidean_distance( fisheye_focus[0], 
+            fisheye_focus[1], i, j )
             
             if dist > ( fisheye_radius + boundary_circle_width ):
                 continue

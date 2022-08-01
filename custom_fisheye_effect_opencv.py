@@ -1,10 +1,21 @@
-from bdb import effective
 import numpy as np
 import math
 import time
+import cv2
 from PIL import Image
 
 from fisheye import fisheye
+
+
+def convert_from_cv2_to_image(img: np.ndarray) -> Image:
+    return Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    # return Image.fromarray(img)
+
+
+def convert_from_image_to_cv2(img: Image) -> np.ndarray:
+    return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+    # return np.asarray(img)
+
 
 def get_euclidean_distance( x0, y0, x1, y1 ):
     return math.sqrt( (x1-x0)**2 + (y1-y0)**2 )
@@ -24,7 +35,7 @@ def apply_fisheye_effect(
     
     start_time = time.time()
 
-    img = Image.open(img_file)
+    img = convert_from_cv2_to_image( img_file )
     dim_x, dim_y = img.size
     
     img_pixels = img.load()
@@ -70,7 +81,8 @@ def apply_fisheye_effect(
     print("--- %s seconds ---" % (time.time() - start_time))
 
 
+img = cv2.imread( 'Output.jpg' )
 
+apply_fisheye_effect(img_file = img, fisheye_focus = (540, 960), fisheye_radius = 200 )
+        
 
-
-# apply_fisheye_effect(img_file = 'Output.jpg', fisheye_focus = (540, 960), fisheye_radius = 200 )

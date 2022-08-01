@@ -16,7 +16,7 @@ class ExampleApp(tk.Tk):
         self.image = Image.open(IMG1).resize((540, 960))
         self.photo = ImageTk.PhotoImage(self.image)
         self.canvas.create_image((0, 0), anchor="nw", image=self.photo)
-        self.bind('<Button-1>', self.update)
+        self.bind('<Button-2>', self.update)
 
     def update(self, event):
         self.image = Image.open(IMG2).resize((540, 960))
@@ -29,4 +29,4 @@ if __name__ == "__main__":
 
 
 
-apply_fisheye_effect(img_file = 'Output.jpg', fisheye_focus = (540, 960), fisheye_radius = 200 )
+custom_fisheye_effect.apply_fisheye_effect(img_file = 'Output.jpg', fisheye_focus = (540, 960), fisheye_radius = 200 )

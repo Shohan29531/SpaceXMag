@@ -26,14 +26,12 @@ def apply_fisheye_effect(
     fisheye_focus, 
     fisheye_radius, 
     d = 1.5, 
-    xw = 0.4,
+    xw = 0.0,
     model = 'Sarkar', 
-    boundary_circle_width = 20, 
+    boundary_circle_width = 10, 
     boundary_circle_color = ( 0, 255, 0 ), 
     output_file_name = 'fisheye_applied.jpg' 
     ):
-    
-    start_time = time.time()
 
     img = convert_from_cv2_to_image( img_file )
     dim_x, dim_y = img.size
@@ -50,6 +48,11 @@ def apply_fisheye_effect(
                    fisheye_focus[0] + effective_fisheye_radius ):
         for j in range( fisheye_focus[1] - effective_fisheye_radius, 
                    fisheye_focus[1] + effective_fisheye_radius ):
+        
+            if( i >= dim_x or i < 0 ):
+                continue
+            if( j >= dim_y or j < 0 ):
+                continue
         
             dist = get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j )
             
@@ -75,14 +78,12 @@ def apply_fisheye_effect(
         current_pixel  = img_pixels[ old[0], old[1] ]
         
         new_img.putpixel( ( new[0], new[1] ), current_pixel )
-
-    new_img.save(output_file_name) 
     
-    print("--- %s seconds ---" % (time.time() - start_time))
+    return convert_from_image_to_cv2( new_img )
 
 
-img = cv2.imread( 'Output.jpg' )
+# img = cv2.imread( 'Output.jpg' )
 
-apply_fisheye_effect(img_file = img, fisheye_focus = (540, 960), fisheye_radius = 200 )
+# apply_fisheye_effect(img_file = img, fisheye_focus = (540, 960), fisheye_radius = 200 )
         
 

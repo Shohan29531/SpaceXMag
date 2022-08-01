@@ -10,7 +10,8 @@ def get_euclidean_distance( x0, y0, x1, y1 ):
 
 
 def apply_fisheye_effect( 
-    img_file, fisheye_focus, 
+    img_file, 
+    fisheye_focus, 
     fisheye_radius, 
     d = 1.5, 
     xw = 0.4,
@@ -20,6 +21,8 @@ def apply_fisheye_effect(
     output_file_name = 'fisheye_applied.jpg' 
     ):
 
+    start_time = time.time()
+    
     img = Image.open(img_file)
     dim_x, dim_y = img.size
     img_pixels = img.load()
@@ -63,11 +66,9 @@ def apply_fisheye_effect(
 
     new_img.save(output_file_name) 
 
+    print("--- %s seconds ---" % (time.time() - start_time))
 
-start_time = time.time()
 
-apply_fisheye_effect(img_file = 'Output.jpg', fisheye_focus = (540, 960), fisheye_radius = 200 )
 
-print("--- %s seconds ---" % (time.time() - start_time))
         
 

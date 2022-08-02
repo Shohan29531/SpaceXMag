@@ -33,6 +33,8 @@ def apply_fisheye_effect(
     output_file_name = 'fisheye_applied.jpg' 
     ):
 
+    start = time.time()
+
     img = convert_from_cv2_to_image( img_file )
     dim_x, dim_y = img.size
     
@@ -79,6 +81,8 @@ def apply_fisheye_effect(
         
         new_img.putpixel( ( new[0], new[1] ), current_pixel )
     
+    print("--- %s seconds ---" % (time.time() - start))
+
     return convert_from_image_to_cv2( new_img )
 
 

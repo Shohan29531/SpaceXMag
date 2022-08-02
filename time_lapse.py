@@ -6,7 +6,7 @@ import custom_fisheye_effect_opencv as F
 scale_factor = 0.6
 current_fisheye_radius = 150
 d = [ 1.5, 3.0, 4.5, 6 ]
-xw = [0.6, 0.4, 0.2, 0]
+xw = [ 0.6, 0.4, 0.2, 0 ]
 
 img = cv2.imread('Output.jpg')
 

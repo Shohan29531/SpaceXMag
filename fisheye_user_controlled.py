@@ -3,7 +3,7 @@ from cv2 import EVENT_MOUSEMOVE
 
 import custom_fisheye_effect_opencv as F
 
-scale_factor = 0.6
+scale_factor = 0.5
 current_fisheye_radius = 150
 d = [ 1.5, 2, 2.5, 3.0]
 xw = [0.6, 0.4, 0.2, 0]

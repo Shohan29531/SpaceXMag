@@ -1,7 +1,7 @@
 import cv2
 from cv2 import EVENT_MOUSEMOVE
 
-import custom_fisheye_effect_opencv as F
+import custom_fisheye_effect_opencv_ellipse as F
 
 scale_factor = 0.6
 current_fisheye_radius = 150

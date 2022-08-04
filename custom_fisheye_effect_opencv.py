@@ -36,7 +36,7 @@ def apply_fisheye_effect_circular(
     d = 1.5, 
     xw = 0.0,
     model = 'Sarkar', 
-    boundary_circle_width = 10, 
+    boundary_circle_width = 5, 
     boundary_circle_color = ( 0, 255, 0 ), 
     output_file_name = 'fisheye_applied.jpg' 
     ):
@@ -101,7 +101,7 @@ def apply_fisheye_effect_elliptical(
     d = 1.5, 
     xw = 0.0,
     model = 'Sarkar', 
-    boundary_circle_width = 10, 
+    boundary_circle_width = 5, 
     boundary_circle_color = ( 0, 255, 0 ), 
     output_file_name = 'fisheye_applied.jpg' 
     ):
@@ -176,7 +176,7 @@ def apply_fisheye_effect_rectangular(
     d = 1.5, 
     xw = 0.0,
     model = 'Sarkar', 
-    boundary_circle_width = 10, 
+    boundary_circle_width = 5, 
     boundary_circle_color = ( 0, 255, 0 ), 
     output_file_name = 'fisheye_applied.jpg' 
     ):

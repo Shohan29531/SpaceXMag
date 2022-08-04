@@ -1,5 +1,6 @@
 import cv2
 from cv2 import EVENT_MOUSEMOVE
+from cv2 import EVENT_FLAG_CTRLKEY
 
 import custom_fisheye_effect_opencv as F
 
@@ -14,15 +15,13 @@ xw = [0.6, 0.4, 0.2, 0]
 d_index = 0
 xw_index = 0
 
-
 img = cv2.imread('Output.jpg')
-
-
 
 dim_x, dim_y = img.shape[1], img.shape[0]
 
 print( dim_x, dim_y)
 
+cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
 img = cv2.resize( img, ( int( dim_x * scale_factor ), int( dim_y * scale_factor ) ) )
 cv2.imshow( 'image', img )
 
@@ -45,8 +44,19 @@ def render_new_image(img, x, y, lens_shape = 'circular'):
 
 
 def mouse_events( event, x, y, flags, param ):  
+
+    global current_fisheye_radius, d_index, xw_index, lens_shapes_index
+
+    if flags == cv2.EVENT_FLAG_CTRLKEY + cv2.EVENT_FLAG_LBUTTON and event == cv2.EVENT_LBUTTONDOWN:
+        print("shape change")
+        lens_shapes_index += 1
+        lens_shapes_index = lens_shapes_index % len( lens_shapes )
+
+        render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] ) 
+
+
     ## Left button click
-    if( event == cv2.EVENT_LBUTTONDOWN ):
+    elif( event == cv2.EVENT_LBUTTONDOWN ):
         
         # font = cv2.FONT_HERSHEY_TRIPLEX
         # LB = 'Left Button'
@@ -54,7 +64,7 @@ def mouse_events( event, x, y, flags, param ):
         
 
         ## zoom in
-        global current_fisheye_radius, d_index, xw_index, lens_shapes_index
+        
         current_fisheye_radius += 25
 
         if ( current_fisheye_radius >= 250 ):
@@ -83,26 +93,31 @@ def mouse_events( event, x, y, flags, param ):
 
         render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )  
 
-    
-    ## Scroll button up    
-    elif( event == cv2.EVENT_MBUTTONUP ):
-        return
-    
-    ## Scroll button down
-    elif( event == cv2.EVENT_MBUTTONDOWN ):
+    elif event == cv2.EVENT_MBUTTONDOWN:
         print("shape change")
         lens_shapes_index += 1
         lens_shapes_index = lens_shapes_index % len( lens_shapes )
 
-        render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] ) 
+        render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )     
 
               
     ## Mouse cursor hover    
-    elif( event == EVENT_MOUSEMOVE ):
+    elif( event == cv2.EVENT_MOUSEMOVE ):
         render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] ) 
+        
+    elif( event == cv2.EVENT_MOUSEHWHEEL):
+        print("damn")
+    elif event == cv2.EVENT_MOUSEMOVE and flags == cv2.EVENT_FLAG_CTRLKEY:
+        print("Mouse is moved over the window while pressing ALT key - position (", x, ", ", y, ")")    
+
+     
 
 
 
 cv2.setMouseCallback( 'image', mouse_events )
 cv2.waitKey( 0 )
+
+
+
+
 cv2.destroyAllWindows( )

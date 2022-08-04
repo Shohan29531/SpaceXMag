@@ -3,14 +3,14 @@ import cv2
 import custom_fisheye_effect_opencv as F
 
 
-scale_factor_display = 0.5
+scale_factor_display = 0.4
 scale_factor_computation = 0.5
 current_fisheye_radius = 152
 
 
 min_fisheye_radius = 152
 max_fisheye_radius = 500
-step_size = ( max_fisheye_radius - min_fisheye_radius) / 4
+step_size = int( ( max_fisheye_radius - min_fisheye_radius) / 4 )
 
 
 d = [ 1.5, 2, 2.5, 3.0]
@@ -34,6 +34,8 @@ cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * sc
 pos_x = 0
 pos_y = 0
 
+
+
 def render_new_image(img, x, y, lens_shape = 'circular'):
 
     if ( lens_shape == 'circular'):
@@ -46,6 +48,7 @@ def render_new_image(img, x, y, lens_shape = 'circular'):
         new_img = F.apply_fisheye_effect_rectangular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )    
     
     cv2.imshow( 'image', new_img )  
+
 
 
 def mouse_events( event, x, y, flags, param ):  
@@ -100,6 +103,7 @@ def mouse_events( event, x, y, flags, param ):
      
 
 cv2.setMouseCallback( 'image', mouse_events )
+
 
 while True:
     k = cv2.waitKey(10)

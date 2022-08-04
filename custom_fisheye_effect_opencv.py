@@ -124,7 +124,6 @@ def apply_fisheye_effect_elliptical(
     effective_primary_axis = primary_axis + boundary_circle_width
     effective_secondary_axis = secondary_axis + boundary_circle_width
 
-    
     # effective_fisheye_radius = ( fisheye_radius + boundary_circle_width )
 
     for i in range( fisheye_focus[0] - effective_primary_axis, 

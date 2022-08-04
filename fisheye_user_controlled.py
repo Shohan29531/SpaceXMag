@@ -23,7 +23,8 @@ cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
 cv2.imshow( 'image', img )
 cv2.resizeWindow('image', ( int( dim_x * scale_factor ), int( dim_y * scale_factor ) ))
 
-
+pos_x = 0
+pos_y = 0
 
 def render_new_image(img, x, y, lens_shape = 'circular'):
 
@@ -41,20 +42,15 @@ def render_new_image(img, x, y, lens_shape = 'circular'):
 
 def mouse_events( event, x, y, flags, param ):  
 
-    global current_fisheye_radius, d_index, xw_index, lens_shapes_index
+    global current_fisheye_radius, d_index, xw_index, lens_shapes_index, pos_x, pos_y
 
-    if flags == cv2.EVENT_FLAG_CTRLKEY + cv2.EVENT_FLAG_LBUTTON and event == cv2.EVENT_LBUTTONDOWN:
-
-        print("shape change")
-
-        lens_shapes_index += 1
-        lens_shapes_index = lens_shapes_index % len( lens_shapes )
-
-        render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] ) 
+    pos_x = x
+    pos_y = y
 
 
     ## Left button click
-    elif( event == cv2.EVENT_LBUTTONDOWN ):
+    ## zoom in
+    if( event == cv2.EVENT_LBUTTONDOWN ):
 
         print("zoom in")
         
@@ -71,6 +67,7 @@ def mouse_events( event, x, y, flags, param ):
         render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] ) 
     
     ## Right button click    
+    ## zoom out
     elif( event == cv2.EVENT_RBUTTONDOWN ):
         
         print("zoom out")
@@ -87,15 +84,7 @@ def mouse_events( event, x, y, flags, param ):
 
         render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )  
 
-    elif event == cv2.EVENT_MBUTTONDOWN:
-
-        print("shape change")
-        lens_shapes_index += 1
-        lens_shapes_index = lens_shapes_index % len( lens_shapes )
-
-        render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )     
-
-              
+                
     ## Mouse cursor hover    
     elif( event == cv2.EVENT_MOUSEMOVE ):
         render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )   
@@ -103,5 +92,21 @@ def mouse_events( event, x, y, flags, param ):
      
 
 cv2.setMouseCallback( 'image', mouse_events )
-cv2.waitKey( 0 )
+
+while True:
+    k = cv2.waitKey(10)
+    
+    ## if esc is pressed, exit the program
+    if k == 27:
+        print("exit")
+        break
+    ## if space is presssed, change the shape
+    elif k == 32:
+        print("shape change")
+        lens_shapes_index += 1
+        lens_shapes_index = lens_shapes_index % len( lens_shapes )
+
+        render_new_image( img = img, x = pos_x, y = pos_y, lens_shape = lens_shapes[ lens_shapes_index ] )   
+
+
 cv2.destroyAllWindows( )

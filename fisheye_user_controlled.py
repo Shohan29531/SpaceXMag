@@ -24,6 +24,7 @@ print( dim_x, dim_y)
 cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
 img = cv2.resize( img, ( int( dim_x * scale_factor ), int( dim_y * scale_factor ) ) )
 cv2.imshow( 'image', img )
+cv2.resizeWindow('image', ( int( dim_x * scale_factor ), int( dim_y * scale_factor ) ))
 
 
 

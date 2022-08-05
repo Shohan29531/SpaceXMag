@@ -1,0 +1,2833 @@
+{
+  "activity_name": "com.github.devnied.emvnfccard/com.github.devnied.emvnfccard.activity.AboutActivity", 
+  "activity": {
+    "root": {
+      "scrollable-horizontal": false, 
+      "draw": true, 
+      "ancestors": [
+        "android.widget.FrameLayout", 
+        "android.view.ViewGroup", 
+        "android.view.View", 
+        "java.lang.Object"
+      ], 
+      "clickable": false, 
+      "pressed": "not_pressed", 
+      "focusable": false, 
+      "long-clickable": false, 
+      "enabled": true, 
+      "bounds": [
+        0, 
+        0, 
+        1440, 
+        2560
+      ], 
+      "visibility": "visible", 
+      "content-desc": [
+        null
+      ], 
+      "rel-bounds": [
+        0, 
+        0, 
+        1440, 
+        2560
+      ], 
+      "focused": false, 
+      "selected": false, 
+      "scrollable-vertical": false, 
+      "children": [
+        {
+          "scrollable-horizontal": false, 
+          "draw": true, 
+          "ancestors": [
+            "android.view.ViewGroup", 
+            "android.view.View", 
+            "java.lang.Object"
+          ], 
+          "clickable": false, 
+          "pressed": "not_pressed", 
+          "focusable": false, 
+          "long-clickable": false, 
+          "enabled": true, 
+          "bounds": [
+            0, 
+            0, 
+            1440, 
+            2392
+          ], 
+          "visibility": "visible", 
+          "content-desc": [
+            null
+          ], 
+          "rel-bounds": [
+            0, 
+            0, 
+            1440, 
+            2392
+          ], 
+          "focused": false, 
+          "selected": false, 
+          "scrollable-vertical": false, 
+          "children": [
+            {
+              "resource-id": "android:id/action_mode_bar_stub", 
+              "adapter-view": false, 
+              "pointer": "84de405", 
+              "scrollable-horizontal": false, 
+              "ancestors": [
+                "android.view.View", 
+                "java.lang.Object"
+              ], 
+              "selected": false, 
+              "content-desc": [
+                null
+              ], 
+              "rel-bounds": [
+                0, 
+                0, 
+                0, 
+                0
+              ], 
+              "draw": true, 
+              "focusable": false, 
+              "long-clickable": false, 
+              "visibility": "gone", 
+              "focused": false, 
+              "clickable": false, 
+              "abs-pos": true, 
+              "class": "android.view.ViewStub", 
+              "visible-to-user": false, 
+              "package": "android", 
+              "enabled": true, 
+              "bounds": [
+                0, 
+                0, 
+                0, 
+                0
+              ], 
+              "pressed": "not_pressed", 
+              "scrollable-vertical": false
+            }, 
+            {
+              "scrollable-horizontal": false, 
+              "draw": true, 
+              "ancestors": [
+                "android.view.ViewGroup", 
+                "android.view.View", 
+                "java.lang.Object"
+              ], 
+              "clickable": false, 
+              "pressed": "not_pressed", 
+              "focusable": false, 
+              "long-clickable": false, 
+              "enabled": true, 
+              "bounds": [
+                0, 
+                0, 
+                1440, 
+                2392
+              ], 
+              "visibility": "visible", 
+              "content-desc": [
+                null
+              ], 
+              "rel-bounds": [
+                0, 
+                0, 
+                1440, 
+                2392
+              ], 
+              "focused": false, 
+              "selected": false, 
+              "scrollable-vertical": false, 
+              "children": [
+                {
+                  "resource-id": "com.github.devnied.emvnfccard:id/action_bar_root", 
+                  "adapter-view": false, 
+                  "pointer": "c239e8b", 
+                  "children": [
+                    {
+                      "resource-id": "android:id/content", 
+                      "adapter-view": false, 
+                      "pointer": "ffb0b68", 
+                      "children": [
+                        {
+                          "resource-id": "com.github.devnied.emvnfccard:id/coordinator", 
+                          "adapter-view": false, 
+                          "pointer": "5cdbb81", 
+                          "children": [
+                            {
+                              "scrollable-horizontal": false, 
+                              "draw": true, 
+                              "ancestors": [
+                                "android.view.ViewGroup", 
+                                "android.view.View", 
+                                "java.lang.Object"
+                              ], 
+                              "clickable": false, 
+                              "pressed": "not_pressed", 
+                              "focusable": false, 
+                              "long-clickable": false, 
+                              "enabled": true, 
+                              "bounds": [
+                                0, 
+                                84, 
+                                1440, 
+                                2392
+                              ], 
+                              "visibility": "visible", 
+                              "content-desc": [
+                                null
+                              ], 
+                              "rel-bounds": [
+                                0, 
+                                84, 
+                                1440, 
+                                2392
+                              ], 
+                              "focused": false, 
+                              "selected": false, 
+                              "scrollable-vertical": false, 
+                              "children": [
+                                {
+                                  "resource-id": "com.github.devnied.emvnfccard:id/toolbar", 
+                                  "adapter-view": false, 
+                                  "pointer": "e805426", 
+                                  "children": [
+                                    {
+                                      "text": "About", 
+                                      "scrollable-vertical": false, 
+                                      "adapter-view": false, 
+                                      "pointer": "1ab9867", 
+                                      "scrollable-horizontal": false, 
+                                      "ancestors": [
+                                        "android.widget.TextView", 
+                                        "android.view.View", 
+                                        "java.lang.Object"
+                                      ], 
+                                      "selected": false, 
+                                      "content-desc": [
+                                        null
+                                      ], 
+                                      "rel-bounds": [
+                                        252, 
+                                        51, 
+                                        440, 
+                                        144
+                                      ], 
+                                      "draw": false, 
+                                      "focusable": false, 
+                                      "long-clickable": false, 
+                                      "visibility": "visible", 
+                                      "focused": false, 
+                                      "clickable": false, 
+                                      "abs-pos": true, 
+                                      "font-family": "sans-serif-medium", 
+                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                      "visible-to-user": true, 
+                                      "enabled": true, 
+                                      "bounds": [
+                                        252, 
+                                        135, 
+                                        440, 
+                                        228
+                                      ], 
+                                      "pressed": "not_pressed"
+                                    }, 
+                                    {
+                                      "scrollable-horizontal": false, 
+                                      "draw": false, 
+                                      "ancestors": [
+                                        "android.widget.ImageButton", 
+                                        "android.widget.ImageView", 
+                                        "android.view.View", 
+                                        "java.lang.Object"
+                                      ], 
+                                      "clickable": true, 
+                                      "pressed": "not_pressed", 
+                                      "focusable": true, 
+                                      "long-clickable": false, 
+                                      "enabled": true, 
+                                      "bounds": [
+                                        0, 
+                                        84, 
+                                        196, 
+                                        280
+                                      ], 
+                                      "visibility": "visible", 
+                                      "content-desc": [
+                                        "Navigate up"
+                                      ], 
+                                      "rel-bounds": [
+                                        0, 
+                                        0, 
+                                        196, 
+                                        196
+                                      ], 
+                                      "focused": false, 
+                                      "selected": false, 
+                                      "scrollable-vertical": false, 
+                                      "adapter-view": false, 
+                                      "abs-pos": true, 
+                                      "pointer": "5297614", 
+                                      "class": "android.support.v7.widget.AppCompatImageButton", 
+                                      "visible-to-user": true
+                                    }, 
+                                    {
+                                      "scrollable-horizontal": false, 
+                                      "draw": true, 
+                                      "ancestors": [
+                                        "android.support.v7.widget.LinearLayoutCompat", 
+                                        "android.view.ViewGroup", 
+                                        "android.view.View", 
+                                        "java.lang.Object"
+                                      ], 
+                                      "clickable": false, 
+                                      "pressed": "not_pressed", 
+                                      "focusable": false, 
+                                      "long-clickable": false, 
+                                      "enabled": true, 
+                                      "bounds": [
+                                        1440, 
+                                        84, 
+                                        1440, 
+                                        280
+                                      ], 
+                                      "visibility": "visible", 
+                                      "content-desc": [
+                                        null
+                                      ], 
+                                      "rel-bounds": [
+                                        1440, 
+                                        0, 
+                                        1440, 
+                                        196
+                                      ], 
+                                      "focused": false, 
+                                      "selected": false, 
+                                      "scrollable-vertical": false, 
+                                      "adapter-view": false, 
+                                      "abs-pos": true, 
+                                      "pointer": "c198ebd", 
+                                      "class": "android.support.v7.widget.ActionMenuView", 
+                                      "visible-to-user": false
+                                    }
+                                  ], 
+                                  "scrollable-horizontal": false, 
+                                  "ancestors": [
+                                    "android.view.ViewGroup", 
+                                    "android.view.View", 
+                                    "java.lang.Object"
+                                  ], 
+                                  "selected": false, 
+                                  "content-desc": [
+                                    null
+                                  ], 
+                                  "rel-bounds": [
+                                    0, 
+                                    0, 
+                                    1440, 
+                                    196
+                                  ], 
+                                  "draw": true, 
+                                  "focusable": false, 
+                                  "long-clickable": false, 
+                                  "visibility": "visible", 
+                                  "focused": false, 
+                                  "clickable": false, 
+                                  "abs-pos": true, 
+                                  "class": "android.support.v7.widget.Toolbar", 
+                                  "visible-to-user": true, 
+                                  "package": "com.github.devnied.emvnfccard", 
+                                  "enabled": true, 
+                                  "bounds": [
+                                    0, 
+                                    84, 
+                                    1440, 
+                                    280
+                                  ], 
+                                  "pressed": "not_pressed", 
+                                  "scrollable-vertical": false
+                                }, 
+                                {
+                                  "resource-id": "com.github.devnied.emvnfccard:id/about_content", 
+                                  "adapter-view": false, 
+                                  "pointer": "38d8cb2", 
+                                  "children": [
+                                    {
+                                      "resource-id": "com.github.devnied.emvnfccard:id/scrollView", 
+                                      "adapter-view": false, 
+                                      "pointer": "7cf5403", 
+                                      "children": [
+                                        {
+                                          "scrollable-horizontal": false, 
+                                          "draw": true, 
+                                          "ancestors": [
+                                            "android.view.ViewGroup", 
+                                            "android.view.View", 
+                                            "java.lang.Object"
+                                          ], 
+                                          "clickable": false, 
+                                          "pressed": "not_pressed", 
+                                          "focusable": false, 
+                                          "long-clickable": false, 
+                                          "enabled": true, 
+                                          "bounds": [
+                                            0, 
+                                            280, 
+                                            1440, 
+                                            2392
+                                          ], 
+                                          "visibility": "visible", 
+                                          "content-desc": [
+                                            null
+                                          ], 
+                                          "rel-bounds": [
+                                            0, 
+                                            0, 
+                                            1440, 
+                                            3556
+                                          ], 
+                                          "focused": false, 
+                                          "selected": false, 
+                                          "scrollable-vertical": false, 
+                                          "children": [
+                                            {
+                                              "scrollable-horizontal": false, 
+                                              "draw": true, 
+                                              "ancestors": [
+                                                "android.widget.FrameLayout", 
+                                                "android.view.ViewGroup", 
+                                                "android.view.View", 
+                                                "java.lang.Object"
+                                              ], 
+                                              "clickable": false, 
+                                              "pressed": "not_pressed", 
+                                              "focusable": false, 
+                                              "long-clickable": false, 
+                                              "enabled": true, 
+                                              "bounds": [
+                                                35, 
+                                                315, 
+                                                1405, 
+                                                1273
+                                              ], 
+                                              "visibility": "visible", 
+                                              "content-desc": [
+                                                null
+                                              ], 
+                                              "rel-bounds": [
+                                                35, 
+                                                35, 
+                                                1405, 
+                                                993
+                                              ], 
+                                              "focused": false, 
+                                              "selected": false, 
+                                              "scrollable-vertical": false, 
+                                              "children": [
+                                                {
+                                                  "scrollable-horizontal": false, 
+                                                  "draw": true, 
+                                                  "ancestors": [
+                                                    "android.view.ViewGroup", 
+                                                    "android.view.View", 
+                                                    "java.lang.Object"
+                                                  ], 
+                                                  "clickable": false, 
+                                                  "pressed": "not_pressed", 
+                                                  "focusable": false, 
+                                                  "long-clickable": false, 
+                                                  "enabled": true, 
+                                                  "bounds": [
+                                                    91, 
+                                                    371, 
+                                                    1349, 
+                                                    1217
+                                                  ], 
+                                                  "visibility": "visible", 
+                                                  "content-desc": [
+                                                    null
+                                                  ], 
+                                                  "rel-bounds": [
+                                                    56, 
+                                                    56, 
+                                                    1314, 
+                                                    902
+                                                  ], 
+                                                  "focused": false, 
+                                                  "selected": false, 
+                                                  "scrollable-vertical": false, 
+                                                  "children": [
+                                                    {
+                                                      "text": "About", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/about_title", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "7e92d5f", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        0, 
+                                                        1258, 
+                                                        66
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": true, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        371, 
+                                                        1349, 
+                                                        437
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "scrollable-horizontal": false, 
+                                                      "draw": false, 
+                                                      "ancestors": [
+                                                        "android.widget.ImageView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "clickable": false, 
+                                                      "pressed": "not_pressed", 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        615, 
+                                                        472, 
+                                                        825, 
+                                                        640
+                                                      ], 
+                                                      "visibility": "visible", 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        524, 
+                                                        101, 
+                                                        734, 
+                                                        269
+                                                      ], 
+                                                      "focused": false, 
+                                                      "selected": false, 
+                                                      "scrollable-vertical": false, 
+                                                      "adapter-view": false, 
+                                                      "abs-pos": true, 
+                                                      "pointer": "9573ac", 
+                                                      "class": "android.support.v7.widget.AppCompatImageView", 
+                                                      "visible-to-user": true
+                                                    }, 
+                                                    {
+                                                      "text": "Credit Card Reader v4.2.3", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/about_version", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "be8d875", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        287, 
+                                                        1258, 
+                                                        358
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": true, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        658, 
+                                                        1349, 
+                                                        729
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "text": "This app was made to read public data on banking NFC cards compliants with EMV norm.", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/about_content", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "396000a", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        376, 
+                                                        1258, 
+                                                        509
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": true, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        747, 
+                                                        1349, 
+                                                        880
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "text": "\uf09b", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/github_icon", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "c9d407b", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        561, 
+                                                        544, 
+                                                        697, 
+                                                        678
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": true, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        652, 
+                                                        915, 
+                                                        788, 
+                                                        1049
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "text": "Source Code and documentation available on Github. Application written by Julien Millau", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/about_github_content", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "2bc1e98", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        713, 
+                                                        1258, 
+                                                        846
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": true, 
+                                                      "long-clickable": true, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": true, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": true, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        1084, 
+                                                        1349, 
+                                                        1217
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }
+                                                  ], 
+                                                  "adapter-view": false, 
+                                                  "abs-pos": true, 
+                                                  "pointer": "3c3c1fe", 
+                                                  "class": "android.widget.LinearLayout", 
+                                                  "visible-to-user": true
+                                                }
+                                              ], 
+                                              "adapter-view": false, 
+                                              "abs-pos": true, 
+                                              "pointer": "5559b9", 
+                                              "class": "android.support.v7.widget.CardView", 
+                                              "visible-to-user": true
+                                            }, 
+                                            {
+                                              "resource-id": "com.github.devnied.emvnfccard:id/about_donation_card", 
+                                              "adapter-view": false, 
+                                              "pointer": "cfb86f1", 
+                                              "children": [
+                                                {
+                                                  "scrollable-horizontal": false, 
+                                                  "draw": true, 
+                                                  "ancestors": [
+                                                    "android.view.ViewGroup", 
+                                                    "android.view.View", 
+                                                    "java.lang.Object"
+                                                  ], 
+                                                  "clickable": false, 
+                                                  "pressed": "not_pressed", 
+                                                  "focusable": false, 
+                                                  "long-clickable": false, 
+                                                  "enabled": true, 
+                                                  "bounds": [
+                                                    91, 
+                                                    1365, 
+                                                    1349, 
+                                                    2392
+                                                  ], 
+                                                  "visibility": "visible", 
+                                                  "content-desc": [
+                                                    null
+                                                  ], 
+                                                  "rel-bounds": [
+                                                    56, 
+                                                    56, 
+                                                    1314, 
+                                                    1180
+                                                  ], 
+                                                  "focused": false, 
+                                                  "selected": false, 
+                                                  "scrollable-vertical": false, 
+                                                  "children": [
+                                                    {
+                                                      "text": "Donate", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/about_inApp", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "cb56957", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        0, 
+                                                        1258, 
+                                                        66
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": true, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        1365, 
+                                                        1349, 
+                                                        1431
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "text": "Thanks for your donation", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/donation_thanks", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "fa08c44", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        0, 
+                                                        0, 
+                                                        0
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "gone", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        1365, 
+                                                        91, 
+                                                        1365
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "text": "Help us to improve this app with donation", 
+                                                      "scrollable-vertical": false, 
+                                                      "adapter-view": false, 
+                                                      "pointer": "2b0a12d", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        112, 
+                                                        1258, 
+                                                        183
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": true, 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        1477, 
+                                                        1349, 
+                                                        1548
+                                                      ], 
+                                                      "pressed": "not_pressed"
+                                                    }, 
+                                                    {
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/about_inapp_content", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "c1e8662", 
+                                                      "children": [
+                                                        {
+                                                          "resource-id": "com.github.devnied.emvnfccard:id/inAppList", 
+                                                          "adapter-view": false, 
+                                                          "pointer": "7bd43f3", 
+                                                          "children": [
+                                                            {
+                                                              "scrollable-horizontal": false, 
+                                                              "draw": true, 
+                                                              "ancestors": [
+                                                                "android.view.ViewGroup", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "clickable": true, 
+                                                              "pressed": "not_pressed", 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                91, 
+                                                                1593, 
+                                                                1349, 
+                                                                1734
+                                                              ], 
+                                                              "visibility": "visible", 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                10, 
+                                                                1258, 
+                                                                151
+                                                              ], 
+                                                              "focused": false, 
+                                                              "selected": false, 
+                                                              "scrollable-vertical": false, 
+                                                              "children": [
+                                                                {
+                                                                  "text": "Donate $2.49", 
+                                                                  "resource-id": "com.github.devnied.emvnfccard:id/inapp_text", 
+                                                                  "adapter-view": false, 
+                                                                  "pointer": "1232329", 
+                                                                  "scrollable-horizontal": false, 
+                                                                  "ancestors": [
+                                                                    "android.widget.TextView", 
+                                                                    "android.view.View", 
+                                                                    "java.lang.Object"
+                                                                  ], 
+                                                                  "selected": false, 
+                                                                  "content-desc": [
+                                                                    null
+                                                                  ], 
+                                                                  "rel-bounds": [
+                                                                    35, 
+                                                                    35, 
+                                                                    1223, 
+                                                                    106
+                                                                  ], 
+                                                                  "draw": false, 
+                                                                  "focusable": false, 
+                                                                  "long-clickable": false, 
+                                                                  "visibility": "visible", 
+                                                                  "focused": false, 
+                                                                  "clickable": false, 
+                                                                  "abs-pos": true, 
+                                                                  "font-family": "sans-serif", 
+                                                                  "class": "android.support.v7.widget.AppCompatTextView", 
+                                                                  "visible-to-user": true, 
+                                                                  "package": "com.github.devnied.emvnfccard", 
+                                                                  "enabled": true, 
+                                                                  "bounds": [
+                                                                    126, 
+                                                                    1628, 
+                                                                    1314, 
+                                                                    1699
+                                                                  ], 
+                                                                  "pressed": "not_pressed", 
+                                                                  "scrollable-vertical": false
+                                                                }
+                                                              ], 
+                                                              "adapter-view": false, 
+                                                              "abs-pos": true, 
+                                                              "pointer": "73c28b0", 
+                                                              "class": "android.widget.LinearLayout", 
+                                                              "visible-to-user": true
+                                                            }, 
+                                                            {
+                                                              "scrollable-horizontal": false, 
+                                                              "draw": true, 
+                                                              "ancestors": [
+                                                                "android.view.ViewGroup", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "clickable": true, 
+                                                              "pressed": "not_pressed", 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                91, 
+                                                                1744, 
+                                                                1349, 
+                                                                1885
+                                                              ], 
+                                                              "visibility": "visible", 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                161, 
+                                                                1258, 
+                                                                302
+                                                              ], 
+                                                              "focused": false, 
+                                                              "selected": false, 
+                                                              "scrollable-vertical": false, 
+                                                              "children": [
+                                                                {
+                                                                  "text": "Donate $4.49", 
+                                                                  "resource-id": "com.github.devnied.emvnfccard:id/inapp_text", 
+                                                                  "adapter-view": false, 
+                                                                  "pointer": "5e2c4f", 
+                                                                  "scrollable-horizontal": false, 
+                                                                  "ancestors": [
+                                                                    "android.widget.TextView", 
+                                                                    "android.view.View", 
+                                                                    "java.lang.Object"
+                                                                  ], 
+                                                                  "selected": false, 
+                                                                  "content-desc": [
+                                                                    null
+                                                                  ], 
+                                                                  "rel-bounds": [
+                                                                    35, 
+                                                                    35, 
+                                                                    1223, 
+                                                                    106
+                                                                  ], 
+                                                                  "draw": false, 
+                                                                  "focusable": false, 
+                                                                  "long-clickable": false, 
+                                                                  "visibility": "visible", 
+                                                                  "focused": false, 
+                                                                  "clickable": false, 
+                                                                  "abs-pos": true, 
+                                                                  "font-family": "sans-serif", 
+                                                                  "class": "android.support.v7.widget.AppCompatTextView", 
+                                                                  "visible-to-user": true, 
+                                                                  "package": "com.github.devnied.emvnfccard", 
+                                                                  "enabled": true, 
+                                                                  "bounds": [
+                                                                    126, 
+                                                                    1779, 
+                                                                    1314, 
+                                                                    1850
+                                                                  ], 
+                                                                  "pressed": "not_pressed", 
+                                                                  "scrollable-vertical": false
+                                                                }
+                                                              ], 
+                                                              "adapter-view": false, 
+                                                              "abs-pos": true, 
+                                                              "pointer": "b62a6ae", 
+                                                              "class": "android.widget.LinearLayout", 
+                                                              "visible-to-user": true
+                                                            }, 
+                                                            {
+                                                              "scrollable-horizontal": false, 
+                                                              "draw": true, 
+                                                              "ancestors": [
+                                                                "android.view.ViewGroup", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "clickable": true, 
+                                                              "pressed": "not_pressed", 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                91, 
+                                                                1895, 
+                                                                1349, 
+                                                                2036
+                                                              ], 
+                                                              "visibility": "visible", 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                312, 
+                                                                1258, 
+                                                                453
+                                                              ], 
+                                                              "focused": false, 
+                                                              "selected": false, 
+                                                              "scrollable-vertical": false, 
+                                                              "children": [
+                                                                {
+                                                                  "text": "Donate $8.99", 
+                                                                  "resource-id": "com.github.devnied.emvnfccard:id/inapp_text", 
+                                                                  "adapter-view": false, 
+                                                                  "pointer": "921c8e5", 
+                                                                  "scrollable-horizontal": false, 
+                                                                  "ancestors": [
+                                                                    "android.widget.TextView", 
+                                                                    "android.view.View", 
+                                                                    "java.lang.Object"
+                                                                  ], 
+                                                                  "selected": false, 
+                                                                  "content-desc": [
+                                                                    null
+                                                                  ], 
+                                                                  "rel-bounds": [
+                                                                    35, 
+                                                                    35, 
+                                                                    1223, 
+                                                                    106
+                                                                  ], 
+                                                                  "draw": false, 
+                                                                  "focusable": false, 
+                                                                  "long-clickable": false, 
+                                                                  "visibility": "visible", 
+                                                                  "focused": false, 
+                                                                  "clickable": false, 
+                                                                  "abs-pos": true, 
+                                                                  "font-family": "sans-serif", 
+                                                                  "class": "android.support.v7.widget.AppCompatTextView", 
+                                                                  "visible-to-user": true, 
+                                                                  "package": "com.github.devnied.emvnfccard", 
+                                                                  "enabled": true, 
+                                                                  "bounds": [
+                                                                    126, 
+                                                                    1930, 
+                                                                    1314, 
+                                                                    2001
+                                                                  ], 
+                                                                  "pressed": "not_pressed", 
+                                                                  "scrollable-vertical": false
+                                                                }
+                                                              ], 
+                                                              "adapter-view": false, 
+                                                              "abs-pos": true, 
+                                                              "pointer": "db31fdc", 
+                                                              "class": "android.widget.LinearLayout", 
+                                                              "visible-to-user": true
+                                                            }, 
+                                                            {
+                                                              "scrollable-horizontal": false, 
+                                                              "draw": true, 
+                                                              "ancestors": [
+                                                                "android.view.ViewGroup", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "clickable": true, 
+                                                              "pressed": "not_pressed", 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                91, 
+                                                                2046, 
+                                                                1349, 
+                                                                2187
+                                                              ], 
+                                                              "visibility": "visible", 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                463, 
+                                                                1258, 
+                                                                604
+                                                              ], 
+                                                              "focused": false, 
+                                                              "selected": false, 
+                                                              "scrollable-vertical": false, 
+                                                              "children": [
+                                                                {
+                                                                  "text": "Donate $14.99", 
+                                                                  "resource-id": "com.github.devnied.emvnfccard:id/inapp_text", 
+                                                                  "adapter-view": false, 
+                                                                  "pointer": "7b3e6b", 
+                                                                  "scrollable-horizontal": false, 
+                                                                  "ancestors": [
+                                                                    "android.widget.TextView", 
+                                                                    "android.view.View", 
+                                                                    "java.lang.Object"
+                                                                  ], 
+                                                                  "selected": false, 
+                                                                  "content-desc": [
+                                                                    null
+                                                                  ], 
+                                                                  "rel-bounds": [
+                                                                    35, 
+                                                                    35, 
+                                                                    1223, 
+                                                                    106
+                                                                  ], 
+                                                                  "draw": false, 
+                                                                  "focusable": false, 
+                                                                  "long-clickable": false, 
+                                                                  "visibility": "visible", 
+                                                                  "focused": false, 
+                                                                  "clickable": false, 
+                                                                  "abs-pos": true, 
+                                                                  "font-family": "sans-serif", 
+                                                                  "class": "android.support.v7.widget.AppCompatTextView", 
+                                                                  "visible-to-user": true, 
+                                                                  "package": "com.github.devnied.emvnfccard", 
+                                                                  "enabled": true, 
+                                                                  "bounds": [
+                                                                    126, 
+                                                                    2081, 
+                                                                    1314, 
+                                                                    2152
+                                                                  ], 
+                                                                  "pressed": "not_pressed", 
+                                                                  "scrollable-vertical": false
+                                                                }
+                                                              ], 
+                                                              "adapter-view": false, 
+                                                              "abs-pos": true, 
+                                                              "pointer": "4b67fba", 
+                                                              "class": "android.widget.LinearLayout", 
+                                                              "visible-to-user": true
+                                                            }, 
+                                                            {
+                                                              "scrollable-horizontal": false, 
+                                                              "draw": true, 
+                                                              "ancestors": [
+                                                                "android.view.ViewGroup", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "clickable": true, 
+                                                              "pressed": "not_pressed", 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                91, 
+                                                                2197, 
+                                                                1349, 
+                                                                2338
+                                                              ], 
+                                                              "visibility": "visible", 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                614, 
+                                                                1258, 
+                                                                755
+                                                              ], 
+                                                              "focused": false, 
+                                                              "selected": false, 
+                                                              "scrollable-vertical": false, 
+                                                              "children": [
+                                                                {
+                                                                  "text": "Donate $21.84", 
+                                                                  "resource-id": "com.github.devnied.emvnfccard:id/inapp_text", 
+                                                                  "adapter-view": false, 
+                                                                  "pointer": "fab0e61", 
+                                                                  "scrollable-horizontal": false, 
+                                                                  "ancestors": [
+                                                                    "android.widget.TextView", 
+                                                                    "android.view.View", 
+                                                                    "java.lang.Object"
+                                                                  ], 
+                                                                  "selected": false, 
+                                                                  "content-desc": [
+                                                                    null
+                                                                  ], 
+                                                                  "rel-bounds": [
+                                                                    35, 
+                                                                    35, 
+                                                                    1223, 
+                                                                    106
+                                                                  ], 
+                                                                  "draw": false, 
+                                                                  "focusable": false, 
+                                                                  "long-clickable": false, 
+                                                                  "visibility": "visible", 
+                                                                  "focused": false, 
+                                                                  "clickable": false, 
+                                                                  "abs-pos": true, 
+                                                                  "font-family": "sans-serif", 
+                                                                  "class": "android.support.v7.widget.AppCompatTextView", 
+                                                                  "visible-to-user": true, 
+                                                                  "package": "com.github.devnied.emvnfccard", 
+                                                                  "enabled": true, 
+                                                                  "bounds": [
+                                                                    126, 
+                                                                    2232, 
+                                                                    1314, 
+                                                                    2303
+                                                                  ], 
+                                                                  "pressed": "not_pressed", 
+                                                                  "scrollable-vertical": false
+                                                                }
+                                                              ], 
+                                                              "adapter-view": false, 
+                                                              "abs-pos": true, 
+                                                              "pointer": "3405dc8", 
+                                                              "class": "android.widget.LinearLayout", 
+                                                              "visible-to-user": true
+                                                            }, 
+                                                            {
+                                                              "scrollable-horizontal": false, 
+                                                              "draw": true, 
+                                                              "ancestors": [
+                                                                "android.view.ViewGroup", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "clickable": true, 
+                                                              "pressed": "not_pressed", 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                91, 
+                                                                2348, 
+                                                                1349, 
+                                                                2392
+                                                              ], 
+                                                              "visibility": "visible", 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                765, 
+                                                                1258, 
+                                                                906
+                                                              ], 
+                                                              "focused": false, 
+                                                              "selected": false, 
+                                                              "scrollable-vertical": false, 
+                                                              "children": [
+                                                                {
+                                                                  "text": "Donate $32.99", 
+                                                                  "resource-id": "com.github.devnied.emvnfccard:id/inapp_text", 
+                                                                  "adapter-view": false, 
+                                                                  "pointer": "30d5647", 
+                                                                  "scrollable-horizontal": false, 
+                                                                  "ancestors": [
+                                                                    "android.widget.TextView", 
+                                                                    "android.view.View", 
+                                                                    "java.lang.Object"
+                                                                  ], 
+                                                                  "selected": false, 
+                                                                  "content-desc": [
+                                                                    null
+                                                                  ], 
+                                                                  "rel-bounds": [
+                                                                    35, 
+                                                                    35, 
+                                                                    1223, 
+                                                                    106
+                                                                  ], 
+                                                                  "draw": false, 
+                                                                  "focusable": false, 
+                                                                  "long-clickable": false, 
+                                                                  "visibility": "visible", 
+                                                                  "focused": false, 
+                                                                  "clickable": false, 
+                                                                  "abs-pos": true, 
+                                                                  "font-family": "sans-serif", 
+                                                                  "class": "android.support.v7.widget.AppCompatTextView", 
+                                                                  "visible-to-user": true, 
+                                                                  "package": "com.github.devnied.emvnfccard", 
+                                                                  "enabled": true, 
+                                                                  "bounds": [
+                                                                    126, 
+                                                                    2383, 
+                                                                    1314, 
+                                                                    2392
+                                                                  ], 
+                                                                  "pressed": "not_pressed", 
+                                                                  "scrollable-vertical": false
+                                                                }
+                                                              ], 
+                                                              "adapter-view": false, 
+                                                              "abs-pos": true, 
+                                                              "pointer": "a3cdd86", 
+                                                              "class": "android.widget.LinearLayout", 
+                                                              "visible-to-user": true
+                                                            }
+                                                          ], 
+                                                          "scrollable-horizontal": false, 
+                                                          "ancestors": [
+                                                            "android.view.ViewGroup", 
+                                                            "android.view.View", 
+                                                            "java.lang.Object"
+                                                          ], 
+                                                          "selected": false, 
+                                                          "content-desc": [
+                                                            null
+                                                          ], 
+                                                          "rel-bounds": [
+                                                            0, 
+                                                            0, 
+                                                            1258, 
+                                                            906
+                                                          ], 
+                                                          "draw": true, 
+                                                          "focusable": false, 
+                                                          "long-clickable": false, 
+                                                          "visibility": "visible", 
+                                                          "focused": false, 
+                                                          "clickable": false, 
+                                                          "abs-pos": true, 
+                                                          "class": "android.widget.LinearLayout", 
+                                                          "visible-to-user": true, 
+                                                          "package": "com.github.devnied.emvnfccard", 
+                                                          "enabled": true, 
+                                                          "bounds": [
+                                                            91, 
+                                                            1583, 
+                                                            1349, 
+                                                            2392
+                                                          ], 
+                                                          "pressed": "not_pressed", 
+                                                          "scrollable-vertical": false
+                                                        }
+                                                      ], 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.view.ViewGroup", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        218, 
+                                                        1258, 
+                                                        1124
+                                                      ], 
+                                                      "draw": true, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "class": "android.widget.FrameLayout", 
+                                                      "visible-to-user": true, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        1583, 
+                                                        1349, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }
+                                                  ], 
+                                                  "adapter-view": false, 
+                                                  "abs-pos": true, 
+                                                  "pointer": "99c12d6", 
+                                                  "class": "android.widget.LinearLayout", 
+                                                  "visible-to-user": true
+                                                }
+                                              ], 
+                                              "scrollable-horizontal": false, 
+                                              "ancestors": [
+                                                "android.widget.FrameLayout", 
+                                                "android.view.ViewGroup", 
+                                                "android.view.View", 
+                                                "java.lang.Object"
+                                              ], 
+                                              "selected": false, 
+                                              "content-desc": [
+                                                null
+                                              ], 
+                                              "rel-bounds": [
+                                                35, 
+                                                1029, 
+                                                1405, 
+                                                2265
+                                              ], 
+                                              "draw": true, 
+                                              "focusable": false, 
+                                              "long-clickable": false, 
+                                              "visibility": "visible", 
+                                              "focused": false, 
+                                              "clickable": false, 
+                                              "abs-pos": true, 
+                                              "class": "android.support.v7.widget.CardView", 
+                                              "visible-to-user": true, 
+                                              "package": "com.github.devnied.emvnfccard", 
+                                              "enabled": true, 
+                                              "bounds": [
+                                                35, 
+                                                1309, 
+                                                1405, 
+                                                2392
+                                              ], 
+                                              "pressed": "not_pressed", 
+                                              "scrollable-vertical": false
+                                            }, 
+                                            {
+                                              "resource-id": "com.github.devnied.emvnfccard:id/about_pro_version", 
+                                              "adapter-view": false, 
+                                              "pointer": "ee18e74", 
+                                              "children": [
+                                                {
+                                                  "scrollable-horizontal": false, 
+                                                  "draw": true, 
+                                                  "ancestors": [
+                                                    "android.view.ViewGroup", 
+                                                    "android.view.View", 
+                                                    "java.lang.Object"
+                                                  ], 
+                                                  "clickable": false, 
+                                                  "pressed": "not_pressed", 
+                                                  "focusable": false, 
+                                                  "long-clickable": false, 
+                                                  "enabled": true, 
+                                                  "bounds": [
+                                                    91, 
+                                                    2654, 
+                                                    1349, 
+                                                    2392
+                                                  ], 
+                                                  "visibility": "visible", 
+                                                  "content-desc": [
+                                                    null
+                                                  ], 
+                                                  "rel-bounds": [
+                                                    56, 
+                                                    56, 
+                                                    1314, 
+                                                    292
+                                                  ], 
+                                                  "focused": false, 
+                                                  "selected": false, 
+                                                  "scrollable-vertical": false, 
+                                                  "children": [
+                                                    {
+                                                      "text": "Credit Card Reader Pro", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/title_pro", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "b794c12", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        0, 
+                                                        652, 
+                                                        85
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        2654, 
+                                                        743, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "text": "\uf105", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/bannerArrow", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "fbf0fe3", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        1224, 
+                                                        89, 
+                                                        1258, 
+                                                        147
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        1315, 
+                                                        2743, 
+                                                        1349, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "scrollable-horizontal": false, 
+                                                      "draw": true, 
+                                                      "ancestors": [
+                                                        "android.view.ViewGroup", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "clickable": false, 
+                                                      "pressed": "not_pressed", 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        2767, 
+                                                        1279, 
+                                                        2392
+                                                      ], 
+                                                      "visibility": "visible", 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        113, 
+                                                        1188, 
+                                                        236
+                                                      ], 
+                                                      "focused": false, 
+                                                      "selected": false, 
+                                                      "scrollable-vertical": false, 
+                                                      "children": [
+                                                        {
+                                                          "scrollable-horizontal": false, 
+                                                          "draw": false, 
+                                                          "ancestors": [
+                                                            "android.widget.ImageView", 
+                                                            "android.view.View", 
+                                                            "java.lang.Object"
+                                                          ], 
+                                                          "clickable": false, 
+                                                          "pressed": "not_pressed", 
+                                                          "focusable": false, 
+                                                          "long-clickable": false, 
+                                                          "enabled": true, 
+                                                          "bounds": [
+                                                            91, 
+                                                            2767, 
+                                                            266, 
+                                                            2392
+                                                          ], 
+                                                          "visibility": "visible", 
+                                                          "content-desc": [
+                                                            null
+                                                          ], 
+                                                          "rel-bounds": [
+                                                            0, 
+                                                            0, 
+                                                            175, 
+                                                            123
+                                                          ], 
+                                                          "focused": false, 
+                                                          "selected": false, 
+                                                          "scrollable-vertical": false, 
+                                                          "adapter-view": false, 
+                                                          "abs-pos": true, 
+                                                          "pointer": "c6e2899", 
+                                                          "class": "android.support.v7.widget.AppCompatImageView", 
+                                                          "visible-to-user": false
+                                                        }, 
+                                                        {
+                                                          "scrollable-horizontal": false, 
+                                                          "draw": true, 
+                                                          "ancestors": [
+                                                            "android.view.ViewGroup", 
+                                                            "android.view.View", 
+                                                            "java.lang.Object"
+                                                          ], 
+                                                          "clickable": false, 
+                                                          "pressed": "not_pressed", 
+                                                          "focusable": false, 
+                                                          "long-clickable": false, 
+                                                          "enabled": true, 
+                                                          "bounds": [
+                                                            301, 
+                                                            2767, 
+                                                            1279, 
+                                                            2392
+                                                          ], 
+                                                          "visibility": "visible", 
+                                                          "content-desc": [
+                                                            null
+                                                          ], 
+                                                          "rel-bounds": [
+                                                            210, 
+                                                            0, 
+                                                            1188, 
+                                                            123
+                                                          ], 
+                                                          "focused": false, 
+                                                          "selected": false, 
+                                                          "scrollable-vertical": false, 
+                                                          "children": [
+                                                            {
+                                                              "text": "Read multiple cards, Extract more data, Export track 1/2 data, ...", 
+                                                              "scrollable-vertical": false, 
+                                                              "adapter-view": false, 
+                                                              "pointer": "448c73f", 
+                                                              "scrollable-horizontal": false, 
+                                                              "ancestors": [
+                                                                "android.widget.TextView", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "selected": false, 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                0, 
+                                                                978, 
+                                                                123
+                                                              ], 
+                                                              "draw": false, 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "visibility": "visible", 
+                                                              "focused": false, 
+                                                              "clickable": false, 
+                                                              "abs-pos": true, 
+                                                              "font-family": "sans-serif", 
+                                                              "class": "android.support.v7.widget.AppCompatTextView", 
+                                                              "visible-to-user": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                301, 
+                                                                2767, 
+                                                                1279, 
+                                                                2392
+                                                              ], 
+                                                              "pressed": "not_pressed"
+                                                            }
+                                                          ], 
+                                                          "adapter-view": false, 
+                                                          "abs-pos": true, 
+                                                          "pointer": "a9c175e", 
+                                                          "class": "android.widget.LinearLayout", 
+                                                          "visible-to-user": false
+                                                        }
+                                                      ], 
+                                                      "adapter-view": false, 
+                                                      "abs-pos": true, 
+                                                      "pointer": "7c31de0", 
+                                                      "class": "android.widget.LinearLayout", 
+                                                      "visible-to-user": false
+                                                    }
+                                                  ], 
+                                                  "adapter-view": false, 
+                                                  "abs-pos": true, 
+                                                  "pointer": "1292f9d", 
+                                                  "class": "android.widget.RelativeLayout", 
+                                                  "visible-to-user": false
+                                                }
+                                              ], 
+                                              "scrollable-horizontal": false, 
+                                              "ancestors": [
+                                                "android.widget.FrameLayout", 
+                                                "android.view.ViewGroup", 
+                                                "android.view.View", 
+                                                "java.lang.Object"
+                                              ], 
+                                              "selected": false, 
+                                              "content-desc": [
+                                                null
+                                              ], 
+                                              "rel-bounds": [
+                                                35, 
+                                                2318, 
+                                                1405, 
+                                                2666
+                                              ], 
+                                              "draw": true, 
+                                              "focusable": false, 
+                                              "long-clickable": false, 
+                                              "visibility": "visible", 
+                                              "focused": false, 
+                                              "clickable": true, 
+                                              "abs-pos": true, 
+                                              "class": "android.support.v7.widget.CardView", 
+                                              "visible-to-user": false, 
+                                              "package": "com.github.devnied.emvnfccard", 
+                                              "enabled": true, 
+                                              "bounds": [
+                                                35, 
+                                                2598, 
+                                                1405, 
+                                                2392
+                                              ], 
+                                              "pressed": "not_pressed", 
+                                              "scrollable-vertical": false
+                                            }, 
+                                            {
+                                              "resource-id": "com.github.devnied.emvnfccard:id/report_feedback", 
+                                              "adapter-view": false, 
+                                              "pointer": "96c380c", 
+                                              "children": [
+                                                {
+                                                  "scrollable-horizontal": false, 
+                                                  "draw": true, 
+                                                  "ancestors": [
+                                                    "android.view.ViewGroup", 
+                                                    "android.view.View", 
+                                                    "java.lang.Object"
+                                                  ], 
+                                                  "clickable": false, 
+                                                  "pressed": "not_pressed", 
+                                                  "focusable": false, 
+                                                  "long-clickable": false, 
+                                                  "enabled": true, 
+                                                  "bounds": [
+                                                    91, 
+                                                    3055, 
+                                                    1349, 
+                                                    2392
+                                                  ], 
+                                                  "visibility": "visible", 
+                                                  "content-desc": [
+                                                    null
+                                                  ], 
+                                                  "rel-bounds": [
+                                                    56, 
+                                                    56, 
+                                                    1314, 
+                                                    118
+                                                  ], 
+                                                  "focused": false, 
+                                                  "selected": false, 
+                                                  "scrollable-vertical": false, 
+                                                  "children": [
+                                                    {
+                                                      "text": "Send feedback or report issues", 
+                                                      "scrollable-vertical": false, 
+                                                      "adapter-view": false, 
+                                                      "pointer": "a8e4b6a", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        0, 
+                                                        1189, 
+                                                        62
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        3055, 
+                                                        1280, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed"
+                                                    }, 
+                                                    {
+                                                      "text": "\uf105", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/report_arrow", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "78c985b", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        1224, 
+                                                        2, 
+                                                        1258, 
+                                                        60
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        1315, 
+                                                        3057, 
+                                                        1349, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }
+                                                  ], 
+                                                  "adapter-view": false, 
+                                                  "abs-pos": true, 
+                                                  "pointer": "16fb555", 
+                                                  "class": "android.widget.RelativeLayout", 
+                                                  "visible-to-user": false
+                                                }
+                                              ], 
+                                              "scrollable-horizontal": false, 
+                                              "ancestors": [
+                                                "android.widget.FrameLayout", 
+                                                "android.view.ViewGroup", 
+                                                "android.view.View", 
+                                                "java.lang.Object"
+                                              ], 
+                                              "selected": false, 
+                                              "content-desc": [
+                                                null
+                                              ], 
+                                              "rel-bounds": [
+                                                35, 
+                                                2719, 
+                                                1405, 
+                                                2893
+                                              ], 
+                                              "draw": true, 
+                                              "focusable": false, 
+                                              "long-clickable": false, 
+                                              "visibility": "visible", 
+                                              "focused": false, 
+                                              "clickable": true, 
+                                              "abs-pos": true, 
+                                              "class": "android.support.v7.widget.CardView", 
+                                              "visible-to-user": false, 
+                                              "package": "com.github.devnied.emvnfccard", 
+                                              "enabled": true, 
+                                              "bounds": [
+                                                35, 
+                                                2999, 
+                                                1405, 
+                                                2392
+                                              ], 
+                                              "pressed": "not_pressed", 
+                                              "scrollable-vertical": false
+                                            }, 
+                                            {
+                                              "resource-id": "com.github.devnied.emvnfccard:id/improve_translation", 
+                                              "adapter-view": false, 
+                                              "pointer": "eaac8f8", 
+                                              "children": [
+                                                {
+                                                  "scrollable-horizontal": false, 
+                                                  "draw": true, 
+                                                  "ancestors": [
+                                                    "android.view.ViewGroup", 
+                                                    "android.view.View", 
+                                                    "java.lang.Object"
+                                                  ], 
+                                                  "clickable": false, 
+                                                  "pressed": "not_pressed", 
+                                                  "focusable": false, 
+                                                  "long-clickable": false, 
+                                                  "enabled": true, 
+                                                  "bounds": [
+                                                    91, 
+                                                    3264, 
+                                                    1349, 
+                                                    2392
+                                                  ], 
+                                                  "visibility": "visible", 
+                                                  "content-desc": [
+                                                    null
+                                                  ], 
+                                                  "rel-bounds": [
+                                                    56, 
+                                                    56, 
+                                                    1314, 
+                                                    118
+                                                  ], 
+                                                  "focused": false, 
+                                                  "selected": false, 
+                                                  "scrollable-vertical": false, 
+                                                  "children": [
+                                                    {
+                                                      "text": "Improve translation", 
+                                                      "scrollable-vertical": false, 
+                                                      "adapter-view": false, 
+                                                      "pointer": "1bdb436", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        0, 
+                                                        1189, 
+                                                        62
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        3264, 
+                                                        1280, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed"
+                                                    }, 
+                                                    {
+                                                      "text": "\uf105", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/improve_translation_arrow", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "2725f37", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        1224, 
+                                                        2, 
+                                                        1258, 
+                                                        60
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        1315, 
+                                                        3266, 
+                                                        1349, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }
+                                                  ], 
+                                                  "adapter-view": false, 
+                                                  "abs-pos": true, 
+                                                  "pointer": "fc351d1", 
+                                                  "class": "android.widget.RelativeLayout", 
+                                                  "visible-to-user": false
+                                                }
+                                              ], 
+                                              "scrollable-horizontal": false, 
+                                              "ancestors": [
+                                                "android.widget.FrameLayout", 
+                                                "android.view.ViewGroup", 
+                                                "android.view.View", 
+                                                "java.lang.Object"
+                                              ], 
+                                              "selected": false, 
+                                              "content-desc": [
+                                                null
+                                              ], 
+                                              "rel-bounds": [
+                                                35, 
+                                                2928, 
+                                                1405, 
+                                                3102
+                                              ], 
+                                              "draw": true, 
+                                              "focusable": false, 
+                                              "long-clickable": false, 
+                                              "visibility": "visible", 
+                                              "focused": false, 
+                                              "clickable": true, 
+                                              "abs-pos": true, 
+                                              "class": "android.support.v7.widget.CardView", 
+                                              "visible-to-user": false, 
+                                              "package": "com.github.devnied.emvnfccard", 
+                                              "enabled": true, 
+                                              "bounds": [
+                                                35, 
+                                                3208, 
+                                                1405, 
+                                                2392
+                                              ], 
+                                              "pressed": "not_pressed", 
+                                              "scrollable-vertical": false
+                                            }, 
+                                            {
+                                              "resource-id": "com.github.devnied.emvnfccard:id/myApp", 
+                                              "adapter-view": false, 
+                                              "pointer": "f3f7ca4", 
+                                              "children": [
+                                                {
+                                                  "scrollable-horizontal": false, 
+                                                  "draw": true, 
+                                                  "ancestors": [
+                                                    "android.view.ViewGroup", 
+                                                    "android.view.View", 
+                                                    "java.lang.Object"
+                                                  ], 
+                                                  "clickable": false, 
+                                                  "pressed": "not_pressed", 
+                                                  "focusable": false, 
+                                                  "long-clickable": false, 
+                                                  "enabled": true, 
+                                                  "bounds": [
+                                                    91, 
+                                                    3473, 
+                                                    1349, 
+                                                    2392
+                                                  ], 
+                                                  "visibility": "visible", 
+                                                  "content-desc": [
+                                                    null
+                                                  ], 
+                                                  "rel-bounds": [
+                                                    56, 
+                                                    56, 
+                                                    1314, 
+                                                    328
+                                                  ], 
+                                                  "focused": false, 
+                                                  "selected": false, 
+                                                  "scrollable-vertical": false, 
+                                                  "children": [
+                                                    {
+                                                      "text": "Our free apps", 
+                                                      "resource-id": "com.github.devnied.emvnfccard:id/myApp_label", 
+                                                      "adapter-view": false, 
+                                                      "pointer": "da8ddc2", 
+                                                      "scrollable-horizontal": false, 
+                                                      "ancestors": [
+                                                        "android.widget.TextView", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "selected": false, 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        0, 
+                                                        281, 
+                                                        62
+                                                      ], 
+                                                      "draw": false, 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "visibility": "visible", 
+                                                      "focused": false, 
+                                                      "clickable": false, 
+                                                      "abs-pos": true, 
+                                                      "font-family": "sans-serif", 
+                                                      "class": "android.support.v7.widget.AppCompatTextView", 
+                                                      "visible-to-user": false, 
+                                                      "package": "com.github.devnied.emvnfccard", 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        3473, 
+                                                        372, 
+                                                        2392
+                                                      ], 
+                                                      "pressed": "not_pressed", 
+                                                      "scrollable-vertical": false
+                                                    }, 
+                                                    {
+                                                      "scrollable-horizontal": false, 
+                                                      "draw": true, 
+                                                      "ancestors": [
+                                                        "android.view.ViewGroup", 
+                                                        "android.view.View", 
+                                                        "java.lang.Object"
+                                                      ], 
+                                                      "clickable": false, 
+                                                      "pressed": "not_pressed", 
+                                                      "focusable": false, 
+                                                      "long-clickable": false, 
+                                                      "enabled": true, 
+                                                      "bounds": [
+                                                        91, 
+                                                        3570, 
+                                                        1349, 
+                                                        2392
+                                                      ], 
+                                                      "visibility": "visible", 
+                                                      "content-desc": [
+                                                        null
+                                                      ], 
+                                                      "rel-bounds": [
+                                                        0, 
+                                                        97, 
+                                                        1258, 
+                                                        272
+                                                      ], 
+                                                      "focused": false, 
+                                                      "selected": false, 
+                                                      "scrollable-vertical": false, 
+                                                      "children": [
+                                                        {
+                                                          "resource-id": "com.github.devnied.emvnfccard:id/currency_icon", 
+                                                          "adapter-view": false, 
+                                                          "pointer": "c49bf10", 
+                                                          "scrollable-horizontal": false, 
+                                                          "ancestors": [
+                                                            "android.widget.ImageView", 
+                                                            "android.view.View", 
+                                                            "java.lang.Object"
+                                                          ], 
+                                                          "selected": false, 
+                                                          "content-desc": [
+                                                            null
+                                                          ], 
+                                                          "rel-bounds": [
+                                                            0, 
+                                                            0, 
+                                                            175, 
+                                                            175
+                                                          ], 
+                                                          "draw": false, 
+                                                          "focusable": false, 
+                                                          "long-clickable": false, 
+                                                          "visibility": "visible", 
+                                                          "focused": false, 
+                                                          "clickable": false, 
+                                                          "abs-pos": true, 
+                                                          "class": "android.support.v7.widget.AppCompatImageView", 
+                                                          "visible-to-user": false, 
+                                                          "package": "com.github.devnied.emvnfccard", 
+                                                          "enabled": true, 
+                                                          "bounds": [
+                                                            91, 
+                                                            3570, 
+                                                            266, 
+                                                            2392
+                                                          ], 
+                                                          "pressed": "not_pressed", 
+                                                          "scrollable-vertical": false
+                                                        }, 
+                                                        {
+                                                          "scrollable-horizontal": false, 
+                                                          "draw": true, 
+                                                          "ancestors": [
+                                                            "android.view.ViewGroup", 
+                                                            "android.view.View", 
+                                                            "java.lang.Object"
+                                                          ], 
+                                                          "clickable": false, 
+                                                          "pressed": "not_pressed", 
+                                                          "focusable": false, 
+                                                          "long-clickable": false, 
+                                                          "enabled": true, 
+                                                          "bounds": [
+                                                            301, 
+                                                            3590, 
+                                                            1152, 
+                                                            2392
+                                                          ], 
+                                                          "visibility": "visible", 
+                                                          "content-desc": [
+                                                            null
+                                                          ], 
+                                                          "rel-bounds": [
+                                                            210, 
+                                                            20, 
+                                                            1061, 
+                                                            155
+                                                          ], 
+                                                          "focused": false, 
+                                                          "selected": false, 
+                                                          "scrollable-vertical": false, 
+                                                          "children": [
+                                                            {
+                                                              "text": "Currency converter", 
+                                                              "scrollable-vertical": false, 
+                                                              "adapter-view": false, 
+                                                              "pointer": "32b140e", 
+                                                              "scrollable-horizontal": false, 
+                                                              "ancestors": [
+                                                                "android.widget.TextView", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "selected": false, 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                0, 
+                                                                399, 
+                                                                62
+                                                              ], 
+                                                              "draw": false, 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "visibility": "visible", 
+                                                              "focused": false, 
+                                                              "clickable": false, 
+                                                              "abs-pos": true, 
+                                                              "font-family": "sans-serif", 
+                                                              "class": "android.support.v7.widget.AppCompatTextView", 
+                                                              "visible-to-user": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                301, 
+                                                                3590, 
+                                                                700, 
+                                                                2392
+                                                              ], 
+                                                              "pressed": "not_pressed"
+                                                            }, 
+                                                            {
+                                                              "text": "180+ currencies, live rates, offline ...", 
+                                                              "scrollable-vertical": false, 
+                                                              "adapter-view": false, 
+                                                              "pointer": "a47fe2f", 
+                                                              "scrollable-horizontal": false, 
+                                                              "ancestors": [
+                                                                "android.widget.TextView", 
+                                                                "android.view.View", 
+                                                                "java.lang.Object"
+                                                              ], 
+                                                              "selected": false, 
+                                                              "content-desc": [
+                                                                null
+                                                              ], 
+                                                              "rel-bounds": [
+                                                                0, 
+                                                                73, 
+                                                                725, 
+                                                                135
+                                                              ], 
+                                                              "draw": false, 
+                                                              "focusable": false, 
+                                                              "long-clickable": false, 
+                                                              "visibility": "visible", 
+                                                              "focused": false, 
+                                                              "clickable": false, 
+                                                              "abs-pos": true, 
+                                                              "font-family": "sans-serif", 
+                                                              "class": "android.support.v7.widget.AppCompatTextView", 
+                                                              "visible-to-user": false, 
+                                                              "enabled": true, 
+                                                              "bounds": [
+                                                                301, 
+                                                                3663, 
+                                                                1026, 
+                                                                2392
+                                                              ], 
+                                                              "pressed": "not_pressed"
+                                                            }
+                                                          ], 
+                                                          "adapter-view": false, 
+                                                          "abs-pos": true, 
+                                                          "pointer": "9fd6a09", 
+                                                          "class": "android.widget.LinearLayout", 
+                                                          "visible-to-user": false
+                                                        }, 
+                                                        {
+                                                          "text": "Free\ndownload", 
+                                                          "resource-id": "com.github.devnied.emvnfccard:id/download_btn", 
+                                                          "adapter-view": false, 
+                                                          "pointer": "773bc3c", 
+                                                          "scrollable-horizontal": false, 
+                                                          "ancestors": [
+                                                            "android.widget.TextView", 
+                                                            "android.view.View", 
+                                                            "java.lang.Object"
+                                                          ], 
+                                                          "selected": false, 
+                                                          "content-desc": [
+                                                            null
+                                                          ], 
+                                                          "rel-bounds": [
+                                                            1061, 
+                                                            24, 
+                                                            1258, 
+                                                            151
+                                                          ], 
+                                                          "draw": false, 
+                                                          "focusable": false, 
+                                                          "long-clickable": false, 
+                                                          "visibility": "visible", 
+                                                          "focused": false, 
+                                                          "clickable": false, 
+                                                          "abs-pos": true, 
+                                                          "font-family": "sans-serif", 
+                                                          "class": "android.support.v7.widget.AppCompatTextView", 
+                                                          "visible-to-user": false, 
+                                                          "package": "com.github.devnied.emvnfccard", 
+                                                          "enabled": true, 
+                                                          "bounds": [
+                                                            1152, 
+                                                            3594, 
+                                                            1349, 
+                                                            2392
+                                                          ], 
+                                                          "pressed": "not_pressed", 
+                                                          "scrollable-vertical": false
+                                                        }
+                                                      ], 
+                                                      "adapter-view": false, 
+                                                      "abs-pos": true, 
+                                                      "pointer": "a83b7d3", 
+                                                      "class": "android.widget.RelativeLayout", 
+                                                      "visible-to-user": false
+                                                    }
+                                                  ], 
+                                                  "adapter-view": false, 
+                                                  "abs-pos": true, 
+                                                  "pointer": "da3a0d", 
+                                                  "class": "android.widget.RelativeLayout", 
+                                                  "visible-to-user": false
+                                                }
+                                              ], 
+                                              "scrollable-horizontal": false, 
+                                              "ancestors": [
+                                                "android.widget.FrameLayout", 
+                                                "android.view.ViewGroup", 
+                                                "android.view.View", 
+                                                "java.lang.Object"
+                                              ], 
+                                              "selected": false, 
+                                              "content-desc": [
+                                                null
+                                              ], 
+                                              "rel-bounds": [
+                                                35, 
+                                                3137, 
+                                                1405, 
+                                                3521
+                                              ], 
+                                              "draw": true, 
+                                              "focusable": false, 
+                                              "long-clickable": false, 
+                                              "visibility": "visible", 
+                                              "focused": false, 
+                                              "clickable": true, 
+                                              "abs-pos": true, 
+                                              "class": "android.support.v7.widget.CardView", 
+                                              "visible-to-user": false, 
+                                              "package": "com.github.devnied.emvnfccard", 
+                                              "enabled": true, 
+                                              "bounds": [
+                                                35, 
+                                                3417, 
+                                                1405, 
+                                                2392
+                                              ], 
+                                              "pressed": "not_pressed", 
+                                              "scrollable-vertical": false
+                                            }
+                                          ], 
+                                          "adapter-view": false, 
+                                          "abs-pos": true, 
+                                          "pointer": "c31df80", 
+                                          "class": "android.widget.LinearLayout", 
+                                          "visible-to-user": true
+                                        }
+                                      ], 
+                                      "scrollable-horizontal": false, 
+                                      "ancestors": [
+                                        "android.widget.FrameLayout", 
+                                        "android.view.ViewGroup", 
+                                        "android.view.View", 
+                                        "java.lang.Object"
+                                      ], 
+                                      "selected": false, 
+                                      "content-desc": [
+                                        null
+                                      ], 
+                                      "rel-bounds": [
+                                        0, 
+                                        0, 
+                                        1440, 
+                                        2112
+                                      ], 
+                                      "draw": false, 
+                                      "focusable": true, 
+                                      "long-clickable": false, 
+                                      "visibility": "visible", 
+                                      "focused": false, 
+                                      "clickable": false, 
+                                      "abs-pos": true, 
+                                      "class": "android.widget.ScrollView", 
+                                      "visible-to-user": true, 
+                                      "package": "com.github.devnied.emvnfccard", 
+                                      "enabled": true, 
+                                      "bounds": [
+                                        0, 
+                                        280, 
+                                        1440, 
+                                        2392
+                                      ], 
+                                      "pressed": "not_pressed", 
+                                      "scrollable-vertical": true
+                                    }
+                                  ], 
+                                  "scrollable-horizontal": false, 
+                                  "ancestors": [
+                                    "android.view.ViewGroup", 
+                                    "android.view.View", 
+                                    "java.lang.Object"
+                                  ], 
+                                  "selected": false, 
+                                  "content-desc": [
+                                    null
+                                  ], 
+                                  "rel-bounds": [
+                                    0, 
+                                    196, 
+                                    1440, 
+                                    2308
+                                  ], 
+                                  "draw": true, 
+                                  "focusable": false, 
+                                  "long-clickable": false, 
+                                  "visibility": "visible", 
+                                  "focused": false, 
+                                  "clickable": false, 
+                                  "abs-pos": true, 
+                                  "class": "android.widget.FrameLayout", 
+                                  "visible-to-user": true, 
+                                  "package": "com.github.devnied.emvnfccard", 
+                                  "enabled": true, 
+                                  "bounds": [
+                                    0, 
+                                    280, 
+                                    1440, 
+                                    2392
+                                  ], 
+                                  "pressed": "not_pressed", 
+                                  "scrollable-vertical": false
+                                }
+                              ], 
+                              "adapter-view": false, 
+                              "abs-pos": true, 
+                              "pointer": "dd57ad9", 
+                              "class": "android.widget.LinearLayout", 
+                              "visible-to-user": true
+                            }
+                          ], 
+                          "scrollable-horizontal": false, 
+                          "ancestors": [
+                            "android.view.ViewGroup", 
+                            "android.view.View", 
+                            "java.lang.Object"
+                          ], 
+                          "selected": false, 
+                          "content-desc": [
+                            null
+                          ], 
+                          "rel-bounds": [
+                            0, 
+                            0, 
+                            1440, 
+                            2392
+                          ], 
+                          "draw": false, 
+                          "focusable": false, 
+                          "long-clickable": false, 
+                          "visibility": "visible", 
+                          "focused": false, 
+                          "clickable": false, 
+                          "abs-pos": true, 
+                          "class": "android.support.design.widget.CoordinatorLayout", 
+                          "visible-to-user": true, 
+                          "package": "com.github.devnied.emvnfccard", 
+                          "enabled": true, 
+                          "bounds": [
+                            0, 
+                            0, 
+                            1440, 
+                            2392
+                          ], 
+                          "pressed": "not_pressed", 
+                          "scrollable-vertical": false
+                        }
+                      ], 
+                      "scrollable-horizontal": false, 
+                      "ancestors": [
+                        "android.widget.FrameLayout", 
+                        "android.view.ViewGroup", 
+                        "android.view.View", 
+                        "java.lang.Object"
+                      ], 
+                      "selected": false, 
+                      "content-desc": [
+                        null
+                      ], 
+                      "rel-bounds": [
+                        0, 
+                        0, 
+                        1440, 
+                        2392
+                      ], 
+                      "draw": true, 
+                      "focusable": false, 
+                      "long-clickable": false, 
+                      "visibility": "visible", 
+                      "focused": false, 
+                      "clickable": false, 
+                      "abs-pos": true, 
+                      "class": "android.support.v7.widget.ContentFrameLayout", 
+                      "visible-to-user": true, 
+                      "package": "android", 
+                      "enabled": true, 
+                      "bounds": [
+                        0, 
+                        0, 
+                        1440, 
+                        2392
+                      ], 
+                      "pressed": "not_pressed", 
+                      "scrollable-vertical": false
+                    }, 
+                    {
+                      "resource-id": "com.github.devnied.emvnfccard:id/action_mode_bar_stub", 
+                      "adapter-view": false, 
+                      "pointer": "2099dc5", 
+                      "scrollable-horizontal": false, 
+                      "ancestors": [
+                        "android.view.View", 
+                        "java.lang.Object"
+                      ], 
+                      "selected": false, 
+                      "content-desc": [
+                        null
+                      ], 
+                      "rel-bounds": [
+                        0, 
+                        0, 
+                        0, 
+                        0
+                      ], 
+                      "draw": true, 
+                      "focusable": false, 
+                      "long-clickable": false, 
+                      "visibility": "gone", 
+                      "focused": false, 
+                      "clickable": false, 
+                      "abs-pos": true, 
+                      "class": "android.support.v7.widget.ViewStubCompat", 
+                      "visible-to-user": false, 
+                      "package": "com.github.devnied.emvnfccard", 
+                      "enabled": true, 
+                      "bounds": [
+                        0, 
+                        0, 
+                        0, 
+                        0
+                      ], 
+                      "pressed": "not_pressed", 
+                      "scrollable-vertical": false
+                    }
+                  ], 
+                  "scrollable-horizontal": false, 
+                  "ancestors": [
+                    "android.widget.FrameLayout", 
+                    "android.view.ViewGroup", 
+                    "android.view.View", 
+                    "java.lang.Object"
+                  ], 
+                  "selected": false, 
+                  "content-desc": [
+                    null
+                  ], 
+                  "rel-bounds": [
+                    0, 
+                    0, 
+                    1440, 
+                    2392
+                  ], 
+                  "draw": true, 
+                  "focusable": false, 
+                  "long-clickable": false, 
+                  "visibility": "visible", 
+                  "focused": false, 
+                  "clickable": false, 
+                  "abs-pos": true, 
+                  "class": "android.support.v7.widget.FitWindowsFrameLayout", 
+                  "visible-to-user": true, 
+                  "package": "com.github.devnied.emvnfccard", 
+                  "enabled": true, 
+                  "bounds": [
+                    0, 
+                    0, 
+                    1440, 
+                    2392
+                  ], 
+                  "pressed": "not_pressed", 
+                  "scrollable-vertical": false
+                }
+              ], 
+              "adapter-view": false, 
+              "abs-pos": true, 
+              "pointer": "581cc5a", 
+              "class": "android.widget.FrameLayout", 
+              "visible-to-user": true
+            }
+          ], 
+          "adapter-view": false, 
+          "abs-pos": true, 
+          "pointer": "120337c", 
+          "class": "android.widget.LinearLayout", 
+          "visible-to-user": true
+        }, 
+        {
+          "resource-id": "android:id/navigationBarBackground", 
+          "adapter-view": false, 
+          "pointer": "788631a", 
+          "scrollable-horizontal": false, 
+          "ancestors": [
+            "java.lang.Object"
+          ], 
+          "selected": false, 
+          "content-desc": [
+            null
+          ], 
+          "rel-bounds": [
+            0, 
+            2392, 
+            1440, 
+            2560
+          ], 
+          "draw": false, 
+          "focusable": false, 
+          "long-clickable": false, 
+          "visibility": "visible", 
+          "focused": false, 
+          "clickable": false, 
+          "abs-pos": true, 
+          "class": "android.view.View", 
+          "visible-to-user": true, 
+          "package": "android", 
+          "enabled": true, 
+          "bounds": [
+            0, 
+            2392, 
+            1440, 
+            2560
+          ], 
+          "pressed": "not_pressed", 
+          "scrollable-vertical": false
+        }
+      ], 
+      "adapter-view": false, 
+      "abs-pos": true, 
+      "pointer": "a0aca6f", 
+      "class": "com.android.internal.policy.PhoneWindow$DecorView", 
+      "visible-to-user": true
+    }, 
+    "added_fragments": [], 
+    "active_fragments": []
+  }, 
+  "is_keyboard_deployed": false, 
+  "request_id": "152"
+}

@@ -3,8 +3,15 @@ import cv2
 import custom_fisheye_effect_opencv as F
 
 
-scale_factor_display = 0.4
+scale_factor_computation_max = 0.5
+scale_factor_computation_min = 0.2
+
+comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
 scale_factor_computation = 0.5
+
+
+scale_factor_display = 0.5
+
 current_fisheye_radius = 152
 
 
@@ -28,6 +35,7 @@ dim_x, dim_y = img.shape[1], img.shape[0]
 cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
 
 img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
+
 cv2.imshow( 'image', img )
 cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * scale_factor_display ) ))
 
@@ -38,6 +46,8 @@ pos_y = 0
 
 def render_new_image(img, x, y, lens_shape = 'circular'):
 
+    img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
+
     if ( lens_shape == 'circular'):
         new_img = F.apply_fisheye_effect_circular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )
 
@@ -45,15 +55,15 @@ def render_new_image(img, x, y, lens_shape = 'circular'):
         new_img = F.apply_fisheye_effect_elliptical( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )   
 
     else:
-        new_img = F.apply_fisheye_effect_rectangular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )    
-    
+        new_img = F.apply_fisheye_effect_rectangular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )   
+
     cv2.imshow( 'image', new_img )  
 
 
 
 def mouse_events( event, x, y, flags, param ):  
 
-    global current_fisheye_radius, d_index, xw_index, lens_shapes_index, pos_x, pos_y
+    global current_fisheye_radius, d_index, xw_index, lens_shapes_index, pos_x, pos_y, scale_factor_computation
 
     pos_x = x
     pos_y = y
@@ -69,6 +79,13 @@ def mouse_events( event, x, y, flags, param ):
 
         if ( current_fisheye_radius >= max_fisheye_radius ):
             current_fisheye_radius = max_fisheye_radius
+
+        scale_factor_computation -= comp_step_size
+
+        if( scale_factor_computation <= scale_factor_computation_min ):
+            scale_factor_computation = scale_factor_computation_min 
+
+        print(scale_factor_computation)      
 
         d_index = d_index + 1
 
@@ -87,6 +104,14 @@ def mouse_events( event, x, y, flags, param ):
 
         if ( current_fisheye_radius < min_fisheye_radius ):
             current_fisheye_radius = min_fisheye_radius
+
+
+        scale_factor_computation += comp_step_size
+
+        if( scale_factor_computation >= scale_factor_computation_max ):
+            scale_factor_computation = scale_factor_computation_max 
+
+        print(scale_factor_computation)   
 
         d_index = d_index - 1
 

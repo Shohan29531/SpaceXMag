@@ -558,7 +558,7 @@ def get_subimage_with_borders(current_image):
 
 ## Read the input json file and build the maps
 
-image_id = 10000
+image_id = 9700
 
 jsonfile = str(image_id) + '.json'
 image_file = str(image_id) + '.jpg'
@@ -623,7 +623,9 @@ final_output = final_output.crop( ( index_to_coordinates[0][0] , index_to_coordi
 
 final_output = final_output.resize( (input_img_dim_x, input_img_dim_y) )
 
-final_output.save('Output.jpg')
+output_file_name = str(image_id) + "_output" + ".jpg"
+
+final_output.save(output_file_name)
 
 
 

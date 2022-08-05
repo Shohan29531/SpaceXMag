@@ -1,3 +1,4 @@
+import threading
 import numpy as np
 import math
 import time
@@ -39,8 +40,7 @@ def apply_fisheye_effect_circular_parallel(
     xw = 0.0,
     model = 'Sarkar', 
     boundary_circle_width = 5, 
-    boundary_circle_color = ( 0, 255, 0 ), 
-    output_file_name = 'fisheye_applied.jpg' 
+    boundary_circle_color = ( 0, 255, 0 )
     ):
 
     start = time.time()
@@ -51,121 +51,78 @@ def apply_fisheye_effect_circular_parallel(
     img_pixels = img.load()
 
     new_img = img.copy()
-
-    fisheye_coordinates = []
     
     effective_fisheye_radius = ( fisheye_radius + boundary_circle_width )
 
-    for i in range( fisheye_focus[0] - effective_fisheye_radius, 
-                   fisheye_focus[0] + effective_fisheye_radius ):
-        for j in range( fisheye_focus[1] - effective_fisheye_radius, 
-                   fisheye_focus[1] + effective_fisheye_radius ):
-        
-            if( i >= dim_x or i < 0 ):
-                continue
-            if( j >= dim_y or j < 0 ):
-                continue
-        
-            dist = get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j )
-            
-            if dist > ( fisheye_radius + boundary_circle_width ):
-                continue
-            elif dist >= fisheye_radius  and dist <= ( fisheye_radius + boundary_circle_width ):
-                new_img.putpixel( ( i, j ), boundary_circle_color )
-                continue
-        
-            fisheye_coordinates.append( [i, j] ) 
+    list_i = [ i for i in range( fisheye_focus[0] - effective_fisheye_radius, 
+                   fisheye_focus[0] + effective_fisheye_radius ) ]
+
+    list_j = [ j for j in range( fisheye_focus[1] - effective_fisheye_radius, 
+                   fisheye_focus[1] + effective_fisheye_radius ) ]  
+
+    all_points = []
+
+    for i in list_i:
+        for j in list_j:
+            all_points.append([i, j])               
 
     F = fisheye( R = fisheye_radius, d = d, xw = xw )
     F.set_focus( fisheye_focus )
+    F.set_mode( model )                     
 
-    F.set_mode( model )
-    original_coordinates = F.inverse_radial_2D(fisheye_coordinates)
+    delayed_funcs = [ delayed( parallel_task )( point, fisheye_focus, fisheye_radius, effective_fisheye_radius, dim_x, dim_y, boundary_circle_color, new_img, img_pixels, F ) for point in all_points ]
 
-    for i in range(len(fisheye_coordinates)):
-    
-        new = [ fisheye_coordinates[i][0], fisheye_coordinates[i][1] ] 
-        old = [ original_coordinates[i][0], original_coordinates[i][1] ] 
-        
-        current_pixel  = img_pixels[ old[0], old[1] ]
-        
-        new_img.putpixel( ( new[0], new[1] ), current_pixel )
-    
+    # print(delayed_funcs)
+
+    parallel_pool = Parallel( n_jobs = joblib.cpu_count(), prefer='threads' )
+
+    parallel_pool(delayed_funcs)
+   
     print("--- %s seconds ---" % (time.time() - start))
 
     return convert_from_image_to_cv2( new_img )
 
 
 
-    img_file, 
+
+
+
+def parallel_task( 
+    point,
     fisheye_focus, 
     fisheye_radius, 
-    d = 1.5, 
-    xw = 0.0,
-    model = 'Sarkar', 
-    boundary_circle_width = 5, 
-    boundary_circle_color = ( 0, 255, 0 ), 
-    output_file_name = 'fisheye_applied.jpg' 
+    effective_fisheye_radius, 
+    dim_x,
+    dim_y,
+    boundary_circle_color,
+    new_img,
+    img_pixels, 
+    F
     ):
 
-    start = time.time()
-
-    img = convert_from_cv2_to_image( img_file )
-    dim_x, dim_y = img.size
-    
-    img_pixels = img.load()
-
-    new_img = img.copy()
-
-    fisheye_coordinates = []
-
-
-    rectangle_length = int( fisheye_radius ) 
-    rectangle_width = int( fisheye_radius * 0.6)
-
-    
-    effective_rectangle_length = rectangle_length + boundary_circle_width
-    effective_rectangle_width = rectangle_width + boundary_circle_width
-    
-    # effective_fisheye_radius = ( fisheye_radius + boundary_circle_width )
-
-    for i in range( fisheye_focus[0] - effective_rectangle_length, 
-                   fisheye_focus[0] + effective_rectangle_length ):
-        for j in range( fisheye_focus[1] - effective_rectangle_width, 
-                   fisheye_focus[1] + effective_rectangle_width ):
+    i = point[0]
+    j = point[1]
         
-            if( i >= dim_x or i < 0 ):
-                continue
-            if( j >= dim_y or j < 0 ):
-                continue
-
-            dist_x = abs( fisheye_focus[0] - i )
-            dist_y = abs( fisheye_focus[1] - j )
+    if( i >= dim_x or i < 0 ):
+        return
+    if( j >= dim_y or j < 0 ):
+        return
         
-            # dist = get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j )
+    dist = get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j )
             
-            if ( dist_x >= rectangle_length  and dist_x <= effective_rectangle_length ) or ( dist_y >= rectangle_width  and dist_y <= effective_rectangle_width ):
-                new_img.putpixel( ( i, j ), boundary_circle_color )
-                continue
+    if dist > effective_fisheye_radius:
+        return
+    elif dist >= fisheye_radius  and dist <= effective_fisheye_radius:
+        new_img.putpixel( ( i, j ), boundary_circle_color )
+        return
+
+    original_coordinates = F.inverse_radial_2D( [i,j] )
+
+    new = [ i, j ] 
+    old = [ original_coordinates[0], original_coordinates[1] ] 
+
+    current_pixel  = img_pixels[ old[0], old[1] ]
         
-            fisheye_coordinates.append( [i, j] ) 
+    new_img.putpixel( ( new[0], new[1] ), current_pixel )
 
-    F = fisheye( R = fisheye_radius, d = d, xw = xw )
-    F.set_focus( fisheye_focus )
-
-    F.set_mode( model )
-    original_coordinates = F.inverse_radial_2D(fisheye_coordinates)
-
-    for i in range(len(fisheye_coordinates)):
     
-        new = [ fisheye_coordinates[i][0], fisheye_coordinates[i][1] ] 
-        old = [ original_coordinates[i][0], original_coordinates[i][1] ] 
-        
-        current_pixel  = img_pixels[ old[0], old[1] ]
-        
-        new_img.putpixel( ( new[0], new[1] ), current_pixel )
-    
-    print("--- %s seconds ---" % (time.time() - start))
-
-    return convert_from_image_to_cv2( new_img )
-

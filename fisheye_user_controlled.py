@@ -1,54 +1,8 @@
 import cv2
+import json
+import time
 
 import custom_fisheye_effect_opencv as F
-
-
-file_id = 12419
-
-# input_file_name = str(file_id) + ".jpg"
-input_file_name = str(file_id) + "_output.jpg"
-
-img = cv2.imread(input_file_name)
-dim_x, dim_y = img.shape[1], img.shape[0]
-
-
-scale_factor_computation_max = 0.5
-scale_factor_computation_min = 0.3
-
-comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
-scale_factor_computation = 0.5
-
-
-scale_factor_display = 0.5
-
-
-min_fisheye_radius = dim_x * 0.15
-max_fisheye_radius = dim_x * 0.45
-step_size = int( ( max_fisheye_radius - min_fisheye_radius) / 4 )
-
-current_fisheye_radius = min_fisheye_radius
-
-
-
-d = [ 1.5, 2, 2.5, 3.0]
-xw = [0.6, 0.4, 0.2, 0]
-lens_shapes = ['circular', 'elliptical', 'rectangular']
-
-d_index = 0
-xw_index = 0
-lens_shapes_index = 0
-
-
-
-
-cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
-img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
-
-cv2.imshow( 'image', img )
-cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * scale_factor_display ) ))
-
-pos_x = 0
-pos_y = 0
 
 
 def render_new_image(img, x, y, lens_shape = 'circular'):
@@ -100,6 +54,22 @@ def mouse_events( event, x, y, flags, param ):
             d_index = d_index -1
 
         render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] ) 
+
+        record_event(
+                username = username,
+                event_device = "Mouse", 
+                event_type = "LEFT_BUTTON", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                fisheye_radius = current_fisheye_radius, fisheye_focus_shape = lens_shapes[ lens_shapes_index ], 
+                d = d[ d_index ], 
+                xw = xw[ xw_index ], 
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
     
     ## Right button click    
     ## zoom out
@@ -127,30 +97,195 @@ def mouse_events( event, x, y, flags, param ):
 
         render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )  
 
+        record_event(
+                username = username,
+                event_device = "Mouse", 
+                event_type = "RIGHT_BUTTON", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                fisheye_radius = current_fisheye_radius, fisheye_focus_shape = lens_shapes[ lens_shapes_index ], 
+                d = d[ d_index ], 
+                xw = xw[ xw_index ], 
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
+
                 
     ## Mouse cursor hover    
     elif( event == cv2.EVENT_MOUSEMOVE ):
-        render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )   
+        render_new_image( img = img, x = x, y = y, lens_shape = lens_shapes[ lens_shapes_index ] )  
 
-     
-
-cv2.setMouseCallback( 'image', mouse_events )
-
-
-while True:
-    k = cv2.waitKey(10)
-    
-    ## if esc is pressed, exit the program
-    if k == 27:
-        print("exit")
-        break
-    ## if space is presssed, change the shape
-    elif k == 32:
-        print("shape change")
-        lens_shapes_index += 1
-        lens_shapes_index = lens_shapes_index % len( lens_shapes )
-
-        render_new_image( img = img, x = pos_x, y = pos_y, lens_shape = lens_shapes[ lens_shapes_index ] )   
+        record_event(
+                username = username,
+                event_device = "Mouse", 
+                event_type = "CURSOR_MOVED", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                fisheye_radius = current_fisheye_radius, fisheye_focus_shape = lens_shapes[ lens_shapes_index ], 
+                d = d[ d_index ], 
+                xw = xw[ xw_index ], 
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                ) 
 
 
-cv2.destroyAllWindows( )
+def record_event(
+    username,
+    event_device,
+    event_type,
+    x,
+    y,
+    time,
+    img_id,
+    fisheye_radius,
+    fisheye_focus_shape,
+    d,
+    xw,
+    scale_factor_computation,
+    dim_x,
+    dim_y,
+
+):
+    global event_list
+
+    event = {}
+
+    event[ "img_id" ] = img_id
+    event[ "dim_x" ] = dim_x
+    event[ "dim_y" ] = dim_y
+
+    event[ "scale_factor_computation" ] = scale_factor_computation
+
+    event[ "fisheye_radius" ] = fisheye_radius
+    event[ "fisheye_focus_shape" ] = fisheye_focus_shape
+    event[ "d" ] = d
+    event[ "xw" ] = xw
+
+    event[ "username" ] = username
+    event[ "event_device" ] = event_device
+    event[ "event_type" ] = event_type
+    event[ "x" ] = x
+    event[ "y" ] = y
+    event[ "time" ] = time - start
+
+    events = event_list[ "events" ]
+    events.append( event )
+    event_list[ "events" ] = events
+
+    with open( username + ".json", "w") as outfile:
+        json.dump(event_list, outfile)
+
+if __name__ == "__main__":
+
+    start = time.time()
+
+    username = "test"
+
+    file_id = 12419
+
+    # input_file_name = str(file_id) + ".jpg"
+    input_file_name = str(file_id) + "_output.jpg"
+
+    img = cv2.imread(input_file_name)
+    dim_x, dim_y = img.shape[1], img.shape[0]
+
+
+    scale_factor_computation_max = 0.5
+    scale_factor_computation_min = 0.3
+
+    comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
+    scale_factor_computation = scale_factor_computation_max
+
+
+    scale_factor_display = 0.5
+
+
+    min_fisheye_radius = dim_x * 0.15
+    max_fisheye_radius = dim_x * 0.45
+    step_size = int( ( max_fisheye_radius - min_fisheye_radius) / 4 )
+
+    current_fisheye_radius = min_fisheye_radius
+
+
+
+    d = [ 1.5, 2, 2.5, 3.0]
+    xw = [0.6, 0.4, 0.2, 0]
+    lens_shapes = ['circular', 'elliptical', 'rectangular']
+
+    d_index = 0
+    xw_index = 0
+    lens_shapes_index = 0
+
+
+    cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
+    img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
+
+    cv2.imshow( 'image', img )
+    cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * scale_factor_display ) ))
+
+    pos_x = 0
+    pos_y = 0
+
+    event_list = {}
+    event_list[ "events" ] = []
+
+    cv2.setMouseCallback( 'image', mouse_events )
+
+
+    while True:
+        k = cv2.waitKey(10)
+        
+        ## if esc is pressed, exit the program
+        if k == 27:
+            print("exit")
+
+            record_event(
+                username = username,
+                event_device = "keyboard", 
+                event_type = "ESC", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                fisheye_radius = current_fisheye_radius, fisheye_focus_shape = lens_shapes[ lens_shapes_index ], 
+                d = d[ d_index ], 
+                xw = xw[ xw_index ], 
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
+
+            break
+        ## if space is presssed, change the shape
+        elif k == 32:
+            print("shape change")
+            lens_shapes_index += 1
+            lens_shapes_index = lens_shapes_index % len( lens_shapes )
+
+            render_new_image( img = img, x = pos_x, y = pos_y, lens_shape = lens_shapes[ lens_shapes_index ] )  
+
+            record_event(
+                username = username,
+                event_device = "keyboard", 
+                event_type = "SPACE", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                fisheye_radius = current_fisheye_radius, fisheye_focus_shape = lens_shapes[ lens_shapes_index ], 
+                d = d[ d_index ], 
+                xw = xw[ xw_index ], 
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                ) 
+
+    with open( username + ".json", "w") as outfile:
+        json.dump(event_list, outfile)
+    cv2.destroyAllWindows( )

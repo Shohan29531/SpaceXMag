@@ -3,8 +3,17 @@ import cv2
 import custom_fisheye_effect_opencv as F
 
 
+file_id = 12419
+
+# input_file_name = str(file_id) + ".jpg"
+input_file_name = str(file_id) + "_output.jpg"
+
+img = cv2.imread(input_file_name)
+dim_x, dim_y = img.shape[1], img.shape[0]
+
+
 scale_factor_computation_max = 0.5
-scale_factor_computation_min = 0.2
+scale_factor_computation_min = 0.3
 
 comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
 scale_factor_computation = 0.5
@@ -12,12 +21,13 @@ scale_factor_computation = 0.5
 
 scale_factor_display = 0.5
 
-current_fisheye_radius = 152
 
-
-min_fisheye_radius = 152
-max_fisheye_radius = 500
+min_fisheye_radius = dim_x * 0.15
+max_fisheye_radius = dim_x * 0.45
 step_size = int( ( max_fisheye_radius - min_fisheye_radius) / 4 )
+
+current_fisheye_radius = min_fisheye_radius
+
 
 
 d = [ 1.5, 2, 2.5, 3.0]
@@ -28,12 +38,10 @@ d_index = 0
 xw_index = 0
 lens_shapes_index = 0
 
-img = cv2.imread('Output.jpg')
-dim_x, dim_y = img.shape[1], img.shape[0]
+
 
 
 cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
-
 img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
 
 cv2.imshow( 'image', img )
@@ -41,7 +49,6 @@ cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * sc
 
 pos_x = 0
 pos_y = 0
-
 
 
 def render_new_image(img, x, y, lens_shape = 'circular'):

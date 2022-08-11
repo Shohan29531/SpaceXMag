@@ -1,10 +1,12 @@
 from tkinter import Tk, Canvas
 from PIL import ImageTk, Image
 
+
+
 def main():
     root = Tk()
 
-    canvas = Canvas(root, width=1080, height=1920)
+    canvas = Canvas(root, width=540, height=1920)
     canvas.pack(fill="both", expand=True)
 
     im = Image.open('100*100.png')
@@ -13,10 +15,11 @@ def main():
 
     canvas.create_image(0, 0, image=canvas.image, anchor='nw')
 
-    canvas.bind("<ButtonPress-1>", drag_start)
-    canvas.bind("<B1-Motion>", drag_move)
+    # canvas.bind("<ButtonPress-1>", drag_start)
+    canvas.bind("<Motion>", drag_move)
 
     root.mainloop()
+
 
 
 def drag_start(event):

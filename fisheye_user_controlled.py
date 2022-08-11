@@ -1,8 +1,22 @@
 import cv2
+import os
 import json
 import time
 
 import custom_fisheye_effect_opencv as F
+
+
+
+def uniquify( path ):
+    filename, extension = os.path.splitext(path)
+    counter = 0
+
+    while os.path.exists(path):
+        path = filename + "(" + str(counter) + ")" + extension
+        counter += 1
+
+    return path
+
 
 
 def render_new_image(img, x, y, lens_shape = 'circular'):
@@ -178,7 +192,7 @@ def record_event(
     events.append( event )
     event_list[ "events" ] = events
 
-    with open( username + ".json", "w") as outfile:
+    with open( username_unique, "w") as outfile:
         json.dump(event_list, outfile)
 
 if __name__ == "__main__":
@@ -186,6 +200,7 @@ if __name__ == "__main__":
     start = time.time()
 
     username = "test"
+    username_unique = uniquify( username + ".json" )
 
     file_id = 12419
 
@@ -286,6 +301,6 @@ if __name__ == "__main__":
                 dim_y = dim_y
                 ) 
 
-    with open( username + ".json", "w") as outfile:
+    with open( username_unique , "w") as outfile:
         json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

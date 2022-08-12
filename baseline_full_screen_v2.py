@@ -48,7 +48,7 @@ class CanvasImage:
         # Bind events to the Canvas
         self.canvas.bind('<Configure>', lambda event: self.__show_image())  # canvas is resized
         self.canvas.bind('<ButtonPress-1>', self.__move_from)  # remember canvas position
-        self.canvas.bind('<B1-Motion>',     self.__move_to)  # move canvas to the new position
+        self.canvas.bind('<Motion>',     self.__move_to)  # move canvas to the new position
         self.canvas.bind('<MouseWheel>', self.__wheel)  # zoom for Windows and MacOS, but not Linux
         self.canvas.bind('<Button-5>',   self.__wheel)  # zoom for Linux, wheel scroll down
         self.canvas.bind('<Button-4>',   self.__wheel)  # zoom for Linux, wheel scroll up

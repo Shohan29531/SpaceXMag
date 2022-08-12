@@ -241,3 +241,81 @@ def apply_fisheye_effect_rectangular(
 
     return convert_from_image_to_cv2( new_img )
 
+
+
+
+
+
+
+
+def apply_basic_magnification( 
+    img_file,
+    zoom_center,
+    rectangle_length,
+    rectangle_width, 
+    magnification_level,
+    boundary_width = 2,
+    boundary_circle_color = ( 0, 255, 0 ),
+    ):
+
+    start = time.time()
+
+    img = convert_from_cv2_to_image( img_file )
+    dim_x, dim_y = img.size
+    
+    img_pixels = img.load()
+
+    new_img = img.copy()
+
+    magnified_coordinates = []
+
+    effective_rectangle_length = rectangle_length + boundary_width
+    effective_rectangle_width = rectangle_width + boundary_width
+    
+    # effective_fisheye_radius = ( fisheye_radius + boundary_circle_width )
+
+    for i in range( zoom_center[0] - effective_rectangle_length, 
+                   zoom_center[0] + effective_rectangle_length ):
+        for j in range( zoom_center[1] - effective_rectangle_width, 
+                   zoom_center[1] + effective_rectangle_width ):
+        
+            if( i >= dim_x or i < 0 ):
+                continue
+            if( j >= dim_y or j < 0 ):
+                continue
+
+            dist_x = abs( zoom_center[0] - i )
+            dist_y = abs( zoom_center[1] - j )
+        
+            # dist = get_euclidean_distance( fisheye_focus[0], fisheye_focus[1], i, j )
+            
+            if ( dist_x >= rectangle_length  and dist_x <= effective_rectangle_length ) or ( dist_y >= rectangle_width  and dist_y <= effective_rectangle_width ):
+                new_img.putpixel( ( i, j ), boundary_circle_color )
+                continue
+        
+            magnified_coordinates.append( [i, j] ) 
+
+
+    for i in range(len(magnified_coordinates)):
+    
+        new = [ magnified_coordinates[i][0], magnified_coordinates[i][1] ] 
+
+        dist_x = new[0] - zoom_center[0] 
+        dist_y = new[1] - zoom_center[1]
+
+        int( zoom_center[0] + ( dist_x / magnification_level ) )
+
+
+        old = [ int( zoom_center[0] + ( dist_x / magnification_level ) ),
+                int( zoom_center[1] + ( dist_y / magnification_level ) ) ] 
+        
+        current_pixel  = img_pixels[ old[0], old[1] ]
+        
+        new_img.putpixel( ( new[0], new[1] ), current_pixel )
+    
+    print("--- %s seconds ---" % (time.time() - start))
+
+    return convert_from_image_to_cv2( new_img )
+
+
+

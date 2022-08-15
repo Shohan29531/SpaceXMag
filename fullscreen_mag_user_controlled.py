@@ -26,6 +26,7 @@ def render_new_image(img, x, y):
         img = img,
         zoom = current_magnification,
         cursor_position = (x, y), 
+        reverse_horizontal_scrolling = reverse_horizontal_scrolling,
         zoom_center = None,
     )
 
@@ -188,6 +189,8 @@ if __name__ == "__main__":
     event_list[ "events" ] = []
 
     cv2.setMouseCallback( 'image', mouse_events )
+
+    reverse_horizontal_scrolling = True
 
     while True:
         k = cv2.waitKey(10)

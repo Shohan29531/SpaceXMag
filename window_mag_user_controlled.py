@@ -19,7 +19,6 @@ def uniquify( path ):
 
 
 
-
 def render_new_image(img, x, y):
 
     img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
@@ -52,10 +51,10 @@ def mouse_events( event, x, y, flags, param ):
 
         print("zoom in")
         
-        current_rect_length += step_size
+        # current_rect_length += step_size
 
-        if ( current_rect_length >= max_rect_length ):
-            current_rect_length = max_rect_length
+        # if ( current_rect_length >= max_rect_length ):
+        #     current_rect_length = max_rect_length
 
         scale_factor_computation -= comp_step_size
 
@@ -93,10 +92,10 @@ def mouse_events( event, x, y, flags, param ):
         
         print("zoom out")
 
-        current_rect_length -= step_size
+        # current_rect_length -= step_size
 
-        if ( current_rect_length < min_rect_length ):
-            current_rect_length = min_rect_length
+        # if ( current_rect_length < min_rect_length ):
+        #     current_rect_length = min_rect_length
 
 
         scale_factor_computation += comp_step_size
@@ -218,7 +217,7 @@ if __name__ == "__main__":
     scale_factor_display = 0.5
 
 
-    min_rect_length = dim_x * 0.3
+    min_rect_length = dim_x * 0.2
     max_rect_length = dim_x * 0.45
     step_size = int( ( max_rect_length - min_rect_length) / 4 )
 
@@ -231,7 +230,7 @@ if __name__ == "__main__":
 
     step_size_mag = ( max_magnification - min_magnification ) / 4
 
-    current_magnification = 2
+    current_magnification = min_magnification
 
     cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
     img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
@@ -270,6 +269,29 @@ if __name__ == "__main__":
                 )
 
             break
+
+        elif k == 32:
+            print("rectnagle size change")
+
+            current_rect_length += step_size
+
+            if ( current_rect_length >= max_rect_length ):
+                current_rect_length = min_rect_length        
+
+            record_event(
+                username = username,
+                event_device = "keyboard", 
+                event_type = "SPACE", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                current_magnification = current_magnification,
+                current_rectangle_length = current_rect_length,
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
 
     with open( username_unique + "window_mag" , "w") as outfile:
         json.dump(event_list, outfile)

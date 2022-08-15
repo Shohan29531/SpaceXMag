@@ -3,7 +3,7 @@ import os
 import json
 import time
 
-import custom_fisheye_effect_opencv as F
+import zoom_and_fisheye_tools as tools
 
 
 
@@ -24,13 +24,13 @@ def render_new_image(img, x, y, lens_shape = 'circular'):
     img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
 
     if ( lens_shape == 'circular'):
-        new_img = F.apply_fisheye_effect_circular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )
+        new_img = tools.apply_fisheye_effect_circular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )
 
     elif ( lens_shape == 'elliptical'):
-        new_img = F.apply_fisheye_effect_elliptical( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )   
+        new_img = tools.apply_fisheye_effect_elliptical( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )   
 
     else:
-        new_img = F.apply_fisheye_effect_rectangular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )   
+        new_img = tools.apply_fisheye_effect_rectangular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )   
 
     cv2.imshow( 'image', new_img )  
 

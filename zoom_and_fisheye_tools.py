@@ -247,7 +247,6 @@ def apply_fisheye_effect_rectangular(
 
 
 
-
 def apply_basic_magnification( 
     img_file,
     zoom_center,
@@ -317,5 +316,66 @@ def apply_basic_magnification(
 
     return convert_from_image_to_cv2( new_img )
 
+
+
+
+
+def zoom_at_point(img, cursor_position, zoom = 1, zoom_center = None):
+
+    # if zoom <= 1:
+    #     return img
+
+    org_height, org_width, _ = [i for i in img.shape]
+
+    zoomed_height, zoomed_width, _ = [ zoom * i for i in img.shape ]
+    
+    
+    if zoom_center is None:
+         cx, cy = org_width/2, org_height/2
+    else:
+         cx, cy = [ c for c in zoom_center ]
+
+
+    deviation_from_center = ( 
+        cursor_position[1] - cy, 
+        cursor_position[0] - cx
+    )   
+
+    ## adjust the deviation based on zoom
+
+    dim_diff = [ zoomed_height - org_height, zoomed_width - org_width]
+
+    deviation_from_center = [ 
+        int( dim_diff[0] * ( deviation_from_center[0] / (org_height/2) ) ), 
+        int( dim_diff[1] * ( deviation_from_center[1] / (org_width/2) ) )
+    ]  
+    
+    img = cv2.resize( img, (0, 0), fx = zoom, fy = zoom)
+
+    y1 = int( round(cy - zoomed_height/zoom * .5) + deviation_from_center[0] ) 
+    y2 = int( round(cy + zoomed_height/zoom * .5) + deviation_from_center[0] )
+
+    x1 = int( round(cx - zoomed_width/zoom * .5) + deviation_from_center[1] ) 
+    x2 = int( round(cx + zoomed_width/zoom * .5) + deviation_from_center[1] )
+
+
+    if y1 < 0:
+        y1 = 0
+        y2 = y1 + org_height
+    elif y2 > int( zoomed_height ):
+        y2 = int( zoomed_height )
+        y1 = y2 - org_height    
+
+    if x1 < 0:
+        x1 = 0
+        x2 = x1 + org_width
+    elif x2 > int( zoomed_width ):
+        x2 = int( zoomed_width )  
+        x1 = x2 - org_width
+      
+    
+    img = img[ y1 : y2, x1 : x2 ]
+    
+    return img
 
 

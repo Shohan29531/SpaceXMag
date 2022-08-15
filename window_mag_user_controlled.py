@@ -3,7 +3,7 @@ import os
 import json
 import time
 
-import custom_fisheye_effect_opencv as lenses
+import zoom_and_fisheye_tools as tools
 
 
 
@@ -24,7 +24,7 @@ def render_new_image(img, x, y):
 
     img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
 
-    new_img = lenses.apply_basic_magnification( 
+    new_img = tools.apply_basic_magnification( 
         img_file = img,
         zoom_center = ( x, y ),
         rectangle_length = int( current_rect_length * scale_factor_computation ) ,

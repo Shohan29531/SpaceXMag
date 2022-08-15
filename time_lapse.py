@@ -1,7 +1,7 @@
 import cv2
 from cv2 import EVENT_MOUSEMOVE
 
-import custom_fisheye_effect_opencv as F
+import zoom_and_fisheye_tools as tools
 
 scale_factor = 0.6
 current_fisheye_radius = 150
@@ -28,14 +28,14 @@ def mouse_events( event, x, y, flags, param ):
         # LB = 'Left Button'
         # cv2.putText( img, LB, (x, y), font, 1, (255, 255, 0), 2 )
         
-        new_img = F.apply_fisheye_effect( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor ) )
+        new_img = tools.apply_fisheye_effect( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor ) )
         new_img = cv2.resize( new_img, ( int( dim_x * scale_factor ), int( dim_y * scale_factor ) ) )
         cv2.imshow( 'image', new_img )  
     
     ## Right button click    
     elif( event == cv2.EVENT_RBUTTONDOWN ):
         
-        new_img = F.apply_fisheye_effect( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor ) )
+        new_img = tools.apply_fisheye_effect( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor ) )
         new_img = cv2.resize( new_img, ( int( dim_x * scale_factor ), int( dim_y * scale_factor ) ) )
         cv2.imshow( 'image', new_img )  
 

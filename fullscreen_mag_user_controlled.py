@@ -22,22 +22,12 @@ def uniquify( path ):
 
 def render_new_image(img, x, y):
 
-    # img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
-
     new_img = tools.zoom_at_point(
         img = img,
         zoom = current_magnification,
         cursor_position = (x, y), 
         zoom_center = None,
     )
-
-    
-    # new_img = tools.zoom_center(
-    #     img = img,
-    #     zoom_factor = current_magnification,
-    #     cursor_position = ( x, y )
-    #     ) 
-    
 
     cv2.imshow( 'image', new_img )  
 
@@ -63,20 +53,18 @@ def mouse_events( event, x, y, flags, param ):
 
         render_new_image( img = img, x = x, y = y ) 
 
-        # record_event(
-        #         username = username,
-        #         event_device = "Mouse", 
-        #         event_type = "LEFT_BUTTON", 
-        #         x = pos_x, 
-        #         y = pos_y, 
-        #         time = time.time(), 
-        #         img_id = file_id, 
-        #         current_magnification = current_magnification,
-        #         current_rectangle_length = current_rect_length,
-        #         scale_factor_computation = scale_factor_computation, 
-        #         dim_x = dim_x, 
-        #         dim_y = dim_y
-        #         )
+        record_event(
+                username = username,
+                event_device = "Mouse", 
+                event_type = "LEFT_BUTTON", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                current_magnification = current_magnification,
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
     
     ## Right button click    
     ## zoom out
@@ -91,40 +79,36 @@ def mouse_events( event, x, y, flags, param ):
 
         render_new_image( img = img, x = x, y = y )  
 
-        # record_event(
-        #         username = username,
-        #         event_device = "Mouse", 
-        #         event_type = "RIGHT_BUTTON", 
-        #         x = pos_x, 
-        #         y = pos_y, 
-        #         time = time.time(), 
-        #         img_id = file_id, 
-        #         current_magnification = current_magnification,
-        #         current_rectangle_length = current_rect_length,
-        #         scale_factor_computation = scale_factor_computation, 
-        #         dim_x = dim_x, 
-        #         dim_y = dim_y
-        #         )
+        record_event(
+                username = username,
+                event_device = "Mouse", 
+                event_type = "RIGHT_BUTTON", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                current_magnification = current_magnification,
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
 
                 
     ## Mouse cursor hover    
     elif( event == cv2.EVENT_MOUSEMOVE ):
         render_new_image( img = img, x = x, y = y)  
 
-        # record_event(
-        #         username = username,
-        #         event_device = "Mouse", 
-        #         event_type = "CURSOR_MOVED", 
-        #         x = pos_x, 
-        #         y = pos_y, 
-        #         time = time.time(), 
-        #         img_id = file_id, 
-        #         current_magnification = current_magnification,
-        #         current_rectangle_length = current_rect_length,
-        #         scale_factor_computation = scale_factor_computation, 
-        #         dim_x = dim_x, 
-        #         dim_y = dim_y
-        #         )
+        record_event(
+                username = username,
+                event_device = "Mouse", 
+                event_type = "CURSOR_MOVED", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                current_magnification = current_magnification,
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
 
 
 def record_event(
@@ -135,9 +119,7 @@ def record_event(
     y,
     time,
     img_id,
-    scale_factor_computation,
     current_magnification,
-    current_rectangle_length,
     dim_x,
     dim_y,
 
@@ -150,11 +132,7 @@ def record_event(
     event[ "dim_x" ] = dim_x
     event[ "dim_y" ] = dim_y
 
-    event[ "scale_factor_computation" ] = scale_factor_computation
-
     event[ "current_magnification" ] = current_magnification
-    event[ "current_rectangle_length" ] = current_rectangle_length
-    event[ "current_rectangle_width" ] = int( current_rectangle_length * 0.5 )
 
     event[ "username" ] = username
     event[ "event_device" ] = event_device
@@ -169,6 +147,10 @@ def record_event(
 
     with open( username_unique, "w") as outfile:
         json.dump(event_list, outfile)
+
+
+
+
 
 if __name__ == "__main__":
 
@@ -186,16 +168,7 @@ if __name__ == "__main__":
     dim_x, dim_y = img.shape[1], img.shape[0]
 
 
-    # scale_factor_computation_max = 0.5
-    # scale_factor_computation_min = 0.3
-
-    # comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
-    # scale_factor_computation = scale_factor_computation_max
-
-
     scale_factor_display = 0.5
-
-
 
     min_magnification = 1
     max_magnification = 4
@@ -205,8 +178,6 @@ if __name__ == "__main__":
     current_magnification = 1
 
     cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
-    # img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
-
     cv2.imshow( 'image', img )
     cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * scale_factor_display ) ))
 
@@ -225,23 +196,21 @@ if __name__ == "__main__":
         if k == 27:
             print("exit")
 
-            # record_event(
-            #     username = username,
-            #     event_device = "keyboard", 
-            #     event_type = "ESC", 
-            #     x = pos_x, 
-            #     y = pos_y, 
-            #     time = time.time(), 
-            #     img_id = file_id, 
-            #     current_magnification = current_magnification,
-            #     current_rectangle_length = current_rect_length,
-            #     scale_factor_computation = scale_factor_computation, 
-            #     dim_x = dim_x, 
-            #     dim_y = dim_y
-            #     )
+            record_event(
+                username = username,
+                event_device = "keyboard", 
+                event_type = "ESC", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                current_magnification = current_magnification,
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
 
             break
 
-    # with open( username_unique , "w") as outfile:
-    #     json.dump(event_list, outfile)
+    with open( username_unique + "fullscreen_mag" , "w") as outfile:
+        json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

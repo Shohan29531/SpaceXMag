@@ -301,6 +301,6 @@ if __name__ == "__main__":
                 dim_y = dim_y
                 ) 
 
-    with open( username_unique , "w") as outfile:
+    with open( username_unique + "fisheye_mag" , "w") as outfile:
         json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

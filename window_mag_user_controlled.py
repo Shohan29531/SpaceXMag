@@ -271,6 +271,6 @@ if __name__ == "__main__":
 
             break
 
-    with open( username_unique , "w") as outfile:
+    with open( username_unique + "window_mag" , "w") as outfile:
         json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

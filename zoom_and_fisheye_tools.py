@@ -243,10 +243,6 @@ def apply_fisheye_effect_rectangular(
 
 
 
-
-
-
-
 def apply_basic_magnification( 
     img_file,
     zoom_center,
@@ -317,13 +313,8 @@ def apply_basic_magnification(
     return convert_from_image_to_cv2( new_img )
 
 
-
-
-
 def zoom_at_point(img, cursor_position, zoom = 1, zoom_center = None):
 
-    # if zoom <= 1:
-    #     return img
 
     org_height, org_width, _ = [i for i in img.shape]
 

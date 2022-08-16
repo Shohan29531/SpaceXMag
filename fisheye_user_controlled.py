@@ -217,8 +217,9 @@ if __name__ == "__main__":
     comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
     scale_factor_computation = scale_factor_computation_max
 
+    screen_length = 14.3
 
-    scale_factor_display = 0.5
+    scale_factor_display = ( 7.16 / screen_length ) * 0.57
 
 
     min_fisheye_radius = dim_x * 0.15

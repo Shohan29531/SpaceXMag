@@ -199,10 +199,15 @@ if __name__ == "__main__":
 
     start = time.time()
 
-    username = "test"
-    username_unique = uniquify( username + ".json" )
+    user_data = []
+    with open('user_data.txt') as f:
+        user_data = [line.rstrip() for line in f]
 
-    file_id = 12419
+    username = user_data[0]
+    screen_size = user_data[1]
+    username_unique = uniquify( username + "_fisheye_mag" + ".json" )
+
+    file_id = 87
 
     # input_file_name = str(file_id) + ".jpg"
     input_file_name = str(file_id) + "_output.jpg"
@@ -217,9 +222,9 @@ if __name__ == "__main__":
     comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
     scale_factor_computation = scale_factor_computation_max
 
-    screen_length = 14.3
+    screen_length = 12
 
-    scale_factor_display = ( 7.16 / screen_length ) * 0.57
+    scale_factor_display = 0.5
 
 
     min_fisheye_radius = dim_x * 0.15
@@ -302,6 +307,6 @@ if __name__ == "__main__":
                 dim_y = dim_y
                 ) 
 
-    with open( username_unique + "fisheye_mag" , "w") as outfile:
+    with open( username_unique, "w") as outfile:
         json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

@@ -38,8 +38,16 @@ def mouse_events( event, x, y, flags, param ):
 
     global pos_x, pos_y, current_magnification
 
-    pos_x = x
-    pos_y = y
+    delta_x = ( x - pos_x ) / ( current_magnification )
+    delta_y = ( y - pos_y ) / ( current_magnification )
+
+    real_x = pos_x + delta_x
+    real_y = pos_y + delta_y 
+
+    pos_x = real_x
+    pos_y = real_y
+
+    
 
     ## Left button click
     ## zoom in
@@ -96,7 +104,7 @@ def mouse_events( event, x, y, flags, param ):
                 
     ## Mouse cursor hover    
     elif( event == cv2.EVENT_MOUSEMOVE ):
-        render_new_image( img = img, x = x, y = y)  
+        render_new_image( img = img, x = real_x, y = real_y)  
 
         record_event(
                 username = username,
@@ -154,11 +162,21 @@ def record_event(
 
 
 if __name__ == "__main__":
+# x1, (x2 - x1)*1/mag =x3
 
     start = time.time()
 
-    username = "test"
-    username_unique = uniquify( username + ".json" )
+    user_data = []
+    with open('user_data.txt') as f:
+        user_data = [line.rstrip() for line in f]
+
+    
+    reverse_horizontal_scrolling = 'False'    
+
+    username = user_data[0]
+    screen_size = user_data[1]
+    reverse_horizontal_scrolling = user_data[2]
+    username_unique = uniquify( username + "_fullscreen_mag" + ".json" )
 
     file_id = 10000
 
@@ -172,7 +190,7 @@ if __name__ == "__main__":
     scale_factor_display = 0.5
 
     min_magnification = 1
-    max_magnification = 4
+    max_magnification = 10
 
     step_size_mag = ( max_magnification - min_magnification ) / 8
 
@@ -189,8 +207,6 @@ if __name__ == "__main__":
     event_list[ "events" ] = []
 
     cv2.setMouseCallback( 'image', mouse_events )
-
-    reverse_horizontal_scrolling = True
 
     while True:
         k = cv2.waitKey(10)
@@ -214,6 +230,6 @@ if __name__ == "__main__":
 
             break
 
-    with open( username_unique + "fullscreen_mag" , "w") as outfile:
+    with open( username_unique , "w") as outfile:
         json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

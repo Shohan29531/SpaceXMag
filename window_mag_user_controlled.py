@@ -195,10 +195,15 @@ if __name__ == "__main__":
 
     start = time.time()
 
-    username = "test"
-    username_unique = uniquify( username + ".json" )
+    user_data = []
+    with open('user_data.txt') as f:
+        user_data = [line.rstrip() for line in f]
 
-    file_id = 12419
+    username = user_data[0]
+    screen_size = user_data[1]
+    username_unique = uniquify( username + "_window_mag" + ".json" )
+
+    file_id = 87
 
     # input_file_name = str(file_id) + ".jpg"
     input_file_name = str(file_id) + "_output.jpg"
@@ -276,7 +281,9 @@ if __name__ == "__main__":
             current_rect_length += step_size
 
             if ( current_rect_length >= max_rect_length ):
-                current_rect_length = min_rect_length        
+                current_rect_length = min_rect_length       
+
+            render_new_image( img = img, x = pos_x, y = pos_y )      
 
             record_event(
                 username = username,
@@ -293,6 +300,6 @@ if __name__ == "__main__":
                 dim_y = dim_y
                 )
 
-    with open( username_unique + "window_mag" , "w") as outfile:
+    with open( username_unique , "w") as outfile:
         json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

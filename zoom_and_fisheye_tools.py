@@ -313,7 +313,7 @@ def apply_basic_magnification(
     return convert_from_image_to_cv2( new_img )
 
 
-def zoom_at_point(img, cursor_position, zoom = 1, reverse_horizontal_scrolling = False, zoom_center = None):
+def zoom_at_point(img, cursor_position, zoom = 1, reverse_horizontal_scrolling = 'False', zoom_center = None):
 
 
     org_height, org_width, _ = [i for i in img.shape]
@@ -326,9 +326,9 @@ def zoom_at_point(img, cursor_position, zoom = 1, reverse_horizontal_scrolling =
     else:
          cx, cy = [ c for c in zoom_center ]
 
+    print(reverse_horizontal_scrolling)
 
-
-    if reverse_horizontal_scrolling:
+    if reverse_horizontal_scrolling == 'True':
         deviation_from_center = ( 
             cursor_position[1] - cy, 
         -( cursor_position[0] - cx )
@@ -379,3 +379,8 @@ def zoom_at_point(img, cursor_position, zoom = 1, reverse_horizontal_scrolling =
     return img
 
 
+def get_screen_length( diagonal ):
+    
+    
+    
+    return 0

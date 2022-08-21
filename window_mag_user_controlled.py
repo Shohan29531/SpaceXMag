@@ -177,6 +177,8 @@ def record_event(
     event[ "current_rectangle_length" ] = current_rectangle_length
     event[ "current_rectangle_width" ] = int( current_rectangle_length * 0.5 )
 
+    event[ "base_magnification" ] = base_magnification
+
     event[ "username" ] = username
     event[ "event_device" ] = event_device
     event[ "event_type" ] = event_type
@@ -219,7 +221,7 @@ if __name__ == "__main__":
     scale_factor_computation = scale_factor_computation_max
 
 
-    scale_factor_display = 0.5
+    scale_factor_display = 0.57
 
 
     min_rect_length = dim_x * 0.2
@@ -236,6 +238,8 @@ if __name__ == "__main__":
     step_size_mag = ( max_magnification - min_magnification ) / 4
 
     current_magnification = min_magnification
+
+    base_magnification = tools.get_screen_height( screen_size ) / tools.get_screen_height( 13 )
 
     cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
     img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )

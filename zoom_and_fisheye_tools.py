@@ -326,7 +326,6 @@ def zoom_at_point(img, cursor_position, zoom = 1, reverse_horizontal_scrolling =
     else:
          cx, cy = [ c for c in zoom_center ]
 
-    print(reverse_horizontal_scrolling)
 
     if reverse_horizontal_scrolling == 'True':
         deviation_from_center = ( 
@@ -379,8 +378,8 @@ def zoom_at_point(img, cursor_position, zoom = 1, reverse_horizontal_scrolling =
     return img
 
 
-def get_screen_length( diagonal ):
+def get_screen_height( diagonal ):
     
-    
-    
-    return 0
+    x = diagonal / math.sqrt( 337 )
+
+    return 9 * x

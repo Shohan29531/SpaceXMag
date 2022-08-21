@@ -181,6 +181,8 @@ def record_event(
     event[ "d" ] = d
     event[ "xw" ] = xw
 
+    event[ "base_magnification" ] = base_magnification
+
     event[ "username" ] = username
     event[ "event_device" ] = event_device
     event[ "event_type" ] = event_type
@@ -224,7 +226,7 @@ if __name__ == "__main__":
 
     screen_length = 12
 
-    scale_factor_display = 0.5
+    scale_factor_display = 0.57
 
 
     min_fisheye_radius = dim_x * 0.15
@@ -243,6 +245,7 @@ if __name__ == "__main__":
     xw_index = 0
     lens_shapes_index = 0
 
+    base_magnification = tools.get_screen_height( screen_size ) / tools.get_screen_height( 13 )
 
     cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
     img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )

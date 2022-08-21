@@ -1,3 +1,5 @@
+from email.policy import default
+from json import tool
 import cv2
 import os
 import json
@@ -36,16 +38,10 @@ def render_new_image(img, x, y):
 
 def mouse_events( event, x, y, flags, param ):  
 
-    global pos_x, pos_y, current_magnification
+    global pos_x, pos_y, current_magnification, mouse_moved
 
-    delta_x = ( x - pos_x ) / ( current_magnification )
-    delta_y = ( y - pos_y ) / ( current_magnification )
-
-    real_x = pos_x + delta_x
-    real_y = pos_y + delta_y 
-
-    pos_x = real_x
-    pos_y = real_y
+    pos_x = x
+    pos_y = y
 
     
 
@@ -104,7 +100,11 @@ def mouse_events( event, x, y, flags, param ):
                 
     ## Mouse cursor hover    
     elif( event == cv2.EVENT_MOUSEMOVE ):
-        render_new_image( img = img, x = real_x, y = real_y)  
+        mouse_moved = mouse_moved + 1
+
+        if( mouse_moved == int ( 5 * current_magnification ) ):
+            render_new_image( img = img, x = x, y = y )  
+            mouse_moved = 0
 
         record_event(
                 username = username,
@@ -142,6 +142,7 @@ def record_event(
     event[ "dim_y" ] = dim_y
 
     event[ "current_magnification" ] = current_magnification
+    event[ "base_magnification" ] = base_magnification
 
     event[ "username" ] = username
     event[ "event_device" ] = event_device
@@ -162,7 +163,6 @@ def record_event(
 
 
 if __name__ == "__main__":
-# x1, (x2 - x1)*1/mag =x3
 
     start = time.time()
 
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     reverse_horizontal_scrolling = 'False'    
 
     username = user_data[0]
-    screen_size = user_data[1]
+    screen_size = float( user_data[1] )
     reverse_horizontal_scrolling = user_data[2]
     username_unique = uniquify( username + "_fullscreen_mag" + ".json" )
 
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     dim_x, dim_y = img.shape[1], img.shape[0]
 
 
-    scale_factor_display = 0.5
+    scale_factor_display = 0.57
 
     min_magnification = 1
     max_magnification = 10
@@ -195,6 +195,7 @@ if __name__ == "__main__":
     step_size_mag = ( max_magnification - min_magnification ) / 8
 
     current_magnification = 1
+    base_magnification = tools.get_screen_height( screen_size ) / tools.get_screen_height( 13 )
 
     cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
     cv2.imshow( 'image', img )
@@ -205,6 +206,8 @@ if __name__ == "__main__":
 
     event_list = {}
     event_list[ "events" ] = []
+
+    mouse_moved = 0
 
     cv2.setMouseCallback( 'image', mouse_events )
 

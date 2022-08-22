@@ -2,7 +2,6 @@ import cv2
 import os
 import json
 import time
-import sys
 
 import zoom_and_fisheye_tools as tools
 
@@ -178,8 +177,6 @@ def record_event(
     event[ "current_rectangle_length" ] = current_rectangle_length
     event[ "current_rectangle_width" ] = int( current_rectangle_length * 0.5 )
 
-    event[ "base_magnification" ] = base_magnification
-
     event[ "username" ] = username
     event[ "event_device" ] = event_device
     event[ "event_type" ] = event_type
@@ -191,164 +188,118 @@ def record_event(
     events.append( event )
     event_list[ "events" ] = events
 
-    with open( "temp_logs/" + username_unique, "w") as outfile:
+    with open( username_unique, "w") as outfile:
         json.dump(event_list, outfile)
 
 if __name__ == "__main__":
 
     start = time.time()
+
+    user_data = []
+    with open('user_data.txt') as f:
+        user_data = [line.rstrip() for line in f]
+
+    username = user_data[0]
+    screen_size = user_data[1]
+    username_unique = uniquify( username + "_window_mag" + ".json" )
+
+    file_id = 87
+
+    # input_file_name = str(file_id) + ".jpg"
+    input_file_name = str(file_id) + "_output.jpg"
+
+    img = cv2.imread(input_file_name)
+    dim_x, dim_y = img.shape[1], img.shape[0]
+
+
+    scale_factor_computation_max = 0.5
+    scale_factor_computation_min = 0.3
+
+    comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
+    scale_factor_computation = scale_factor_computation_max
+
+
+    scale_factor_display = 0.5
+
+
+    min_rect_length = dim_x * 0.2
+    max_rect_length = dim_x * 0.45
+    step_size = int( ( max_rect_length - min_rect_length) / 4 )
+
+    current_rect_length = int( min_rect_length )
+
     
-    original = True
-    space_optimized = False
 
-    org_T1 = [100, 272, 340]
-    spc_T1 = [1067, 201, 313]
+    min_magnification = 1
+    max_magnification = 4
 
-    org_T2 = [8, 3546, 3268]
-    spc_T2 = [469, 237, 3122]
+    step_size_mag = ( max_magnification - min_magnification ) / 4
 
-    org_T3 = [87]
-    spc_T3 = [238]
+    current_magnification = min_magnification
 
+    cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
+    img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
 
-    target_array = []
-    task = 1
-    ## argv[1] is for original or space_optimized
-    ## true for space optimized, false for original
-    if sys.argv[1] == 'False':
-        space_optimized = True
-        original = False
+    cv2.imshow( 'image', img )
+    cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * scale_factor_display ) ))
 
-    ## argv[2] is the id of the task (one of 1, 2, or 3)    
-    task = int( sys.argv[2] )  
- 
-  
-    if task == 1 and original == True:
-        target_array = org_T1
-    elif task == 2 and original == True:
-        target_array = org_T2    
-    elif task == 3 and original == True:
-        target_array = org_T3  
+    pos_x = 0
+    pos_y = 0
 
-    elif task == 1 and original == False:
-        target_array = spc_T1  
-    elif task == 2 and original == False:
-        target_array = spc_T2 
-    elif task == 3 and original == False:
-        target_array = spc_T3 
+    event_list = {}
+    event_list[ "events" ] = []
 
-    print(target_array)    
+    cv2.setMouseCallback( 'image', mouse_events )
 
-    for file_id in target_array:    
-
-        user_data = []
-        with open('user_data.txt') as f:
-            user_data = [line.rstrip() for line in f]
-
-        username = user_data[0]
-        screen_size = float( user_data[1] )
+    while True:
+        k = cv2.waitKey(10)
         
+        ## if esc is pressed, exit the program
+        if k == 27:
+            print("exit")
 
-        if original:
-            input_file_name = str(file_id) + ".jpg"
-            username_unique = uniquify( username + "_Task" + str( task ) + "_window_" + str( file_id ) + "_org.json" )
-        if space_optimized:
-            input_file_name = str(file_id) + "_output.jpg"
-            username_unique = uniquify( username + "_Task" + str( task ) + "_window_" + str( file_id ) + "_spc.json" )
+            record_event(
+                username = username,
+                event_device = "keyboard", 
+                event_type = "ESC", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                current_magnification = current_magnification,
+                current_rectangle_length = current_rect_length,
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
 
+            break
 
-        img = cv2.imread(input_file_name)
-        dim_x, dim_y = img.shape[1], img.shape[0]
+        elif k == 32:
+            print("rectnagle size change")
 
+            current_rect_length += step_size
 
-        scale_factor_computation_max =  ( 540 / dim_x ) 
-        scale_factor_computation_min = ( 324 / dim_x ) 
+            if ( current_rect_length >= max_rect_length ):
+                current_rect_length = min_rect_length       
 
-        comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
-        scale_factor_computation = scale_factor_computation_max
+            render_new_image( img = img, x = pos_x, y = pos_y )      
 
+            record_event(
+                username = username,
+                event_device = "keyboard", 
+                event_type = "SPACE", 
+                x = pos_x, 
+                y = pos_y, 
+                time = time.time(), 
+                img_id = file_id, 
+                current_magnification = current_magnification,
+                current_rectangle_length = current_rect_length,
+                scale_factor_computation = scale_factor_computation, 
+                dim_x = dim_x, 
+                dim_y = dim_y
+                )
 
-        min_rect_length = dim_x * 0.2
-        max_rect_length = dim_x * 0.45
-        step_size = int( ( max_rect_length - min_rect_length) / 4 )
-
-        current_rect_length = int( min_rect_length )
-
-        
-
-        min_magnification = 1
-        max_magnification = 4
-
-        step_size_mag = ( max_magnification - min_magnification ) / 4
-
-        current_magnification = min_magnification
-
-        base_magnification = tools.get_screen_height( screen_size ) / tools.get_screen_height( 13 )
-
-        cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
-        img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
-
-        
-        cv2.resizeWindow('image', 640, 1140 )
-        cv2.imshow( 'image', img )
-
-        pos_x = 0
-        pos_y = 0
-
-        event_list = {}
-        event_list[ "events" ] = []
-
-        cv2.setMouseCallback( 'image', mouse_events )
-
-        while True:
-            k = cv2.waitKey(10)
-            
-            ## if esc is pressed, exit the program
-            if k == 27:
-                print("exit")
-
-                record_event(
-                    username = username,
-                    event_device = "keyboard", 
-                    event_type = "ESC", 
-                    x = pos_x, 
-                    y = pos_y, 
-                    time = time.time(), 
-                    img_id = file_id, 
-                    current_magnification = current_magnification,
-                    current_rectangle_length = current_rect_length,
-                    scale_factor_computation = scale_factor_computation, 
-                    dim_x = dim_x, 
-                    dim_y = dim_y
-                    )
-
-                break
-
-            elif k == 32:
-                print("rectnagle size change")
-
-                current_rect_length += step_size
-
-                if ( current_rect_length >= max_rect_length ):
-                    current_rect_length = min_rect_length       
-
-                render_new_image( img = img, x = pos_x, y = pos_y )      
-
-                record_event(
-                    username = username,
-                    event_device = "keyboard", 
-                    event_type = "SPACE", 
-                    x = pos_x, 
-                    y = pos_y, 
-                    time = time.time(), 
-                    img_id = file_id, 
-                    current_magnification = current_magnification,
-                    current_rectangle_length = current_rect_length,
-                    scale_factor_computation = scale_factor_computation, 
-                    dim_x = dim_x, 
-                    dim_y = dim_y
-                    )
-
-        with open( "logs/" + username_unique , "w") as outfile:
-            json.dump(event_list, outfile)
-        cv2.destroyAllWindows( )
+    with open( username_unique , "w") as outfile:
+        json.dump(event_list, outfile)
+    cv2.destroyAllWindows( )

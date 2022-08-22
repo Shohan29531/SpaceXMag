@@ -33,7 +33,7 @@ def render_new_image(img, x, y, lens_shape = 'circular'):
     else:
         new_img = tools.apply_fisheye_effect_rectangular( img_file = img, fisheye_focus = (x, y), fisheye_radius = int( current_fisheye_radius * scale_factor_computation ), d = d[ d_index ] )   
 
-    cv2.imshow( 'image', new_img )  
+    cv2.imshow( input_file_name, new_img )  
 
 
 
@@ -288,11 +288,11 @@ if __name__ == "__main__":
 
         base_magnification = tools.get_screen_height( screen_size ) / tools.get_screen_height( 13 )
 
-        cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
+        cv2.namedWindow(input_file_name, cv2.WINDOW_GUI_NORMAL)
         img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
 
-        cv2.resizeWindow('image', 640, 1140 )
-        cv2.imshow( 'image', img )
+        cv2.resizeWindow(input_file_name, 640, 1140 )
+        cv2.imshow( input_file_name, img )
 
 
         pos_x = 0
@@ -301,7 +301,7 @@ if __name__ == "__main__":
         event_list = {}
         event_list[ "events" ] = []
 
-        cv2.setMouseCallback( 'image', mouse_events )
+        cv2.setMouseCallback( input_file_name, mouse_events )
 
 
         while True:

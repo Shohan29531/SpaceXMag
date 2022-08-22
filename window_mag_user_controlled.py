@@ -1,3 +1,4 @@
+from curses import window
 import cv2
 import os
 import json
@@ -32,7 +33,7 @@ def render_new_image(img, x, y):
         magnification_level = current_magnification
     )  
 
-    cv2.imshow( 'image', new_img )  
+    cv2.imshow( input_file_name, new_img )  
 
 
 
@@ -247,7 +248,7 @@ if __name__ == "__main__":
 
         username = user_data[0]
         screen_size = float( user_data[1] )
-        
+
 
         if original:
             input_file_name = str(file_id) + ".jpg"
@@ -285,12 +286,12 @@ if __name__ == "__main__":
 
         base_magnification = tools.get_screen_height( screen_size ) / tools.get_screen_height( 13 )
 
-        cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
+        cv2.namedWindow(input_file_name, cv2.WINDOW_GUI_NORMAL)
         img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
 
         
-        cv2.resizeWindow('image', 640, 1140 )
-        cv2.imshow( 'image', img )
+        cv2.resizeWindow(input_file_name, 640, 1140 )
+        cv2.imshow( input_file_name, img )
 
         pos_x = 0
         pos_y = 0
@@ -298,7 +299,7 @@ if __name__ == "__main__":
         event_list = {}
         event_list[ "events" ] = []
 
-        cv2.setMouseCallback( 'image', mouse_events )
+        cv2.setMouseCallback( input_file_name, mouse_events )
 
         while True:
             k = cv2.waitKey(10)

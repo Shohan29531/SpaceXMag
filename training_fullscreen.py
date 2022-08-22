@@ -36,7 +36,7 @@ def render_new_image(img, x, y):
 
 def mouse_events( event, x, y, flags, param ):  
 
-    global pos_x, pos_y, current_magnification
+    global pos_x, pos_y, current_magnification, mouse_moved
 
     delta_x = ( x - pos_x ) / ( current_magnification )
     delta_y = ( y - pos_y ) / ( current_magnification )
@@ -104,7 +104,11 @@ def mouse_events( event, x, y, flags, param ):
                 
     ## Mouse cursor hover    
     elif( event == cv2.EVENT_MOUSEMOVE ):
-        render_new_image( img = img, x = real_x, y = real_y)  
+        mouse_moved = mouse_moved + 1
+
+        if( mouse_moved == int ( 5 * current_magnification ) ):
+            render_new_image( img = img, x = x, y = y )  
+            mouse_moved = 0
 
         record_event(
                 username = username,
@@ -133,31 +137,31 @@ def record_event(
     dim_y,
 
 ):
-    global event_list
+    # global event_list
 
-    event = {}
+    # event = {}
 
-    event[ "img_id" ] = img_id
-    event[ "dim_x" ] = dim_x
-    event[ "dim_y" ] = dim_y
+    # event[ "img_id" ] = img_id
+    # event[ "dim_x" ] = dim_x
+    # event[ "dim_y" ] = dim_y
 
-    event[ "current_magnification" ] = current_magnification
+    # event[ "current_magnification" ] = current_magnification
 
-    event[ "username" ] = username
-    event[ "event_device" ] = event_device
-    event[ "event_type" ] = event_type
-    event[ "x" ] = x
-    event[ "y" ] = y
-    event[ "time" ] = time - start
+    # event[ "username" ] = username
+    # event[ "event_device" ] = event_device
+    # event[ "event_type" ] = event_type
+    # event[ "x" ] = x
+    # event[ "y" ] = y
+    # event[ "time" ] = time - start
 
-    events = event_list[ "events" ]
-    events.append( event )
-    event_list[ "events" ] = events
+    # events = event_list[ "events" ]
+    # events.append( event )
+    # event_list[ "events" ] = events
 
-    with open( username_unique, "w") as outfile:
-        json.dump(event_list, outfile)
+    # with open( username_unique, "w") as outfile:
+    #     json.dump(event_list, outfile)
 
-
+    return
 
 
 
@@ -178,16 +182,14 @@ if __name__ == "__main__":
     reverse_horizontal_scrolling = user_data[2]
     username_unique = uniquify( username + "_fullscreen_mag" + ".json" )
 
-    file_id = 10000
+    file_id = 'training_5004'
 
-    # input_file_name = str(file_id) + ".jpg"
-    input_file_name = str(file_id) + "_output.jpg"
+    input_file_name = str(file_id) + ".jpg"
+    # input_file_name = str(file_id) + "_output.jpg"
 
     img = cv2.imread(input_file_name)
     dim_x, dim_y = img.shape[1], img.shape[0]
 
-
-    scale_factor_display = 0.5
 
     min_magnification = 1
     max_magnification = 10
@@ -197,8 +199,9 @@ if __name__ == "__main__":
     current_magnification = 1
 
     cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
+    
+    cv2.resizeWindow('image', 640, 1140 )
     cv2.imshow( 'image', img )
-    cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * scale_factor_display ) ))
 
     pos_x = 0
     pos_y = 0
@@ -207,6 +210,8 @@ if __name__ == "__main__":
     event_list[ "events" ] = []
 
     cv2.setMouseCallback( 'image', mouse_events )
+
+    mouse_moved = 0
 
     while True:
         k = cv2.waitKey(10)
@@ -230,6 +235,6 @@ if __name__ == "__main__":
 
             break
 
-    with open( username_unique , "w") as outfile:
-        json.dump(event_list, outfile)
+    # with open( username_unique , "w") as outfile:
+    #     json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

@@ -166,34 +166,35 @@ def record_event(
     dim_y,
 
 ):
-    global event_list
+    # global event_list
 
-    event = {}
+    # event = {}
 
-    event[ "img_id" ] = img_id
-    event[ "dim_x" ] = dim_x
-    event[ "dim_y" ] = dim_y
+    # event[ "img_id" ] = img_id
+    # event[ "dim_x" ] = dim_x
+    # event[ "dim_y" ] = dim_y
 
-    event[ "scale_factor_computation" ] = scale_factor_computation
+    # event[ "scale_factor_computation" ] = scale_factor_computation
 
-    event[ "fisheye_radius" ] = fisheye_radius
-    event[ "fisheye_focus_shape" ] = fisheye_focus_shape
-    event[ "d" ] = d
-    event[ "xw" ] = xw
+    # event[ "fisheye_radius" ] = fisheye_radius
+    # event[ "fisheye_focus_shape" ] = fisheye_focus_shape
+    # event[ "d" ] = d
+    # event[ "xw" ] = xw
 
-    event[ "username" ] = username
-    event[ "event_device" ] = event_device
-    event[ "event_type" ] = event_type
-    event[ "x" ] = x
-    event[ "y" ] = y
-    event[ "time" ] = time - start
+    # event[ "username" ] = username
+    # event[ "event_device" ] = event_device
+    # event[ "event_type" ] = event_type
+    # event[ "x" ] = x
+    # event[ "y" ] = y
+    # event[ "time" ] = time - start
 
-    events = event_list[ "events" ]
-    events.append( event )
-    event_list[ "events" ] = events
+    # events = event_list[ "events" ]
+    # events.append( event )
+    # event_list[ "events" ] = events
 
-    with open( username_unique, "w") as outfile:
-        json.dump(event_list, outfile)
+    # with open( username_unique, "w") as outfile:
+    #     json.dump(event_list, outfile)
+    return 
 
 if __name__ == "__main__":
 
@@ -207,7 +208,7 @@ if __name__ == "__main__":
     screen_size = user_data[1]
     username_unique = uniquify( username + "_fisheye_mag" + ".json" )
 
-    file_id = 87
+    file_id = 'training_4959'
 
     # input_file_name = str(file_id) + ".jpg"
     input_file_name = str(file_id) + "_output.jpg"
@@ -215,16 +216,13 @@ if __name__ == "__main__":
     img = cv2.imread(input_file_name)
     dim_x, dim_y = img.shape[1], img.shape[0]
 
-
-    scale_factor_computation_max = 0.5
-    scale_factor_computation_min = 0.3
+    scale_factor_computation_max =  ( 540 / dim_x ) 
+    scale_factor_computation_min = ( 324 / dim_x ) 
 
     comp_step_size = ( scale_factor_computation_max - scale_factor_computation_min ) / 4
     scale_factor_computation = scale_factor_computation_max
 
     screen_length = 12
-
-    scale_factor_display = 0.5
 
 
     min_fisheye_radius = dim_x * 0.15
@@ -247,8 +245,8 @@ if __name__ == "__main__":
     cv2.namedWindow("image", cv2.WINDOW_GUI_NORMAL)
     img = cv2.resize( img, ( int( dim_x * scale_factor_computation ), int( dim_y * scale_factor_computation ) ) )
 
+    cv2.resizeWindow('image', 640, 1140 )
     cv2.imshow( 'image', img )
-    cv2.resizeWindow('image', ( int( dim_x * scale_factor_display ), int( dim_y * scale_factor_display ) ))
 
     pos_x = 0
     pos_y = 0
@@ -307,6 +305,6 @@ if __name__ == "__main__":
                 dim_y = dim_y
                 ) 
 
-    with open( username_unique, "w") as outfile:
-        json.dump(event_list, outfile)
+    # with open( username_unique, "w") as outfile:
+    #     json.dump(event_list, outfile)
     cv2.destroyAllWindows( )

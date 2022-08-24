@@ -103,7 +103,7 @@ def mouse_events( event, x, y, flags, param ):
     elif( event == cv2.EVENT_MOUSEMOVE ):
         mouse_moved = mouse_moved + 1
 
-        if( mouse_moved == int ( 5 * current_magnification ) ):
+        if( mouse_moved == int ( 2.5 * current_magnification ) ):
             render_new_image( img = img, x = x, y = y )  
             mouse_moved = 0
 

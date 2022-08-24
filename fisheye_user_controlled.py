@@ -206,10 +206,10 @@ if __name__ == "__main__":
     space_optimized = False
 
     org_T1 = [766, 201, 1530]
-    spc_T1 = [102, 327, 237]
+    spc_T1 = [102, 6335, 237]
 
-    org_T2 = [2853, 201, 3546]
-    spc_T2 = [2849, 327, 237]
+    org_T2 = [2853, 4913, 5177]
+    spc_T2 = [2849, 4873, 5648]
 
     org_T3 = [4861]
     spc_T3 = [4579]
@@ -278,9 +278,9 @@ if __name__ == "__main__":
         current_fisheye_radius = min_fisheye_radius
 
 
-        d = [ 1.5, 2, 2.5, 3.0]
+        d = [ 3, 4, 5, 6]
         xw = [0.6, 0.4, 0.2, 0]
-        lens_shapes = ['circular', 'elliptical', 'rectangular']
+        lens_shapes = ['rectangular', 'elliptical',  'circular']
 
         d_index = 0
         xw_index = 0

@@ -192,8 +192,8 @@ def record_event(
     events.append( event )
     event_list[ "events" ] = events
 
-    with open( "temp_logs/" + username_unique, "w") as outfile:
-        json.dump(event_list, outfile)
+    # with open( "temp_logs/" + username_unique, "w") as outfile:
+    #     json.dump(event_list, outfile)
 
 if __name__ == "__main__":
 
@@ -252,10 +252,10 @@ if __name__ == "__main__":
 
         if original:
             input_file_name = str(file_id) + ".jpg"
-            username_unique = uniquify( username + "_Task" + str( task ) + "_window_" + str( file_id ) + "_org.json" )
+            username_unique = uniquify( "logs/" + username + "_Task" + str( task ) + "_window_" + str( file_id ) + "_org.json" )
         if space_optimized:
             input_file_name = str(file_id) + "_output.jpg"
-            username_unique = uniquify( username + "_Task" + str( task ) + "_window_" + str( file_id ) + "_spc.json" )
+            username_unique = uniquify( "logs/" +  username + "_Task" + str( task ) + "_window_" + str( file_id ) + "_spc.json" )
 
 
         img = cv2.imread(input_file_name)
@@ -350,6 +350,6 @@ if __name__ == "__main__":
                     dim_y = dim_y
                     )
 
-        with open( "logs/" + username_unique , "w") as outfile:
+        with open( username_unique , "w") as outfile:
             json.dump(event_list, outfile)
         cv2.destroyAllWindows( )

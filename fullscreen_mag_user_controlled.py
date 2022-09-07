@@ -14,6 +14,8 @@ def uniquify( path ):
     filename, extension = os.path.splitext(path)
     counter = 0
 
+    print(filename, extension)
+
     while os.path.exists(path):
         path = filename + "(" + str(counter) + ")" + extension
         counter += 1
@@ -103,9 +105,10 @@ def mouse_events( event, x, y, flags, param ):
     elif( event == cv2.EVENT_MOUSEMOVE ):
         mouse_moved = mouse_moved + 1
 
-        if( mouse_moved == int ( 2.5 * current_magnification ) ):
+        if( mouse_moved >= int ( 5 * current_magnification) ):
             render_new_image( img = img, x = x, y = y )  
             mouse_moved = 0
+            print("mouse moved")
 
         record_event(
                 username = username,
@@ -156,8 +159,8 @@ def record_event(
     events.append( event )
     event_list[ "events" ] = events
 
-    with open( "temp_logs/" + username_unique, "w") as outfile:
-        json.dump(event_list, outfile)
+    # with open( "temp_logs/" + username_unique, "w") as outfile:
+    #     json.dump(event_list, outfile)
 
 
 
@@ -225,10 +228,10 @@ if __name__ == "__main__":
 
         if original:
             input_file_name = str(file_id) + ".jpg"
-            username_unique = uniquify( username + "_Task" + str( task ) + "_fullscreen_" + str( file_id ) + "_org.json" )
+            username_unique = uniquify( "logs/" + username + "_Task" + str( task ) + "_fullscreen_" + str( file_id ) + "_org.json" )
         if space_optimized:
             input_file_name = str(file_id) + "_output.jpg"
-            username_unique = uniquify( username + "_Task" + str( task ) + "_fullscreen_" + str( file_id ) + "_spc.json" )
+            username_unique = uniquify( "logs/" +  username + "_Task" + str( task ) + "_fullscreen_" + str( file_id ) + "_spc.json" )
  
 
 
@@ -280,6 +283,6 @@ if __name__ == "__main__":
 
                 break
 
-        with open( "logs/" + username_unique , "w") as outfile:
+        with open( username_unique , "w") as outfile:
             json.dump(event_list, outfile)
         cv2.destroyAllWindows( )

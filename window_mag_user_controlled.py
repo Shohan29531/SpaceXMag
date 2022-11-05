@@ -1,4 +1,3 @@
-from curses import window
 import cv2
 import os
 import json
@@ -202,7 +201,7 @@ if __name__ == "__main__":
     original = True
     space_optimized = False
 
-    org_T1 = [100, 272, 340]
+    org_T1 = [766, 272, 340]
     spc_T1 = [1067, 201, 313]
 
     org_T2 = [8, 3546, 3268]

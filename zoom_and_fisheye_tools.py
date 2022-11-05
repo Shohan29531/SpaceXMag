@@ -249,8 +249,8 @@ def apply_basic_magnification(
     rectangle_length,
     rectangle_width, 
     magnification_level,
-    boundary_width = 2,
-    boundary_circle_color = ( 0, 255, 0 ),
+    boundary_width = 15,
+    boundary_circle_color = ( 0, 0, 255 ),
     ):
 
     start = time.time()

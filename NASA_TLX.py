@@ -11,7 +11,7 @@ for i in range(6):
         if scores[i] > scores[j]:
             freq[i] += 1
         else:
-            freq[j] += 1     
+            freq[j] += 1    
 
 
 print(freq)            

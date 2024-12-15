@@ -51,6 +51,7 @@ To launch fisheye magnification:
 ## Citation
 If you find the repo useful, please cite our paper:
 
+<pre>
 @article{islam2023spacex,
   title={SpaceX mag: an automatic, scalable, and rapid space compactor for optimizing smartphone app interfaces for low-vision users},
   author={Islam, Md Touhidul and Billah, Syed Masum},
@@ -61,5 +62,5 @@ If you find the repo useful, please cite our paper:
   year={2023},
   publisher={ACM New York, NY, USA}
 }
-
+</pre>
 

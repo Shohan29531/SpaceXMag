@@ -39,7 +39,7 @@ SpaceXMag significantly improves usability for low-vision users, as demonstrated
 Ensure you have installed Python and the necessary dependencies.
 
 ### Steps:
-- git clone https://github.com/your-repo/SpaceXMag.git
+- clone the repo
 - cd SpaceXMag
 To launch fullscreen magnification:
 - python fullscreen_mag_user_controlled.py

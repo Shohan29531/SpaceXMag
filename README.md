@@ -45,3 +45,18 @@ Ensure you have Python installed along with necessary dependencies.
 - python window_mag_user_controlled.py
 # to launch fisheye magnification:
 - python fisheye_user_controlled.py
+
+## Citation
+If you find the repo useful, please cite our paper:
+@article{islam2023spacex,
+  title={SpaceX mag: an automatic, scalable, and rapid space compactor for optimizing smartphone app interfaces for low-vision users},
+  author={Islam, Md Touhidul and Billah, Syed Masum},
+  journal={Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+  volume={7},
+  number={2},
+  pages={1--36},
+  year={2023},
+  publisher={ACM New York, NY, USA}
+}
+
+

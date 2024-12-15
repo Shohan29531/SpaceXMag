@@ -17,6 +17,8 @@ SpaceXMag is an automatic, scalable, and rapid optimization framework for smartp
 - **Fisheye Mode:** Provides non-uniform magnification with customizable lens shapes (e.g., circular, rectangular).
 
 ### Scalability and Speed:
+SpaceXMag was evaluated using the RICO-SCA dataset with 25,677 Android screenshots.
+SpaceXMag:
 - Processes each UI in **~1.44 seconds** on average.
 - Tested on a dataset of **25,677 Android app screenshots**, achieving a **47.17% whitespace reduction**.
 
@@ -34,20 +36,21 @@ SpaceXMag significantly improves usability for low-vision users, as demonstrated
 ## Installation
 
 ### Requirements
-Ensure you have Python installed along with necessary dependencies.
+Ensure you have installed Python and the necessary dependencies.
 
 ### Steps:
 - git clone https://github.com/your-repo/SpaceXMag.git
 - cd SpaceXMag
-# to Launch fullscreen magnification:
+To launch fullscreen magnification:
 - python fullscreen_mag_user_controlled.py
-# to launch window magnification:
+To launch window magnification:
 - python window_mag_user_controlled.py
-# to launch fisheye magnification:
+To launch fisheye magnification:
 - python fisheye_user_controlled.py
 
 ## Citation
 If you find the repo useful, please cite our paper:
+
 @article{islam2023spacex,
   title={SpaceX mag: an automatic, scalable, and rapid space compactor for optimizing smartphone app interfaces for low-vision users},
   author={Islam, Md Touhidul and Billah, Syed Masum},
